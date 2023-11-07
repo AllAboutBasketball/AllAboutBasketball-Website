@@ -1,0 +1,140 @@
+<?php
+
+include('functions/userfunctions.php');
+include('includes/header.php');
+include('authenticate.php');
+
+?>
+
+<div class="py-3 bg-primary">
+    <div class="container">
+        <h6 class="text-white">
+            <a href="index.php" class="text-white">
+                Home /
+            </a>
+            <a href="cart.php" class="text-white">
+                Cart /
+            </a>
+            <a href="checkout.php" class="text-white">
+                Checkout
+            </a>
+        </h6>
+    </div>
+</div>
+
+<div class="py-5">
+    <div class="container">
+        <div class="card shadow">
+            <div class="card-body shadow">
+            <form action="functions/placeorder.php" method="POST">
+    <div class="row">
+        <div class="col-md-7">
+            <!-- Basic Details -->
+            <h5 class="text-dark"><strong>Basic Details</strong></h5>
+            <hr>
+            <?php
+            $user = getAllInfo('users');
+           
+            if (!empty($user)) {
+                
+                foreach ($user as $name) {
+                    ?>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold text-dark">Name</label>
+                            <input type="text" name="name" required placeholder="Enter your full name" class="form-control" autocomplete="off" value="<?= $name['name']; ?>" readonly>
+                            <!--<input type="text" name="name" required placeholder="Enter your full name" class="form-control" autocomplete="off" value="<?= $str; ?>" readonly>-->
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold text-dark">E-mail</label>
+                            <input type="email" name="email" required placeholder="Enter your email" class="form-control" autocomplete="off" value="<?= $name['email']; ?>" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold text-dark">Phone</label>
+                            <input type="text" name="phone" required placeholder="Enter your phone number" class="form-control" autocomplete="off" value="<?= $name['phone']; ?>" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold text-dark">ZIP Code</label>
+                            <input type="text" name="zip_code" required placeholder="Enter your zip code" class="form-control" autocomplete="off" value="<?= $name['zip']; ?>" readonly>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="fw-bold text-dark">Address</label>
+                            <textarea name="address" required class="form-control" rows="5" autocomplete="off"><?= $name['address']; ?></textarea>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "No Records Found";
+            }
+            ?>
+        </div>
+
+        <div class="col-md-5">
+            <!-- Order Details -->
+            <h5 class="text-danger"><strong>Order Details</strong></h5>
+            <hr>
+            <?php
+            $items = getCartItems();
+            $totalPrice = 0;
+
+            foreach ($items as $citem) {
+                if ($citem['qty'] >= $citem['prod_qty']) {
+                    ?>
+                    <div class="mb-1 border">
+                        <div class="row align-items-center">
+                            <div class="col-md-2">
+                                <img src="uploads/<?= $citem['image'] ?>" alt="Image" width="90px" height="80px">
+                            </div>
+                            <div class="col-md-3">
+                                <div class="ms-4">
+                                    <label class="text-dark"><?= $citem['name'] ?></label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="text-success">₱ <?= $citem['selling_price'] ?>.00</label>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="ms-5">
+                                    <label class="text-dark"><?= $citem['size'] ?></label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="text-danger"><?= $citem['prod_qty'] ?>x</label>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                    // Include the selected cart item in the form
+                    ?>
+                    <input type="hidden" name="selected_items[]" value="<?= $citem['prod_id'] ?>">
+                    <?php
+                    $totalPrice += $citem['selling_price'] * $citem['prod_qty'];
+                }
+            }
+            unset($_SESSION["cart_id"]);
+            ?>
+            <hr>
+            <h5 class="fw-bold text-danger">Total Price: <span class="float-end text-success">₱ <?= $totalPrice ?>.00</span></h5>
+            <hr>
+            <div class="row">
+                <h5 class="fw-bold text-dark">Place Order</h5>
+                <div class="col-md-4">
+                    <input type="hidden" name="payment_mode" value="COD">
+                    <input type="hidden" name="payment_modes" value="Gcash">
+                    <button type="submit" name="placeOrderBtn" class="btn btn-outline-primary mt-2">Cash On Delivery</button>
+                </div>
+                <div class="col-md-5">
+                    <button type="submit" name="GcashBtn" class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="assets/images/gcash.png" alt="" height="25px" width="25px">Gcash</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include('includes/footer.php'); ?>

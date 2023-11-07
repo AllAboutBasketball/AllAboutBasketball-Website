@@ -1,0 +1,98 @@
+[10-Jul-2023 12:30:28 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 12:30:28 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 13:37:04 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 13:37:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:17:27 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:17:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:19:16 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[10-Jul-2023 15:42:27 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:42:27 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:42:35 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:42:35 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:44:57 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry '0' for key 'PRIMARY' in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php:75
+Stack trace:
+#0 /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php(75): mysqli_query()
+#1 {main}
+  thrown in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 75
+[10-Jul-2023 15:51:01 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry '0' for key 'PRIMARY' in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php:75
+Stack trace:
+#0 /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php(75): mysqli_query()
+#1 {main}
+  thrown in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 75
+[10-Jul-2023 15:53:12 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown MySQL server host 'localhost:3306' (0) in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php:89
+Stack trace:
+#0 /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php(89): mysqli_connect()
+#1 {main}
+  thrown in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 89
+[10-Jul-2023 15:55:13 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:55:13 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:56:24 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:56:24 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:57:00 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:57:00 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 15:57:19 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[10-Jul-2023 15:57:19 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry '0' for key 'PRIMARY' in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php:47
+Stack trace:
+#0 /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php(47): mysqli_query()
+#1 {main}
+  thrown in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 47
+[10-Jul-2023 15:57:30 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry '0' for key 'PRIMARY' in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php:122
+Stack trace:
+#0 /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php(122): mysqli_query()
+#1 {main}
+  thrown in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 122
+[10-Jul-2023 16:00:37 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[10-Jul-2023 17:16:58 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 17:16:58 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 17:17:12 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[10-Jul-2023 17:56:34 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 17:56:34 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 18:03:56 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 18:03:56 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 18:17:20 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 18:17:20 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 22:36:52 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 22:36:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 22:37:45 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 22:37:45 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 23:52:50 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 23:52:50 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[10-Jul-2023 23:53:00 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[10-Jul-2023 23:54:37 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[10-Jul-2023 23:59:36 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[11-Jul-2023 00:01:53 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[11-Jul-2023 00:08:10 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[11-Jul-2023 00:19:27 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[11-Jul-2023 01:42:47 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 01:42:47 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 01:51:21 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 01:51:21 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 01:51:21 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'vitabella.users' doesn't exist in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php:166
+Stack trace:
+#0 /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php(166): mysqli_query()
+#1 {main}
+  thrown in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 166
+[11-Jul-2023 02:03:35 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry '0' for key 'PRIMARY' in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php:75
+Stack trace:
+#0 /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php(75): mysqli_query()
+#1 {main}
+  thrown in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 75
+[11-Jul-2023 02:04:58 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry '0' for key 'PRIMARY' in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php:75
+Stack trace:
+#0 /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php(75): mysqli_query()
+#1 {main}
+  thrown in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 75
+[11-Jul-2023 02:05:43 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:05:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:14:52 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:14:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:22:54 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:22:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:24:44 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:24:44 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:28:37 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:28:37 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:32:50 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
+[11-Jul-2023 02:37:14 UTC] PHP Warning:  Undefined array key "auth_user" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:37:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/authcode.php on line 162
+[11-Jul-2023 02:39:47 UTC] PHP Warning:  Undefined array key "payment_id" in /home/vz5y0qhi4yhz/allaboutbasketballl/functions/placeorder.php on line 19
