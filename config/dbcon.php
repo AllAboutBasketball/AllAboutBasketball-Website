@@ -1,7 +1,7 @@
 <?php
 
     $host = 'localhost';
-    $username ='u992665783_aab';
+    $username ='u992665783_aabofficial';
     $password = 'oATnan?3$';
     $database = 'u992665783_aab';  
 
