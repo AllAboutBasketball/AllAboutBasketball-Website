@@ -68,7 +68,11 @@ if (isset($_POST["register_btn"]))
         $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
 
         // connect with database
-        $conn = mysqli_connect("localhost", "kaelreyes", "03028138646k@eL!", "vitabella");
+        $host = 'localhost';
+        $username ='root';
+        $password = '';
+        $database = 'db_aab';
+        $conn = mysqli_connect($host, $username, $pass, $database);
 
         // insert in users table
         $sql = "INSERT INTO users(name, email, phone, address, zip, password, verification_code, email_verified_at) VALUES ('" . $name . "', '" . $email . "', '" . $phone . "', '" . $address . "', '" . $zip . "', '" . $encrypted_password . "', '" . $verification_code . "', NULL)";

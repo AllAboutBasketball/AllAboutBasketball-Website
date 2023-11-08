@@ -188,38 +188,54 @@ a{
 
 .prodl {
     background: white;
-    width: 500px;
+    width: 100%; /* Change width to full width for mobile */
     margin: 10px;
     border-radius: 15px;
 }
 
 .card-imahe {
-
-    height: 450px;
+    height: 300px; /* Reduce height for mobile */
     margin-bottom: 15px;
     background-size: cover;
     border-radius: 15px 15px 0 0;
 }
 
+/* Media query for screens with a maximum width of 768px (typical for mobile devices) */
+@media (max-width: 768px) {
+    .prodl {
+        width: 90%; /* Adjust the width to fit smaller screens */
+    }
+
+    .card-imahe {
+        height: 200px; /* Further reduce the height for small screens */
+    }
+
+    .prodl h2, .prodl p {
+        padding: 5px; /* Reduce padding for smaller text elements */
+    }
+
+    .prodl a {
+        padding: 10px 15px; /* Adjust button padding for mobile */
+        margin: 10px 20px; /* Adjust margins for mobile */
+    }
+}
 .car-1 {
     background-image: url('../images/model2.jpg');
 }
-
-
 
 .car-2 {
     background-image: url('../images/model1.jpg');
 }
 
-
-
 .car-3 {
     background-image: url('../images/model5.jpg');
 }
+
 .prodl h2 {
     padding: 10px;
 }
-.prodl p{
+
+.prodl p {
     padding: 10px;
 }
 
@@ -230,9 +246,8 @@ a{
     display: block;
     text-align: center;
     margin: 20px 50px;
-	border-radius: 10px;
+    border-radius: 10px;
     text-decoration: none;
-
 }
 
 .prodl:hover {

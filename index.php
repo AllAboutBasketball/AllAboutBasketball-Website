@@ -106,6 +106,7 @@ include('./includes/header.php');
                                             <div class="card shadow">
                                                 <div class="card-body">
                                                     <!-- Image File Not Working -->
+                                                    <h5><?=  $item['image']; ?></h5>
                                                     <img src="./uploads/<?= $item['image']; ?>"  width="350px" height="300px" alt="Product Image" class = "w-100">
                                                     <h6 class = "text-center text-dark"> <strong> <?= $item['name']; ?> </strong></h6>
                                                 </div>
@@ -138,26 +139,23 @@ include('./includes/header.php');
                 <a href="">Shop Now</a>
         </div>
         <section class="lagayan">
-        <div class="prodl">
-            <div class="card-imahe car-2"></div>
-            <h2>Check Out Now</h2>
-            <p>Check Out Your Favorite Items</p>
-            <a href="">Shop Now</a>
+            <div class="prodl">
+                <div class="card-imahe car-2"></div>
+                <h2>Check Out Now</h2>
+                <p>Check Out Your Favorite Items</p>
+                <a href="">Shop Now</a>
 
-        </div>
+            </div>
+        </section>
         <section class="lagayan">
-        <div class="prodl">
-            <div class="card-imahe car-3"></div>
-            <h2>Discover Our Collection</h2>
-            <p>Be the first to avail or new collections</p>
-            <a href="">Shop Now</a>
-
-
-        </div>
-        
-        
-
-    </section>
+            <div class="prodl">
+                <div class="card-imahe car-3"></div>
+                <h2>Discover Our Collection</h2>
+                <p>Be the first to avail or new collections</p>
+                <a href="">Shop Now</a>
+            </div>
+        </section>
+</section>
    
 
 <!------------------ Featured  ----------------->
@@ -202,54 +200,63 @@ include('./includes/header.php');
                     <p> ALL ABOUT BASKETBALL CLOTHING LINE</p>
                 </div>
                  
+            
+
             <section id="product1">
-                
-                        
-                <!-- Fix the Styling of these Cards -->
-                <div class="pro-container">
-                        <div class="pro-display">
-                            <img src="aab_images/model2.jpg" alt="">
-                            <div class="descrip">
-                            <!-- <span> -----</span>
-                            <h5> -----</h5> -->
-                            </div>
-                        </div>
-                        <div class="pro-display">
-                            <img src="aab_images/model3.jpg" alt="">
-                            <div class="descrip">
-                                <!-- <span> -----</span>
-                                <h5> -----</h5> -->
-                             </div>
-                        </div>
-                        <div class="pro-display">
-                            <img src="aab_images/model4.jpg" alt="">
-                             <div class="descrip">
-                                 <!-- <span> ------</span>
-                                <h5> -----</h5> -->
-                            </div>
-                        </div>
-                        <div class="pro-display">
-                            <img src="aab_images/model5.jpg" alt="">
-                                <div class="descrip">
-                                    <!-- <span> ------</span>
-                                    <h5> ------</h5> -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6  mb-4">
+                            <div class="card">
+                                <img src="aab_images/model2.jpg" class="card-img-top" alt="Model 2">
+                                <div class="card-body">
+                                    <h5 class="card-title">Collection 2</h5>
                                 </div>
-                        </div>
-                        <div class="pro-display">
-                            <img src="aab_images/model6.jpg" alt="">
-                            <div class="descrip">
-                                    <!-- <span> ----</span>
-                                    <h5> ------</h5> -->
                             </div>
                         </div>
-                        <div class="pro-display">
-                             <img src="" alt="">
-                            <div class="descrip">
-                            <span> WE HOPE THAT YOU WILL BE PART OF OUR MODEL</span>
-                                    <!-- <h5> -----</h5> -->
+                        <div class="col-6  mb-4">
+                            <div class="card">
+                                <img src="aab_images/model3.jpg" class="card-img-top" alt="Model 3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Collection 3</h5>
+                                </div>
+                            </div>
                         </div>
-                 </div>
+                        <div class="col-6  mb-4">
+                            <div class="card">
+                                <img src="aab_images/model4.jpg" class="card-img-top" alt="Model 4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Collection 4</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6  mb-4">
+                            <div class="card">
+                                <img src="aab_images/model5.jpg" class="card-img-top" alt="Model 5">
+                                <div class="card-body">
+                                    <h5 class="card-title">Collection 5</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6  mb-4">
+                            <div class="card">
+                                <img src="aab_images/model6.jpg" class="card-img-top" alt="Model 6">
+                                <div class="card-body">
+                                    <h5 class="card-title">Collection 6</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6  mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title ">Be a Model</h5>
+                                    <p class="card-text">WE HOPE THAT YOU WILL BE PART OF OUR MODEL</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
+
         </div>
     </div>
 </div>
@@ -284,53 +291,54 @@ include('./includes/header.php');
 <!-------------- FOOTER LAYER ------------------->
 
 <!-- Proper Footer Design -->
-<div class="py-5 bg-dark">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <h4 class="text-white"> <strong> All About Basketball </strong></h4>
-                <div class="underlines mb-2"></div>
-                <a href="index.php" class="text-info"><i class="fa fa-angle-right"></i> Home</a>
-                <br>
-                <!-- <a href="" class="text-info"><i class="fa fa-angle-right"></i> Collection</a><br> -->
-                <a href="categories.php" class="text-info"><i class="fa fa-angle-right"></i> AAB Collections</a>
-                <br>
-                <a href="help.php" class="text-info"><i class="fa fa-angle-right"></i> Help</a>
-                <br>
-                <a href="cart.php" class="text-info"><i class="fa fa-angle-right"></i> Cart</a>
-                <br>
-                <a href="my-orders.php" class="text-info"><i class="fa fa-angle-right"></i> Track Order</a>  
-                <br>
-                <a href="terms.php" class="text-info"><i class="fa fa-angle-right"></i> Terms and Services</a> 
-
-            </div>
-            <div class="col-md-3">
-                <h4 class="text-white"> <strong> Address </strong> </h4>
-                <a href="tel:+639451278635" class="text-white"  style="display: block; margin-bottom: 10px;"><i class="fa fa-phone">&nbsp; (+63) 9813795513</i></a>
-                <a href="mailto:" class="text-white"><i class="fa fa-envelope"> &nbsp;allaboutbasketball4102@gmail.com</i></a>
-                <a href="https://www.google.com/maps?q=Maliksi+3+Bacoor,+Cavite" target="_blank" class="text-white" style="display: block; margin-top: 10px;"><i class="fa fa-map-marker"></i> &nbsp; Maliksi 3 Bacoor, Cavite</a>
-
-            </div>
-            <div class="map-con mt-3">
-                
-                
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3864.687474098946!2d120.9523358!3d14.45997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cd8d14cb0d5f%3A0x5cecad8590a32f1e!2sFX52%2BXWP%2C%20Maliksi%20Elementary%20School%2C%20Maliksi%2C%20Bacoor%2C%20Cavite%2C%20Gen.%20Evangelista%20Street%2C%20Bacoor%2C%20Cavite!5e0!3m2!1sen!2sph!4v1625191187386!5m2!1sen!2sph" width="600" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                
-            </div>
-
-            <div class="col-md-3 mt-2">
-                <a href="https://www.facebook.com/Allaboutbasketballclothing?mibextid=LQQJ4d" class="text-white mr-3"><i class="fa fa-facebook"></i> Facebook</a>
-                <a href="https://www.instagram.com/all_about_basketballclo/?igshid=MzRlODBiNWFlZA%3D%3D&fbclid=IwAR2602htvIx4OrtBU9y7eS_qncnBAAv65NIdriK2SFL7acTCi1oEiv1kt9c" class="text-white" style="margin-left: 15px;"><i class="fa fa-instagram"></i> Instagram</a>
+<!-- <a href="" class="text-info"><i class="fa fa-angle-right"></i> Collection</a><br> -->
+<footer>
+    <div class="bg-dark py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="text-white"><strong>All About Basketball</strong></h4>
+                    <div class="underline mb-3"></div>
+                    <ul class="list-unstyled">
+                        <li><a href="index.php" class="text-info">Home</a></li>
+                        <li><a href="categories.php" class="text-info">AAB Collections</a></li>
+                        <li><a href="help.php" class="text-info">Help</a></li>
+                        <li><a href="cart.php" class="text-info">Cart</a></li>
+                        <li><a href="my-orders.php" class="text-info">Track Order</a></li>
+                        <li><a href="terms.php" class="text-info">Terms and Services</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4 class="text-white"><strong>Address</strong></h4>
+                    <ul class="list-unstyled">
+                        <li><a href="tel:+639451278635" class="text-white"><i class="fa fa-phone"></i> (+63) 9813795513</a></li>
+                        <li><a href="mailto:allaboutbasketball4102@gmail.com" class="text-white"><i class="fa fa-envelope"></i> allaboutbasketball4102@gmail.com</a></li>
+                        <li><a href="https://www.google.com/maps?q=Maliksi+3+Bacoor,+Cavite" target="_blank" class="text-white"><i class="fa fa-map-marker"></i> Maliksi 3 Bacoor, Cavite</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.facebook.com/Allaboutbasketballclothing?mibextid=LQQJ4d" class="text-white"><i class="fa fa-facebook"></i> Facebook</a></li>
+                        <li><a href="https://www.instagram.com/all_about_basketballclo/?igshid=MzRlODBiNWFlZA%3D%3D&fbclid=IwAR2602htvIx4OrtBU9y7eS_qncnBAAv65NIdriK2SFL7acTCi1oEiv1kt9c" class="text-white"><i class="fa fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <div class="map-con">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3864.687474098946!2d120.9523358!3d14.45997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cd8d14cb0d5f%3A0x5cecad8590a32f1e!2sFX52%2BXWP%2C%20Maliksi%20Elementary%20School%2C%20Maliksi%2C%20Bacoor%2C%20Cavite%2C%20Gen.%20Evangelista%20Street%2C%20Bacoor%2C%20Cavite!5e0!3m2!1sen!2sph!4v1625191187386!5m2!1sen!2sph" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="py-2 bg-warning">
-    <div class="text-center">
-        <p class="mb-0">All Rights Reserved Copyright @ National College of Science & Technology <?= date('Y')?></p>
+    <div class="bg-warning py-2">
+        <div class="container">
+            <div class="text-center">
+                <p class="mb-0">All Rights Reserved Copyright @ National College of Science & Technology <?= date('Y')?></p>
+            </div>
+        </div>
     </div>
-</div>
+</footer>
+
 
 <?php include('includes/footer.php'); ?>
 <script>
