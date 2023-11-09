@@ -72,7 +72,7 @@ if (isset($_POST["register_btn"]))
         $username ='u992665783_aabofficial';
         $password = 'oATnan?3$';
         $database = 'u992665783_aab'; 
-        $conn = mysqli_connect($host, $username, $pass, $database);
+        $conn = mysqli_connect($host, $username, $password, $database);
 
         // insert in users table
         $sql = "INSERT INTO users(name, email, phone, address, zip, password, verification_code, email_verified_at) VALUES ('" . $name . "', '" . $email . "', '" . $phone . "', '" . $address . "', '" . $zip . "', '" . $encrypted_password . "', '" . $verification_code . "', NULL)";
