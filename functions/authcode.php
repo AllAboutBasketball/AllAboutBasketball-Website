@@ -69,9 +69,9 @@ if (isset($_POST["register_btn"]))
 
         // connect with database
         $host = 'localhost';
-        $username ='root';
-        $password = '';
-        $database = 'db_aab';
+        $username ='u992665783_aabofficial';
+        $password = 'oATnan?3$';
+        $database = 'u992665783_aab'; 
         $conn = mysqli_connect($host, $username, $pass, $database);
 
         // insert in users table
