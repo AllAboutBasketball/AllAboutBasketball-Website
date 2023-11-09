@@ -132,31 +132,31 @@ include('./includes/header.php');
 <!--------------------------------------------- PRODUCT SALES  ---------------------->
 
 <section class="lagayan">
-        <div class="prodl">
-            <div class="card-imahe car-1"></div>
-            <h2>Hot Offers</h2>
-            <p>Check Out Our New Hot Offers</p>
-                <a href="">Shop Now</a>
-        </div>
-        <section class="lagayan">
-            <div class="prodl">
-                <div class="card-imahe car-2"></div>
-                <h2>Check Out Now</h2>
-                <p>Check Out Your Favorite Items</p>
-                <a href="">Shop Now</a>
-
-            </div>
-        </section>
-        <section class="lagayan">
-            <div class="prodl">
-                <div class="card-imahe car-3"></div>
-                <h2>Discover Our Collection</h2>
-                <p>Be the first to avail or new collections</p>
-                <a href="">Shop Now</a>
-            </div>
-        </section>
+    <div class="prodl">
+        <div class="card-imahe car-1"></div>
+        <h2>Hot Offers</h2>
+        <p>Check Out Our New Hot Offers</p>
+            <a href="">Shop Now</a>
+    </div>
 </section>
-   
+    <section class="lagayan">
+        <div class="prodl">
+            <div class="card-imahe car-2"></div>
+            <h2>Check Out Now</h2>
+            <p>Check Out Your Favorite Items</p>
+            <a href="">Shop Now</a>
+
+        </div>
+    </section>
+    <section class="lagayan">
+        <div class="prodl">
+            <div class="card-imahe car-3"></div>
+            <h2>Discover Our Collection</h2>
+            <p>Be the first to avail or new collections</p>
+            <a href="">Shop Now</a>
+        </div>
+    </section>
+
 
 <!------------------ Featured  ----------------->
 
@@ -205,7 +205,7 @@ include('./includes/header.php');
             <section id="product1">
                 <div class="container">
                     <div class="row">
-                        <div class="col-6  mb-4">
+                        <div class="col-md-6  mb-4">
                             <div class="card">
                                 <img src="aab_images/model2.jpg" class="card-img-top" alt="Model 2">
                                 <div class="card-body">
@@ -213,7 +213,7 @@ include('./includes/header.php');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6  mb-4">
+                        <div class="col-md-6  mb-4">
                             <div class="card">
                                 <img src="aab_images/model3.jpg" class="card-img-top" alt="Model 3">
                                 <div class="card-body">
@@ -221,7 +221,7 @@ include('./includes/header.php');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6  mb-4">
+                        <div class="col-md-6  mb-4">
                             <div class="card">
                                 <img src="aab_images/model4.jpg" class="card-img-top" alt="Model 4">
                                 <div class="card-body">
@@ -229,7 +229,7 @@ include('./includes/header.php');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6  mb-4">
+                        <div class="col-md-6  mb-4">
                             <div class="card">
                                 <img src="aab_images/model5.jpg" class="card-img-top" alt="Model 5">
                                 <div class="card-body">
@@ -237,7 +237,7 @@ include('./includes/header.php');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6  mb-4">
+                        <div class="col-md-6  mb-4">
                             <div class="card">
                                 <img src="aab_images/model6.jpg" class="card-img-top" alt="Model 6">
                                 <div class="card-body">
@@ -245,7 +245,7 @@ include('./includes/header.php');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6  mb-4">
+                        <div class="col-md-6  mb-4">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title ">Be a Model</h5>
