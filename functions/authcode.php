@@ -90,7 +90,7 @@ else if(isset($_POST["verify_email"]))
     $verification_code = $_POST["verification_code"];
 
     // connect with database
-    $conn = mysqli_connect("localhost", "kaelreyes", "03028138646k@eL!", "vitabella");
+    $conn = mysqli_connect($host, $username, $password, $database);
 
     // mark email as verified
     $sql = "UPDATE users SET email_verified_at = NOW() WHERE email = '" . $email . "' AND verification_code = '" . $verification_code . "'";
