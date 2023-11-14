@@ -52,14 +52,14 @@ include('includes/header.php');
                }
             ?>
                 
-                <div class="card">
+                <div class="card shadow-lg">
                     <div class="card-header bg-primary">
-                        <h4>Verification Form</h4>
+                        <h4><strong class="text-light">Verification Form</strong></h4>
                     </div>
                     <div class="card-body">
                     <form action="functions/authcode.php" method="POST">
     
-    <input type="text" name="verification_code" placeholder="Enter verification code" required /> <br>
+    <input type="text" name="verification_code" placeholder="Enter verification code" class="form-control" required /> <br>
 
    <br> <input type="submit" name="verify_email" class="btn btn-primary" value="Verify Email">
 </form>
