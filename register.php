@@ -28,7 +28,7 @@ include('includes/header.php');
             ?>
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h4>Registration Form</h4>
+                        <h4><strong class="text-light">Registration Form</strong></h4>
                     </div>
                     <div class="card-body">
                         <form action="functions/authcode.php" method="POST">

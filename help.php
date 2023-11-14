@@ -98,68 +98,76 @@ include('includes/header.php');
     </div>
 </div>
  <!---------------------------------- REPORT PROBLEM ---------------------------------------->
-<div class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                    <section id="report-problem">
-                        <div class="report-desc">
-                                <h1> REPORT A PROBLEM</h1>
-                                <h4> Let's Do Some Action To Your Concern </h4>
-                        </div>
-                        <div class="report-subject">
-                            <h2> Don't Hesistate Your Concerns And Inquiries </h2>
-                        </div>
-                        <div class="body">
-                                <div class="report-header">
-                                <h4> <strong> Danielle Bab T. Ebio </strong></h4>
-                                    <div class="content">
-                                    <p><i class="fa fa-phone"></i> &nbsp; (+63) 9272853091</p>
-                                    <div class="underscore"></div>
-                                    <p><i class="fa fa-map-marker"></i> &nbsp; Imus City, Cavite</p>
-                                </div>
+ <div class="container">
+     <div class="card shadow mb-5 mt-3">
+        <div class="card-body">
+            <div class="py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                                <section id="report-problem">
+                                    <div style="margin: 0 30px;">
+                                        <div class="report-desc">
+                                                <h1> REPORT A PROBLEM</h1>
+                                                <h4> Let's Do Some Action To Your Concern </h4>
+                                        </div>
+                                        <div class="report-subject">
+                                            <h2> Don't Hesistate Your <br> Concerns And Inquiries </h2>
+                                        </div>
+                                    </div>
+                                    <div class="body">
+                                            <div class="report-header">
+                                            <h4> <strong> Danielle Bab T. Ebio </strong></h4>
+                                                <div class="content">
+                                                <p><i class="fa fa-phone"></i> &nbsp; (+63) 9272853091</p>
+                                                <div class="underscore"></div>
+                                                <p><i class="fa fa-map-marker"></i> &nbsp; Imus City, Cavite</p>
+                                            </div>
+                                        </div>
+                                        <div class="report-header">
+                                            <h4> <strong> Gabriel Jett Hilario </strong></h4>
+                                        <div class="content">
+                                        <p><i class="fa fa-phone"></i> &nbsp; (+63) 9813795514</p>
+                                            <div class="underscore"></div>
+                                            <p><i class="fa fa-map-marker"></i> &nbsp; Zapote Kalinisan Bacoor, Cavite</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                    <!---------------------------------- CONTACT FORM ---------------------------------------->
+                                            <form id="report-form" action="code.php" method="POST">
+                                            <label for="fullname" class="report-label" >Fullname</label>
+                                            <input type="text" id="name" class="underscore-input" required autocomplete="off">
+                                            <label for="email" class="report-label">Email</label>
+                                            <input type="text" id="email" class="underscore-input" required autocomplete="off">
+                                            <label for="contact" class="report-label">Contact Number</label>
+                                            <input type="text" id="contact" class="underscore-input" required autocomplete="off">
+                                            <label for="address" class="report-label">Address (Optional) </label>
+                                            <input type="text" id="address" class="underscore-input" autocomplete="off" >
+                                            <label for="inquiries" class="report-label">Title Inquiries</label>
+                                                <select required id="inquiries" required class="form-select mb-2 bg-color-light mt-2">
+                                                    <option selected hidden>Select an option</option>
+                                                    <option value="inq_website">Our Website</option>
+                                                    <option value="inq_products">Our Product</option>
+                                                    <option value="inq_cse">Customer Service Experience</option>
+                                                    <option value="inq_feedback">Feedback</option>
+                                                    <option value="inq_ratings">Ratings</option>
+                                                    <option value="inq_se">Something Else</option>
+                                                    <!-- Add more options as needed -->
+                                                </select>
+                                            <!-- <input type="text" id="inquiries" name="inquiries" class="underscore-input" required> -->
+                                            <label for="message" class="report-label" >Message</label>
+                                            <input type="text" id="message" class="underscore-input" autocomplete="off" required>
+                                            <button class="report-submit" type="submit" onclick="sendEmail()" name="help_btn">Submit</button>
+                                            </form>
+                                            <h4 class="sent-notification"></h4>
                             </div>
-                            <div class="report-header">
-                                <h4> <strong> Gabriel Jett Hilario </strong></h4>
-                            <div class="content">
-                            <p><i class="fa fa-phone"></i> &nbsp; (+63) 9813795514</p>
-                                <div class="underscore"></div>
-                                <p><i class="fa fa-map-marker"></i> &nbsp; Zapote Kalinisan Bacoor, Cavite</p>
-                                </div>
-                            </div>
-                        </div>
-        <!---------------------------------- CONTACT FORM ---------------------------------------->
-                                <form id="report-form" action="code.php" method="POST">
-                                <label for="fullname" class="report-label" >Fullname</label>
-                                <input type="text" id="name" class="underscore-input" required autocomplete="off">
-                                <label for="email" class="report-label">Email</label>
-                                <input type="text" id="email" class="underscore-input" required autocomplete="off">
-                                <label for="contact" class="report-label">Contact Number</label>
-                                <input type="text" id="contact" class="underscore-input" required autocomplete="off">
-                                <label for="address" class="report-label">Address (Optional) </label>
-                                <input type="text" id="address" class="underscore-input" autocomplete="off" >
-                                <label for="inquiries" class="report-label">Title Inquiries</label>
-                                    <select required id="inquiries" required class="form-select mb-2 bg-color-light mt-2">
-                                        <option selected hidden>Select an option</option>
-                                        <option value="inq_website">Our Website</option>
-                                        <option value="inq_products">Our Product</option>
-                                        <option value="inq_cse">Customer Service Experience</option>
-                                        <option value="inq_feedback">Feedback</option>
-                                        <option value="inq_ratings">Ratings</option>
-                                        <option value="inq_se">Something Else</option>
-                                        <!-- Add more options as needed -->
-                                    </select>
-                                <!-- <input type="text" id="inquiries" name="inquiries" class="underscore-input" required> -->
-                                <label for="message" class="report-label" >Message</label>
-                                <input type="text" id="message" class="underscore-input" autocomplete="off" required>
-                                <button class="report-submit" type="submit" onclick="sendEmail()" name="help_btn">Submit</button>
-                                </form>
-                                <h4 class="sent-notification"></h4>
+                        </section>
+                    </div>
                 </div>
-            </section>
+            </div>
         </div>
-    </div>
-</div>
+     </div>
+ </div>
 
 <!-------------- FOOTER LAYER ------------------->
 <div class="py-5 bg-dark">

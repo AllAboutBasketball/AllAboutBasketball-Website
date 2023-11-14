@@ -131,31 +131,44 @@ include('./includes/header.php');
 
 <!--------------------------------------------- PRODUCT SALES  ---------------------->
 
-<section class="lagayan">
-    <div class="prodl">
-        <div class="card-imahe car-1"></div>
-        <h2>Hot Offers</h2>
-        <p>Check Out Our New Hot Offers</p>
-            <a href="">Shop Now</a>
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="lagayan">
+                <div class="prodl">
+                    <div class="card-imahe car-1"></div>
+                    <h2>Hot Offers</h2>
+                    <p>Check Out Our New Hot Offers</p>
+                        <a href="">Shop Now</a>
+                </div>
+            </div>
+        </div>
     </div>
-</section>
-    <section class="lagayan">
-        <div class="prodl">
-            <div class="card-imahe car-2"></div>
-            <h2>Check Out Now</h2>
-            <p>Check Out Your Favorite Items</p>
-            <a href="">Shop Now</a>
 
+    <div class="row">
+        <div class="col-md-6">
+            <div class="lagayan">
+                <div class="prodl">
+                    <div class="card-imahe car-2"></div>
+                    <h2>Check Out Now</h2>
+                    <p>Check Out Your Favorite Items</p>
+                    <a href="">Shop Now</a>
+                </div>
+            </div>
         </div>
-    </section>
-    <section class="lagayan">
-        <div class="prodl">
-            <div class="card-imahe car-3"></div>
-            <h2>Discover Our Collection</h2>
-            <p>Be the first to avail or new collections</p>
-            <a href="">Shop Now</a>
+        <div class="col-md-6">
+            <div class="lagayan">
+                <div class="prodl">
+                    <div class="card-imahe car-3"></div>
+                    <h2>Discover Our Collection</h2>
+                    <p>Be the first to avail or new collections</p>
+                    <a href="">Shop Now</a>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+</div>
+
 
 
 <!------------------ Featured  ----------------->

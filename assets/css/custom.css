@@ -194,7 +194,7 @@ a{
 }
 
 .card-imahe {
-    height: 300px; /* Reduce height for mobile */
+    height: 780px; /* Reduce height for mobile */
     margin-bottom: 15px;
     background-size: cover;
     border-radius: 15px 15px 0 0;
@@ -207,7 +207,7 @@ a{
     }
 
     .card-imahe {
-        height: 200px; /* Further reduce the height for small screens */
+        height: 780px; /* Further reduce the height for small screens */
     }
 
     .prodl h2, .prodl p {
