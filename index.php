@@ -106,7 +106,6 @@ include('./includes/header.php');
                                             <div class="card shadow">
                                                 <div class="card-body">
                                                     <!-- Image File Not Working -->
-                                                    <h5><?=  $item['image']; ?></h5>
                                                     <img src="./uploads/<?= $item['image']; ?>"  width="350px" height="300px" alt="Product Image" class = "w-100">
                                                     <h6 class = "text-center text-dark"> <strong> <?= $item['name']; ?> </strong></h6>
                                                 </div>
