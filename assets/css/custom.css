@@ -631,9 +631,19 @@ a{
 	width: 550px; /* Adjust the width as per your requirements */
 	margin-top: -30%; /* Add some top margin for spacing */
 	margin-right: 5%;
-  
-  }
-  
+ }
+
+ @media (max-width: 890px) {
+	#report-form {
+		margin-top: 0px;
+		float: none;
+	}
+
+	.res-form {
+		max-width: 80%;
+	}
+ }
+
   .report-label {
 	display: block;
 	margin-top: 30px;

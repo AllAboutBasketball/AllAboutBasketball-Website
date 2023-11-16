@@ -134,32 +134,47 @@ include('includes/header.php');
                                         </div>
                                     </div>
                     <!---------------------------------- CONTACT FORM ---------------------------------------->
-                                            <form id="report-form" action="code.php" method="POST">
-                                            <label for="fullname" class="report-label" >Fullname</label>
-                                            <input type="text" id="name" class="underscore-input" required autocomplete="off">
-                                            <label for="email" class="report-label">Email</label>
-                                            <input type="text" id="email" class="underscore-input" required autocomplete="off">
-                                            <label for="contact" class="report-label">Contact Number</label>
-                                            <input type="text" id="contact" class="underscore-input" required autocomplete="off">
-                                            <label for="address" class="report-label">Address (Optional) </label>
-                                            <input type="text" id="address" class="underscore-input" autocomplete="off" >
-                                            <label for="inquiries" class="report-label">Title Inquiries</label>
-                                                <select required id="inquiries" required class="form-select mb-2 bg-color-light mt-2">
-                                                    <option selected hidden>Select an option</option>
-                                                    <option value="inq_website">Our Website</option>
-                                                    <option value="inq_products">Our Product</option>
-                                                    <option value="inq_cse">Customer Service Experience</option>
-                                                    <option value="inq_feedback">Feedback</option>
-                                                    <option value="inq_ratings">Ratings</option>
-                                                    <option value="inq_se">Something Else</option>
-                                                    <!-- Add more options as needed -->
-                                                </select>
-                                            <!-- <input type="text" id="inquiries" name="inquiries" class="underscore-input" required> -->
-                                            <label for="message" class="report-label" >Message</label>
-                                            <input type="text" id="message" class="underscore-input" autocomplete="off" required>
-                                            <button class="report-submit" type="submit" onclick="sendEmail()" name="help_btn">Submit</button>
-                                            </form>
-                                            <h4 class="sent-notification"></h4>
+                                    <form id="report-form" action="code.php" method="POST">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="res-form">
+                                                        <label for="fullname" class="report-label">Fullname</label>
+                                                        <input type="text" id="name" class="underscore-input form-control" required autocomplete="off">
+                                                    </div>
+                                                    <div class="res-form">
+                                                        <label for="email" class="report-label">Email</label>
+                                                        <input type="text" id="email" class="underscore-input form-control" required autocomplete="off">
+                                                    </div>
+                                                    <div class="res-form">
+                                                        <label for="contact" class="report-label">Contact Number</label>
+                                                        <input type="text" id="contact" class="underscore-input form-control" required autocomplete="off">
+                                                    </div>
+                                                    <div class="res-form">
+                                                        <label for="address" class="report-label">Address (Optional) </label>
+                                                        <input type="text" id="address" class="underscore-input form-control" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="res-form">
+                                                        <label for="inquiries" class="report-label">Title Inquiries</label>
+                                                        <select required id="inquiries" required class="form-select mb-2 bg-color-light mt-2">
+                                                            <option selected hidden>Select an option</option>
+                                                            <!-- Your options here -->
+                                                        </select>
+                                                    </div>
+                                                    <div class="res-form">
+                                                        <label for="message" class="report-label">Message</label>
+                                                        <input type="text" id="message" class="underscore-input form-control" autocomplete="off" required>
+                                                    </div>
+                                                    <div class="res-form">
+                                                        <button class="report-submit" type="submit" onclick="sendEmail()" name="help_btn">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <h4 class="sent-notification"></h4>
                             </div>
                         </section>
                     </div>
@@ -168,7 +183,6 @@ include('includes/header.php');
         </div>
      </div>
  </div>
-
 <!-------------- FOOTER LAYER ------------------->
 <div class="py-5 bg-dark">
     <div class="container">
