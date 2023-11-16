@@ -37,18 +37,19 @@
                     if(isset($_SESSION['auth']))
                     {
                  ?>
-                  <li class="nav-item dropdown ">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?= $_SESSION['auth_user']['name'];?>
+                        <?= $_SESSION['auth_user']['name']; ?>
                     </a>
-                    <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="admin/index.php">Admin Dashboard</a></li>   
-                            <hr class="dropdown-divider">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="admin/index.php">Admin Dashboard</a></li>
+                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="my-profile.php">My Profile</a></li>
-                            <hr class="dropdown-divider">
+                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
                 </li>
+
                 <?php
                 }
                 else{
