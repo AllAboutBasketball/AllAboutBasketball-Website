@@ -144,5 +144,29 @@ function redirect($url, $message)
     exit();
 }
 
+function getOrderDetails($orderId){
+    global $con;
+    $query = "SELECT * FROM `order_items` WHERE order_id = '$orderId'";
+    return mysqli_query($con, $query);
+}
 
+
+function publishFeedback($orderId, $feedbackHeader, $feedbackDetails, $rating){
+    global $con;
+    $orderId = intval($orderId);
+    $feedbackHeader = mysqli_real_escape_string($con, $feedbackHeader);
+    $feedbackDetails = mysqli_real_escape_string($con, $feedbackDetails);
+    $rating = intval($rating); 
+
+    $query = "INSERT INTO feedbacks (order_id, feedback_heading, feedback_description, feedback_rating)
+              VALUES ('$orderId', '$feedbackHeader', '$feedbackDetails', '$rating')";
+    
+    $result = mysqli_query($con, $query);
+
+    if($result){
+        return true;
+    } else {
+        return false;
+    }
+}
 ?>

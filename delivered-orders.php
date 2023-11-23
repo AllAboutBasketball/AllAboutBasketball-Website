@@ -60,6 +60,7 @@ include('authenticate.php');
                                 <th class="text-success fw-bold">Price</th>
                                 <th class="text-success fw-bold">Date Ordered</th>
                                 <th class="text-success fw-bold">View</th>
+                                <th class="text-success fw-bold">Feedback</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,6 +79,9 @@ include('authenticate.php');
                                                 <td>
                                                     <a href="view-order.php?t=<?= $items['tracking_no']; ?>" class="btn btn-outline-primary">View Details</a>
                                                 </td>
+                                                <td>
+                                                    <a href="review-order.php?order_id=<?= $items['id']; ?>" class="btn btn-outline-primary">Leave Review</a>
+                                                </td>
                                             </tr>
                                         <?php
                                     }
@@ -86,7 +90,7 @@ include('authenticate.php');
                                 {
                                     ?>
                                         <tr>
-                                            <td colspan="5">No Confirmed Orders Yet</td>
+                                            <td colspan="6">No Confirmed Orders Yet</td>
                                         </tr>
                                     <?php   
                                 }

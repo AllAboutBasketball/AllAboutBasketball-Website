@@ -696,3 +696,31 @@ a{
 	margin-top: 20px;
 
 }
+
+.rating {
+    display: inline-block;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    display: inline-block;
+    padding: 5px;
+    font-size: 25px;
+    color: #fff; 
+    cursor: pointer;
+    text-shadow: 0 0 1px #000; 
+}
+
+.rating label:before {
+    content: '\2605';
+    padding: 2px; 
+}
+
+.rating input:checked ~ label {
+    color: #ffdd00; 
+}
