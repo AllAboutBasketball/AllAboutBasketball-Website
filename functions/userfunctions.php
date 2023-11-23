@@ -151,15 +151,15 @@ function getOrderDetails($orderId){
 }
 
 
-function publishFeedback($orderId, $feedbackHeader, $feedbackDetails, $rating){
+function publishFeedback($orderId, $user_id, $feedbackHeader, $feedbackDetails, $rating){
     global $con;
     $orderId = intval($orderId);
     $feedbackHeader = mysqli_real_escape_string($con, $feedbackHeader);
     $feedbackDetails = mysqli_real_escape_string($con, $feedbackDetails);
     $rating = intval($rating); 
 
-    $query = "INSERT INTO feedbacks (order_id, feedback_heading, feedback_description, feedback_rating)
-              VALUES ('$orderId', '$feedbackHeader', '$feedbackDetails', '$rating')";
+    $query = "INSERT INTO feedbacks (order_id, user_id, feedback_heading, feedback_description, feedback_rating)
+              VALUES ('$orderId', '$user_id', '$feedbackHeader', '$feedbackDetails', '$rating')";
     
     $result = mysqli_query($con, $query);
 
@@ -168,5 +168,19 @@ function publishFeedback($orderId, $feedbackHeader, $feedbackDetails, $rating){
     } else {
         return false;
     }
+}
+
+function getCurrentUserID(){
+    if(isset($_SESSION['auth'])){
+        return $_SESSION['auth_user']['user_id'];
+    }else{
+        return null;
+    }
+}
+
+function getFeedbacks($user_id){
+    global $con;
+    $query = "SELECT * FROM feedbacks WHERE user_id = '$user_id'";
+    return mysqli_query($con, $query);
 }
 ?>

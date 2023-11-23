@@ -3,42 +3,14 @@ include('functions/userfunctions.php');
 include('includes/header.php');
 include('authenticate.php');
 
-// Assuming your database connection is established
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 if (isset($_GET['order_id'])) {
     $tracking_no = $_GET['order_id'];
     $orderDetails = getOrderDetails($tracking_no);
 
-    // Fetching specific order details
-    // $orderData = fetchOrderDetails($tracking_no);
-
-    if (!$orderDetails || mysqli_num_rows($orderDetails) <= 0) {
-        ?>
-        <h4>Something Went Wrong</h4>
-        <?php
-        die();
-    }
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST['order_id'], $_POST['feedback_header'], $_POST['feedback_details'], $_POST['rating'])) {
-            $order_id = $_POST['order_id'];
-            $feedback_header = $_POST['feedback_header'];
-            $feedback_details = $_POST['feedback_details'];
-            $rating = $_POST['rating'];
-
-            // Call the publishFeedback() function
-            if (publishFeedback($order_id, $feedback_header, $feedback_details, $rating)) {
-                // Feedback successfully inserted
-                redirect("index.php", "Review Successfully Published!");
-                exit();
-            } else {
-                redirect('index.php', "ERROR! Review Failed to Publish!");
-                exit();
-            }
-        } else {
-            echo "Error: Missing form data.";
-        }
-    }
+    
 
 } else {
     ?>
@@ -96,7 +68,7 @@ if (isset($_GET['order_id'])) {
 
 <div class="container mt-4">
     <h2>Review Order</h2>
-    <form method="post">
+    <form method="post" action="submit-feedback.php">
         <?php
         $order = mysqli_fetch_assoc($orderDetails);
         ?>

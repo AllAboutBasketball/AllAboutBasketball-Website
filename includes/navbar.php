@@ -32,6 +32,9 @@
                 <li class="nav-item">
                     <a class="nav-link <?= $page == "my-orders.php"? 'active text-primary':''; ?>" href="my-orders.php">Track Order</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= $page == "reviews.php"? 'active text-primary':''; ?>" href="reviews.php">Order Reviews</a>
+                </li>
      
                 <?php 
                     if(isset($_SESSION['auth']))
@@ -39,7 +42,7 @@
                  ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?= $_SESSION['auth_user']['name']; ?>
+                        <?php echo $_SESSION['auth_user']['name']; ?>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="admin/index.php">Admin Dashboard</a></li>

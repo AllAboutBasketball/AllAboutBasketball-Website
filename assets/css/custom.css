@@ -724,3 +724,17 @@ a{
 .rating input:checked ~ label {
     color: #ffdd00; 
 }
+
+.checked-star:before {
+    content: '\2605'; 
+    /* border: 1px solid #ffd700;  */
+    padding: 2px; 
+    color: #ffd700; 
+}
+
+.unchecked-star:before {
+    content: '\2605'; 
+    /* border: 1px solid #ddd;  */
+    padding: 2px; 
+    color: #ddd; 
+}
