@@ -137,6 +137,12 @@ function getByID($table, $userId)
     exit();
 }
 
+function getUserByID($userId){
+    global $con;
+    $query = "SELECT * FROM users WHERE id = '$userId'";
+    return mysqli_query($con, $query);
+}
+
 function redirect($url, $message)
 {
     $_SESSION['message'] = $message;
@@ -182,5 +188,27 @@ function getFeedbacks($user_id){
     global $con;
     $query = "SELECT * FROM feedbacks WHERE user_id = '$user_id'";
     return mysqli_query($con, $query);
+}
+
+function getProductReviews($product_id){
+    global $con;
+    $query = "SELECT fb.* 
+              FROM feedbacks fb
+              JOIN orders o ON fb.order_id = o.id
+              JOIN order_items oi ON o.id = oi.order_id
+              WHERE oi.prod_id = '$product_id'";
+    $result = mysqli_query($con, $query);
+
+    if($result) {
+        return $result;
+    } else {
+        return null;
+    }
+}
+
+function getFeedbackCommentsByID($id){
+    global $con;
+    $query = "SELECT * FROM feedback_comments WHERE feedback_id = '$id'";
+    return  mysqli_query($con, $query);
 }
 ?>

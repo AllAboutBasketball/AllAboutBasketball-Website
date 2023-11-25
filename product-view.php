@@ -7,12 +7,16 @@ if(isset($_GET['product']))
     $product_slug = $_GET['product'];
     $product_data = getSlugActive("products", $product_slug);
     $product = mysqli_fetch_array($product_data);
+
+    $product_reviews = getProductReviews($product['id']);
+
     
+
 
     if($product)
     {
         ?>
-         <div class="py-3 bg-primary">
+        <div class="py-3 bg-primary">
             <div class="container">
                 <h6 class = "text-white">
                     <a class = "text-white" href="categories.php">
@@ -120,6 +124,87 @@ if(isset($_GET['product']))
                     </div>
                 </div>
             </div>
+        </div>
+
+
+        <div class="container" style="margin-top:130px;">
+            <h2 class="mb-5 text-center">User Reviews for this Product</h2>
+            <?php foreach($product_reviews as $review) 
+                {
+                    $userResult = getUserByID(intval($review['user_id']));
+                    $currentUserID = getCurrentUserID();
+            ?>
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <span style="font-size: 0.9rem;">
+                            <?php 
+                                if($userResult){
+                                    $user = mysqli_fetch_assoc($userResult);
+                                    echo $user['name']; 
+                                }
+                            ?>
+                        </span>
+                        <br>
+                        <strong>
+                            <?php echo $review['feedback_heading']; ?>
+                        </strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <h5 class="card-title"><?php echo $review['feedback_rating']; ?>/5: </h5>
+                            <div class="rating" style="direction: ltr;">
+                                <?php
+                                $rating = intval($review['feedback_rating']);
+                                for ($i = 1; $i <= 5; $i++) {
+                                $checked = $i <= $rating ? "checked" : "";
+                                $starClass = $i <= $rating ? "checked-star" : "unchecked-star";
+                                ?>
+                                <input type="radio" id="star<?php echo $i ?>" name="rating" value="<?php echo $i ?>" <?php echo $checked ?>>
+                                <label for="star<?php echo $i ?>" class="<?php echo $starClass ?>" title="<?php echo $i ?> stars"></label>
+                                <?php
+                            }
+                            ?>
+                            </div>
+                        </div>
+                        <p class="card-text"><?php echo $review['feedback_description']; ?></p>
+                        <hr>
+                        <!-- Comment Form and Comment  -->
+                        <form method="post" action="submit-comment.php">
+                            <input type="hidden" name="feedback_id" value="<?php echo $review['id']; ?>">
+                            <input type="hidden" name="user_id" value="<?php echo $currentUserID; ?>">
+                            <div class="mb-3">
+                                <label for="comment" class="form-label">Your Comment:</label>
+                                <input class="form-control" id="comment" name="comment" placeholder="Write your comment here" style="outline: none;border-bottom: 1px solid #ced4da;" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                        <div class="mt-5">
+                            <hr>
+                            <?php
+                                $comments = getFeedbackCommentsByID($review['id']);
+
+                                foreach($comments as $comment){
+                                    $userResultTwo = getUserByID($comment['user_id']);
+                            ?>
+                                <span class="d-flex">
+                                    <h5>
+                                        <?php 
+                                            if($userResultTwo){
+                                                $user = mysqli_fetch_assoc($userResultTwo);
+                                                echo $user['name']; 
+                                            }
+                                        ?>
+                                    </h5>
+                                    :
+                                    <p style="margin-left: 16px;">
+                                            <?php echo $comment['text']; ?>
+                                    </p>
+                                </span>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
         <?php
     }
