@@ -2,32 +2,20 @@
 
 include('../middleware/adminMiddleware.php'); 
 include('includes/header.php');
+include("includes/adminFunctions.php");
 
-if(isset($_GET['t']))
-{
-    $tracking_no = $_GET['t'];
+if (isset($_GET['id'])) {
+    $uploadID = intval($_GET['id']);
+    $result = getCollabData($uploadID);
 
-    $orderData = getAllCollab();
-    if(mysqli_num_rows($orderData) < 0)
-    {
-        ?>
-            <h4>Something Went Wrong</h4>
-        <?php
-        die();
+    if ($result) {
+        $data = mysqli_fetch_assoc($result);
+    } else {
+        die("Error fetching data.");
     }
-
+} else {
+    die("ID not set.");
 }
-else
-{
-    ?>
-        <h4>Something Went Wrong</h4>
-    <?php
-    die();
-
-}
-
-$data = mysqli_fetch_array($orderData);
-
 ?>
 
 
@@ -36,88 +24,60 @@ $data = mysqli_fetch_array($orderData);
         <div class="colmd-12">
             <div class="card">
                 <div class="card-header bg-info">
-                    <span class="fs-4 fw-bold text-white">View Order</span>                          
+                    <span class="fs-4 fw-bold text-white">View User Collab Upload Details</span>                          
                     <a href="collab.php" class="btn btn-warning float-end"><i class="fa fa-reply me-1"></i>Back</a>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>Delivery Details</h4>
+                            <h4>Collab Image</h4>
                             <hr>
-                            <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <label class="fw-bold">Description</label>
-                                    <div class="border p-1">
-                                        <?= $data['name']; ?>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <label class="fw-bold">Size</label>
-                                    <div class="border p-1">
-                                        <?= $data['cloth_size']; ?>
-                                    </div>
-                                </div>
-                            </div>
+                            <img src="./../userdesign/<?php echo $data['image']?>" width="400px" height="50px" class="float-start img-fluid"/> 
                         </div>
                         <div class="col-md-6">
-                            <h4>Order Details</h4>
-                            <hr>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                    </tr>
-                                </thead>
-                                <tbody>                                      
-                                        <?php
-                                                $orders = getAllCollab("upload");
-                
-                                                if(mysqli_num_rows($orders) > 0)
-                                                {
-                                                    foreach ($orders as $items) {
-                                                        ?>
-                                                             
-                                                        <?php
-                                                        
-                                                    }
-                                                }
-                                        ?>
-                                    </tbody>
-                            </table>
-                            <hr>
-                            <h5>Total Price: 700.00</h5>
-                            
+                            <div class="card mb-3">
+                                <div class="card-header bg-info text-white">
+                                    Details
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $data['name']; ?></h5>
+                                    <p class="card-text">
+                                        <strong>Cloth Size:</strong> <?php echo $data['cloth_size']; ?><br>
+                                        <strong>Color:</strong> <?php echo $data['color']; ?>
+                                    </p>
+                                </div>
+                            </div>
                             <hr>
                             <label class="fw-bold">Status: </label>
-                            <?php
-                                $products = getAll('upload');
+                                <?php 
+                                    if ($data['status'] == 0) {
+                                ?>
 
-                                if(mysqli_num_rows($products) > 0)
-                                
-                                    foreach($products as $item)
-                                
-                                        ?>
-                            <?php 
-							 			if ($item['status'] == 0) {
-							 				echo "<span class='color: blue'>Pending</span>";
-							 			}
-							 			if ($item['status'] == 1){
-							 				echo "<span class='color: green'> Approved</span>";
-							 			}
-                                        if ($item['status'] == 2){
-                                            echo "<span class='color: red'> Rejected</span>";
-                                        } ?>
-                                <br><form action="approvedes.php?id=<?php echo $result['id']; ?>" method="POST">
-							 				<input type="hidden" name="appid" value="<?php echo $result['id']; ?>">
-							 				<input type="submit" class="btn btn-sm btn-success" name="approve" value="Approve">
-							 			
-                                        <form action="rejectdes.php?id=<?php echo $result['id']; ?>" method="POST">
-							 				<input type="hidden" name="appid" value="<?php echo $result['id']; ?>">
-							 				<input type="submit" class="btn btn-sm btn-danger" name="reject" value="Reject">
-							 			</form>
-                                
+                                        <span style='color: blue;'>Pending</span>
+                                <?php 
+                                    }
+                                    if ($data['status'] == 1){
+                                ?>
+                                        <span style='color: green;'> Approved</span>
+                                <?php
+                                    }
+                                    if ($data['status'] == 2){
+                                ?>
+                                        <span cstyle='color: red;'> Rejected</span>
+                                <?php 
+                                    } 
+                                ?>
+                                <hr>    
+                                <?php if($data['status'] == 0) { ?>
+                                    <form action="collab-approved.php?id=<?php echo $data['id']; ?>" method="POST">
+                                        <input type="hidden" name="appid" value="<?php echo $data['id']; ?>">
+                                        <input type="submit" class="btn btn-sm btn-success" name="approve" value="Approve">
+                                    </form>
+                                    <form action="collab-reject.php?id=<?php echo $data['id']; ?>" method="POST">
+                                        <input type="hidden" name="appid" value="<?php echo $data['id']; ?>">
+                                        <input type="submit" class="btn btn-sm btn-danger" name="reject" value="Reject">
+                                    </form>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

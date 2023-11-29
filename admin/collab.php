@@ -3,7 +3,7 @@
 
 include('../middleware/adminMiddleware.php'); 
 include('includes/header.php');
-
+include('./includes/adminFunctions.php');
 
 ?>
 
@@ -30,25 +30,27 @@ include('includes/header.php');
                         </thead>
                         <tbody>
                             <?php
-                                $orders = getAllCollab();
+                                $orders = getAllUploadData();
 
                                 if(mysqli_num_rows($orders) > 0)
                                 {
                                     foreach ($orders as $items) {
+                                        if($items['status'] == 0){
                                         ?>
                                             <tr>
                                                 <td><?= $items['id']; ?></td>
                                                 <td><?= $items['name']; ?></td>
                                                 <td class="text-center">
-                                                <img src="../userdesign/<?= $items['image']; ?>" width = "50px" height = "50px" alt="<?= $items['name']; ?>">
-                                            </td>
+                                                    <img src="../userdesign/<?= $items['image']; ?>" width = "50px" height = "50px" alt="<?= $items['name']; ?>">
+                                                </td>
                                                 <td><?php echo $items['cloth_size']; ?> </td>
                                                 <td><?php echo $items['color']; ?> </td>
                                                 <td>
-                                                    <a href="view-collab.php?t=<?= $items['name']; ?>" class="btn btn-outline-primary">View Details</a>
+                                                    <a href="view-collab.php?id=<?= $items['id']; ?>" class="btn btn-outline-primary">View Details</a>
                                                 </td>
                                             </tr>
                                         <?php
+                                        }
                                     }
                                 }
                                 else

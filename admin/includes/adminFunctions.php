@@ -106,3 +106,34 @@ function getCollectionCount(){
         return -1; 
     }
 }
+
+function approveUploadData($uploadID){
+    global $con;
+    $query = "UPDATE upload SET status = '1' WHERE id = '$uploadID'";
+    return mysqli_query($con, $query);
+}
+
+function rejectUploadData($uploadID){
+    global $con;
+    $query = "UPDATE upload SET status = '2' WHERE id = '$uploadID'";
+    return mysqli_query($con, $query);
+}
+
+function getAllUploadData(){
+    global $con;
+    $query = "SELECT * FROM `upload`";
+    return mysqli_query($con, $query);
+}
+
+function getCollabData($id){
+    global $con;
+    $query = "SELECT * FROM `upload` WHERE id = '$id'";
+    return mysqli_query($con, $query);
+}
+
+function redirectAdmin($url, $message)
+{
+    $_SESSION['message'] = $message;
+    header('Location: '.$url);
+    exit();
+}

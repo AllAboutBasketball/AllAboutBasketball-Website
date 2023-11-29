@@ -211,4 +211,24 @@ function getFeedbackCommentsByID($id){
     $query = "SELECT * FROM feedback_comments WHERE feedback_id = '$id'";
     return  mysqli_query($con, $query);
 }
+
+
+function uploadCollabData($userId, $name, $filename, $cloth_size, $color){
+    global $con;
+    $test_query = "INSERT INTO upload (user_id, name, cloth_size, color, image) VALUES ( '$userId' ,'$name', '$cloth_size', '$color', '$filename')";
+    $test_query_run = mysqli_query($con, $test_query);
+}
+
+function getCollabDataByUserID($userId){
+    global $con;
+    $query = "SELECT * FROM upload WHERE user_id = '$userId'";
+    return mysqli_query($con, $query);
+}
+
+
+function getCollabData($id){
+    global $con;
+    $query = "SELECT * FROM `upload` WHERE id = '$id'";
+    return mysqli_query($con, $query);
+}
 ?>

@@ -49,6 +49,17 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="my-profile.php">My Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
+                        <?php 
+                            $userId = getCurrentUserID();
+                            $collab = getCollabDataByUserID($userId);
+
+                            if(mysqli_num_rows($collab) > 0){
+                        ?>
+                            <li><a class="dropdown-item" href="collab-history.php">Collab Upload History</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                        <?php 
+                            }
+                        ?>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>
                 </li>
