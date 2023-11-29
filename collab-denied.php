@@ -69,7 +69,7 @@
                                             <td><?= $items['cloth_size']; ?></td>
                                             <td><?= $items['color']; ?></td>
                                             <td>
-                                                <a href="collab-view.php?t=<?= $items['id']; ?>" class="btn btn-outline-success">View Details</a>
+                                                <a href="collab-view.php?id=<?= $items['id']; ?>" class="btn btn-outline-success">View Details</a>
                                             </td>
                                         </tr>
                             <?php
