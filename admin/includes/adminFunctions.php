@@ -125,7 +125,7 @@ function getAllUploadData(){
     return mysqli_query($con, $query);
 }
 
-function getCollabData($id){
+function getUploadData($id){
     global $con;
     $query = "SELECT * FROM `upload` WHERE id = '$id'";
     return mysqli_query($con, $query);

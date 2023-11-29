@@ -4,7 +4,7 @@ include('./includes/adminFunctions.php');
 
 if (isset($_GET['id'])) {
     $uploadID = intval($_GET['id']);
-    $result = getCollabData($uploadID);
+    $result = getUploadData($uploadID);
 
     if ($result) {
         rejectUploadData($uploadID);
