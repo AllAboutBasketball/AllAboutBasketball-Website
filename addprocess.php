@@ -1,6 +1,5 @@
 <?php
 require("functions/userfunctions.php");
-$conn = mysqli_connect("localhost", "root", "", "db_aab");
 
 if(isset($_POST['save_select'])){
 
