@@ -41,7 +41,7 @@
                    <div class="card">
                        <div class="card-header bg-primary">
                            <span class="text-white fs-4">View Upload</i></span>                          
-                           <a href="collab-history.php" class="btn btn-warning float-end"><i class="fa fa-reply"></i>Back</a>
+                           <a href="data.php" class="btn btn-warning float-end"><i class="fa fa-reply"></i>Back</a>
                        </div>
                        <div class="card-body">
                            <div class="row">

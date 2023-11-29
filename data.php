@@ -59,10 +59,11 @@ include('authenticate.php');
                         <tbody>
                             <?php
                                 $orders = getCollab("upload");
-
+                                $userId = getCurrentUserID();
                                 if(mysqli_num_rows($orders) > 0)
                                 {
                                     foreach ($orders as $items) {
+                                        if($items['user_id'] == $userId){
                                         ?>
                                             <tr>
                                                 <td><?= $items['id']; ?></td>
@@ -71,10 +72,11 @@ include('authenticate.php');
                                                 <td><?php echo $items['cloth_size']; ?> </td>
                                                 <td><?php echo $items['color']; ?> </td>
                                                 <td>
-                                                    <a href="view-order.php?t=<?= $items['name']; ?>" class="btn btn-outline-primary">View Details</a>
+                                                    <a href="collab-view.php?id=<?= $items['id']; ?>" class="btn btn-outline-primary">View Details</a>
                                                 </td>
                                             </tr>
                                         <?php
+                                        }
                                     }
                                 }
                                 else
