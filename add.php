@@ -33,9 +33,18 @@ include('authenticate.php');
                 <li class="nav-item">
                     <a class="nav-link text-dark<?= $page == "add.php"? 'active text-white':''; ?>" href="add.php">Collaboration</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark " href="data.php">Upload History</a>
-                </li>
+                <?php 
+                    $userId = getCurrentUserID();
+                    $collab = getCollabDataByUserID($userId);
+
+                    if(mysqli_num_rows($collab) > 0){
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark " href="collab-history.php">Upload History</a>
+                    </li>
+                <?php
+                    }
+                ?>
             </ul>
             </div> 
         </div>
