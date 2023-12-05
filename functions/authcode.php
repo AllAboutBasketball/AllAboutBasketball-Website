@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../config/dbcon.php');
+
 ?>
 
 <?php
@@ -28,7 +29,7 @@ if (isset($_POST["register_btn"]))
         $mail->SMTPDebug = 0;//SMTP::DEBUG_SERVER;
 
         //Send using SMTP
-        // $mail->isSMTP();
+        $mail->isSMTP();
 
         //Set the SMTP server to send through
         $mail->Host = 'smtp.gmail.com';
@@ -127,12 +128,14 @@ else if(isset($_POST["verify_email"]))
                         
                         $_SESSION['message'] = "Welcome to Dashboard";
                         header('Location: ../admin/index.php');
+                        exit();
             
                     }
                     else
                     {
                         $_SESSION['message'] = "Logged In Successfully";
                         header('Location: ../index.php');
+                        exit();
                     }
            
         
@@ -143,6 +146,7 @@ else if(isset($_POST["verify_email"]))
             {
                 $_SESSION['message'] = "You can now login";
                 header('Location: ../login.php');
+                exit();
             
             }
         }
@@ -153,9 +157,7 @@ else if(isset($_POST["verify_email"]))
     {
         $_SESSION['message'] = "You can now login";
         header('Location: ../login.php');
-    
-        
-        
+        exit();
     }
 }
 
@@ -201,12 +203,14 @@ else if(isset($_POST['login_btn']))
                         
                         $_SESSION['message'] = "Welcome to Dashboard";
                         header('Location: ../admin/index.php');
+                        exit();
             
                     }
                     else
                     {
                         $_SESSION['message'] = "Logged In Successfully";
                         header('Location: ../index.php');
+                        exit();
                     }
            
         
@@ -217,6 +221,7 @@ else if(isset($_POST['login_btn']))
             {
                 $_SESSION['message'] = "Invalid email or password";
                 header('Location: ../login.php');
+                exit();
             
             }
         }
@@ -227,22 +232,24 @@ else if(isset($_POST['login_btn']))
     {
         $_SESSION['message'] = "Invalid email or password";
         header('Location: ../login.php');
-    
-        
-        
+        exit();
     }
 }
 
 if (isset($_POST['reset_btn'])) {
-    $conn = mysqli_connect("localhost", "kaelreyes", "03028138646k@eL!", "vitabella");
+    $host = 'localhost';
+    $username ='u992665783_aabofficial';
+    $password = 'oATnan?3$';
+    $database = 'u992665783_aab';  
+
+    $conn = mysqli_connect($host, $username, $password, $database);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $code = mysqli_real_escape_string($conn, md5(rand()));
 
     if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE email='{$email}'")) > 0) {
         $query = mysqli_query($conn, "UPDATE users SET code='{$code}' WHERE email='{$email}'");
 
-        if ($query) {        
-            echo "<div style='display: none;'>";
+        if ($query) {
             //Create an instance; passing `true` enables exceptions
             $mail = new PHPMailer(true);
 
@@ -265,44 +272,72 @@ if (isset($_POST['reset_btn'])) {
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'Password Reset';
-                $mail->Body    = 'Here is the verification link <b><a href="http://localhost/V411/change-password.php? reset='.$code.'">http://localhost/V411/change-password.php?reset='.$code.'</a></b>';
+                $mail->Body    = 'Here is the verification link <b><a href="http://localhost/aab/change-password.php?reset='.$code.'">http://localhost/aab/change-password.php?reset='.$code.'</a></b>';
 
                 $mail->send();
-                echo 'Message has been sent';
+                $_SESSION['message'] = "Email has been sent";
+                header('Location: ../forgot-password.php');
             } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-            echo "</div>";        
+                $_SESSION['message'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                header('Location: ../forgot-password.php');
+                exit();
+            }     
             $msg = "<div class='alert alert-info'>We've send a verification link on your email address.</div>";
+            $_SESSION["msg"] = $msg;
+            header('Location: ../forgot-password.php');
+            exit();
         }
     } else {
         $msg = "<div class='alert alert-danger'>$email - This email address do not found.</div>";
+        $_SESSION["msg"] = $msg;
+        header('Location: ../forgot-password.php');
+        exit();
     }
 }
 
 
 
 else if (isset($_GET['reset'])) {
-    if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE code='{$_GET['reset']}'")) > 0) {
+    global $con;
+    if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM users WHERE code='{$_GET['reset']}'")) > 0) {
         if (isset($_POST['submit'])) {
-            $password = mysqli_real_escape_string($conn, md5($_POST['password']));
-            $confirm_password = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
+            $password = mysqli_real_escape_string($con, md5($_POST['password']));
+            $confirm_password = mysqli_real_escape_string($con, md5($_POST['cpassword']));
 
-            if ($password === $confirm_password) {
-                $query = mysqli_query($conn, "UPDATE users SET password='{$password}', code='' WHERE code='{$_GET['reset']}'");
-
+            if ($password == $confirm_password) {
+                $query = mysqli_query($con, "UPDATE users SET password='{$password}', code='' WHERE code='{$_GET['reset']}'");
                 if ($query) {
-                    header("Location: login.php");
+                    $_SESSION["message"] = "Succesfully Reset Your Password";
+                    header("Location: ../login.php");
+                    exit();
+                }else{
+                    $msg = "<div class='alert alert-danger'>Password Change ERROR!</div>";
+                    $_SESSION["msg"] = $msg;
+                    header('Location: ../change-password.php?reset='.$_GET["reset"]);
+                    exit();
                 }
             } else {
                 $msg = "<div class='alert alert-danger'>Password and Confirm Password do not match.</div>";
+                $_SESSION["msg"] = $msg;
+                header('Location: ../change-password.php?reset='.$_GET["reset"]);
+                exit();
             }
+        }else{
+            $msg = "<div class='alert alert-danger'>POST ERROR!</div>";
+            $_SESSION["msg"] = $msg;
+            header('Location: ../change-password.php?reset='.$_GET["reset"]);
+            exit();
         }
     } else {
         $msg = "<div class='alert alert-danger'>Reset Link do not match.</div>";
+        $_SESSION["msg"] = $msg;
+        header('Location: ../change-password.php?reset='.$_GET["reset"]);
+        exit();
     }
 } else {
-    // header("Location: ../index.php");
+    $_SESSION["message"] = "NULL INDEX";
+    header("Location: ../index.php");
+    exit();
 }
         
 ?>

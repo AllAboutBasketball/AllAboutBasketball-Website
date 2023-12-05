@@ -27,28 +27,19 @@
   $(document).ready(function() {
     // Event handler for the select change
     $('#sizeSelect').change(function() {
-      var selectedSize = $(this).val(); // Get the value of the selected option
-
-      // Enable or disable buttons based on the selected size
+      var selectedSize = $(this).val();
       if (selectedSize === 'ALL AVAILABLE') {
-        $('.modal-button').prop('disabled', false); // Enable all buttons
+        $('.modal-button').prop('disabled', false);
       } else {
-        $('.modal-button').prop('disabled', true); // Disable all buttons except the selected size button
-        $('#' + selectedSize.toLowerCase() + 'Btn').prop('disabled', false); // Enable the selected size button
+        $('.modal-button').prop('disabled', true);
+        $('#' + selectedSize.toLowerCase() + 'Btn').prop('disabled', false);
       }
     });
 
-    // Event handler for the button clicks
     $('.modal-button').click(function() {
-      var selectedSize = $(this).val(); // Get the value of the clicked button
-
-      // Remove the active class from all buttons
+      var selectedSize = $(this).val();
       $('.modal-button').removeClass('active');
-
-      // Add the active class to the clicked button
       $(this).addClass('active');
-
-      // Set the selected value in the hidden input field
       $('#selectedSize').val(selectedSize);
     });
   });
@@ -167,7 +158,6 @@ function validateCheckbox() {
     if (selectedItems.length > 0) {
       // Process the selected items
       console.log("Selected Items: ", selectedItems);
-      // You can perform further actions with the selected items here
       localStorage.setItem("carts", selectedItems);
       window.location.href = 'checkout.php';
     } else {
