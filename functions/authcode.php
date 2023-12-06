@@ -250,11 +250,9 @@ if (isset($_POST['reset_btn'])) {
         $query = mysqli_query($conn, "UPDATE users SET code='{$code}' WHERE email='{$email}'");
 
         if ($query) {
-            //Create an instance; passing `true` enables exceptions
             $mail = new PHPMailer(true);
 
             try {
-                //Server settings
                 $mail->CharSet =  "utf-8";
                 $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
                 $mail->isSMTP();                                            //Send using SMTP
@@ -265,14 +263,12 @@ if (isset($_POST['reset_btn'])) {
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-                //Recipients
                 $mail->setFrom('allaboutbasketball6@gmail.com', 'AllAboutBasketClothing');
                 $mail->addAddress($email);
 
-                //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'Password Reset';
-                $mail->Body    = 'Here is the verification link <b><a href="http://localhost/aab/change-password.php?reset='.$code.'">http://localhost/aab/change-password.php?reset='.$code.'</a></b>';
+                $mail->Body    = 'Here is the verification link <b><a href="https://allaboutbasketballofficial.com/change-password.php?reset='.$code.'">http://localhost/aab/change-password.php?reset='.$code.'</a></b>';
 
                 $mail->send();
                 $_SESSION['message'] = "Email has been sent";

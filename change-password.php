@@ -10,35 +10,49 @@ if(isset($_SESSION['auth']))
 include('includes/header.php'); 
 include('./config/dbcon.php');
 
+
 if (isset($_POST['submit'])) {
     if (isset($_GET['reset'])) {
-        if (mysqli_num_rows(mysqli_query($con, "SELECT * FROM users WHERE code='{$_GET['reset']}'")) > 0) {
-            $password = mysqli_real_escape_string($con, md5($_POST['password']));
-            $confirm_password = mysqli_real_escape_string($con, md5($_POST['cpassword']));
-        
-            if ($password == $confirm_password) {
-                $updatedPassword = $encrypted_password = password_hash(md5($_POST['password']), PASSWORD_DEFAULT);
-                $query = mysqli_query($con, "UPDATE users SET password='{$updatedPassword}', code='' WHERE code='{$_GET['reset']}'");
-                if ($query) {
-                    $_SESSION["message"] = "Succesfully Reset Your Password";
+        // Check if the reset code exists and retrieve the user's data
+        $reset_code = $_GET['reset'];
+        $stmt = $con->prepare("SELECT * FROM users WHERE code = ?");
+        $stmt->bind_param("s", $reset_code);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            $password = $_POST['password'];
+            $confirm_password = $_POST['cpassword'];
+
+            if ($password === $confirm_password) {
+                // Hash the password securely
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+                // Update the user's password in the database
+                $query = $con->prepare("UPDATE users SET password = ?, code = '' WHERE code = ?");
+                $query->bind_param("ss", $hashed_password, $reset_code);
+                $query->execute();
+
+                if ($query->affected_rows > 0) {
+                    $_SESSION["message"] = "Successfully reset your password.";
                     header("Location: ./login.php");
                     exit();
-                }else{
-                    $msg = "<div class='alert alert-danger'>Password Change ERROR!</div>";
-                    $_SESSION["msg"] = $msg;
-                    header('Location: ./change-password.php?reset='.$_GET["reset"]);
+                } else {
+                    $_SESSION["msg"] = "<div class='alert alert-danger'>Password change error.</div>";
+                    header('Location: ./change-password.php?reset=' . $reset_code);
                     exit();
                 }
             } else {
                 $msg = "<div class='alert alert-danger'>Password and Confirm Password do not match.</div>";
                 $_SESSION["msg"] = $msg;
-                header('Location: ./change-password.php?reset='.$_GET["reset"]);
+                header('Location: ./change-password.php?reset=' . $reset_code);
                 exit();
             }
         } else {
-            $msg = "<div class='alert alert-danger'>Reset Link do not match.</div>";
+            $msg = "<div class='alert alert-danger'>Reset Link does not match.</div>";
             $_SESSION["msg"] = $msg;
-            header('Location: ./change-password.php?reset='.$_GET["reset"]);
+            header('Location: ./change-password.php?reset=' . $reset_code);
             exit();
         }
     } else {
