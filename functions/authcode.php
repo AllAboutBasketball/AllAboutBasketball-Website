@@ -268,7 +268,7 @@ if (isset($_POST['reset_btn'])) {
 
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'Password Reset';
-                $mail->Body    = 'Here is the verification link <b><a href="https://allaboutbasketballofficial.com/change-password.php?reset='.$code.'">http://localhost/aab/change-password.php?reset='.$code.'</a></b>';
+                $mail->Body    = 'Here is the verification link <b><a href="https://allaboutbasketballofficial.com/change-password.php?reset='.$code.'">Change Password!</a></b>';
 
                 $mail->send();
                 $_SESSION['message'] = "Email has been sent";
