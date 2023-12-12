@@ -4,6 +4,11 @@ include('functions/userfunctions.php');
 include('includes/header.php');
 include('authenticate.php');
 
+
+if(isset($_GET['product'])){
+    addProductToCart($_GET['product']);
+}
+
 ?>
 
 <div class="py-3 bg-primary">
@@ -75,44 +80,46 @@ include('authenticate.php');
                         <h5 class="text-danger"><strong>Order Details</strong></h5>
                         <hr>
                         <?php
-                        $items = getCartItems();
-                        $totalPrice = 0;
 
-                        foreach ($items as $citem) {
-                            if ($citem['qty'] >= $citem['prod_qty']) {
-                                ?>
-                                <div class="mb-1 border">
-                                    <div class="row align-items-center">
-                                        <div class="col-md-2">
-                                            <img src="uploads/<?= $citem['image'] ?>" alt="Image" width="90px" height="80px">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="ms-4">
-                                                <label class="text-dark"><?= $citem['name'] ?></label>
+
+                            $items = getCartItems();
+                            $totalPrice = 0;
+    
+                            foreach ($items as $citem) {
+                                if ($citem['qty'] >= $citem['prod_qty']) {
+                                    ?>
+                                    <div class="mb-1 border">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-2">
+                                                <img src="uploads/<?= $citem['image'] ?>" alt="Image" width="90px" height="80px">
                                             </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label class="text-success">₱ <?= $citem['selling_price'] ?>.00</label>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="ms-5">
-                                                <label class="text-dark"><?= $citem['size'] ?></label>
+                                            <div class="col-md-3">
+                                                <div class="ms-4">
+                                                    <label class="text-dark"><?= $citem['name'] ?></label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label class="text-danger"><?= $citem['prod_qty'] ?>x</label>
+                                            <div class="col-md-2">
+                                                <label class="text-success">₱ <?= $citem['selling_price'] ?>.00</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="ms-5">
+                                                    <label class="text-dark"><?= $citem['size'] ?></label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class="text-danger"><?= $citem['prod_qty'] ?>x</label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <?php
-                                // Include the selected cart item in the form
-                                ?>
-                                <input type="hidden" name="selected_items[]" value="<?= $citem['prod_id'] ?>">
-                                <?php
-                                $totalPrice += $citem['selling_price'] * $citem['prod_qty'];
+                                    <?php
+                                    // Include the selected cart item in the form
+                                    ?>
+                                    <input type="hidden" name="selected_items[]" value="<?= $citem['prod_id'] ?>">
+                                    <?php
+                                    $totalPrice += $citem['selling_price'] * $citem['prod_qty'];
+                                }
                             }
-                        }
-                        unset($_SESSION["cart_id"]);
+                            unset($_SESSION["cart_id"]);
                         ?>
                         <hr>
                         <h5 class="fw-bold text-danger">Total Price: <span class="float-end text-success">₱ <?= $totalPrice ?>.00</span></h5>

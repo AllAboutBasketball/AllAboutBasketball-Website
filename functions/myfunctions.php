@@ -74,7 +74,7 @@ function checkTrackingNoValid($trackingNo)
 function getOrdersHistory()
 {
     global $con;
-    $query = "SELECT * FROM orders WHERE status = '8' ORDER BY id DESC";
+    $query = "SELECT * FROM orders WHERE status = '8' AND status = -1 ORDER BY id DESC";
     return $query_run = mysqli_query($con, $query);
 }
 

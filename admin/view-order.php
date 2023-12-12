@@ -133,35 +133,56 @@ $data = mysqli_fetch_array($orderData);
                             </div>
                             <label class="fw-bold">Status</label>
                             <div class="mb-3">
-                                <form action="code.php" method="POST">
-                                    <input type="hidden" name="tracking_no" value="<?= $data['tracking_no'] ?>">
-                                    <input type="hidden" name="order_id" value="<?= $data['id'] ?>">
-                                    <select name="order_status" class="form-select" onchange="toggleInput(this.value)">
-                                        <option value="1" <?= $data['status'] == 1 ? "selected" : "" ?>>Pending</option>
-                                        <option value="2" <?= $data['status'] == 2 ? "selected" : "" ?>>Order Packaged</option>
-                                        <option value="3" <?= $data['status'] == 3 ? "selected" : "" ?>>Picked up by courier</option>
-                                        <option value="4" <?= $data['status'] == 4 ? "selected" : "" ?>>Arrived at Sorting Station</option>
-                                        <option value="5" <?= $data['status'] == 5 ? "selected" : "" ?>>Departed at Sorting Station</option>
-                                        <option value="6" <?= $data['status'] == 6 ? "selected" : "" ?>>Arrived at Delivery Hub</option>
-                                        <option value="7" <?= $data['status'] == 7 ? "selected" : "" ?>>Out for Delivery</option>
-                                        <option value="8" <?= $data['status'] == 8 ? "selected" : "" ?>>Delivered</option>
-                                    </select>
+                                <?php
+                                if($data['status'] > 0)
+                                {
+                                ?>
+                                    <?php
+                                        if($data['status'] == 8){
+                                    ?>
+                                        <strong class="text-secondary">ITEM DELIVERED!</strong>
+                                    <?php
+                                        }else{
+                                    ?>
+                                    <form action="code.php" method="POST">
+                                        <input type="hidden" name="tracking_no" value="<?= $data['tracking_no'] ?>">
+                                        <input type="hidden" name="order_id" value="<?= $data['id'] ?>">
+                                        <select name="order_status" class="form-select" onchange="toggleInput(this.value)">
+                                            <option value="1" <?= $data['status'] == 1 ? "selected" : "" ?>>Pending</option>
+                                            <option value="2" <?= $data['status'] == 2 ? "selected" : "" ?>>Order Packaged</option>
+                                            <option value="3" <?= $data['status'] == 3 ? "selected" : "" ?>>Picked up by courier</option>
+                                            <option value="4" <?= $data['status'] == 4 ? "selected" : "" ?>>Arrived at Sorting Station</option>
+                                            <option value="5" <?= $data['status'] == 5 ? "selected" : "" ?>>Departed at Sorting Station</option>
+                                            <option value="6" <?= $data['status'] == 6 ? "selected" : "" ?>>Arrived at Delivery Hub</option>
+                                            <option value="7" <?= $data['status'] == 7 ? "selected" : "" ?>>Out for Delivery</option>
+                                            <option value="8" <?= $data['status'] == 8 ? "selected" : "" ?>>Delivered</option>
+                                        </select>
 
-                                    <div id="locationInput" class="form-control mt-3" style="display: none;">
-                                        <label for="location">Current Location:</label>
-                                        <input type="text" class="form-control" id="location" name="location">
-                                    </div>
-                            <!-- <label class="fw-bold mt-2">Status</label>
-                            <select name="remarks_status" class="form-select">
-                                    <option value="0"<?= $data['status'] == 0?"selected":""?>>Order On Progress</option>
-                                    <option value="1"<?= $data['status'] == 1?"selected":""?>> On Shipping</option>
-                                    <option value="2"<?= $data['status'] == 2?"selected":""?>>Thankyou! AAB Likes you!</option>
-                                    <option value="3"<?= $data['status'] == 3?"selected":""?>>Technical Issue</option>
-                                </select>
-                            <br> -->
-                                <button type="submit" name="update_order_btn" class="btn btn-success mt-3"><i class="fa fa-refresh me-1"></i>Update Status</button>
-                                <!--<button type="submit" name="sub_courier_btn" class="btn btn-info mt-3 ms-5"><i class="fas fa-box me-1"></i>Submit to Courier</button>-->
-                            </form>
+                                        <div id="locationInput" class="form-control mt-3" style="display: none;">
+                                            <label for="location">Current Location:</label>
+                                            <input type="text" class="form-control" id="location" name="location">
+                                        </div>
+                                    <!-- <label class="fw-bold mt-2">Status</label>
+                                    <select name="remarks_status" class="form-select">
+                                            <option value="0"<?= $data['status'] == 0?"selected":""?>>Order On Progress</option>
+                                            <option value="1"<?= $data['status'] == 1?"selected":""?>> On Shipping</option>
+                                            <option value="2"<?= $data['status'] == 2?"selected":""?>>Thankyou! AAB Likes you!</option>
+                                            <option value="3"<?= $data['status'] == 3?"selected":""?>>Technical Issue</option>
+                                        </select>
+                                    <br> -->
+                                        <button type="submit" name="update_order_btn" class="btn btn-success mt-3"><i class="fa fa-refresh me-1"></i>Update Status</button>
+                                        <!--<button type="submit" name="sub_courier_btn" class="btn btn-info mt-3 ms-5"><i class="fas fa-box me-1"></i>Submit to Courier</button>-->
+                                    </form>
+                                    <?php
+                                        }
+                                    ?>
+                            <?php
+                                }else{
+                            ?>
+                                <strong class="text-primary">CANCELLED</strong>
+                            <?php
+                                }
+                            ?>
                             </div>
                         </div>
                     </div>

@@ -137,3 +137,10 @@ function redirectAdmin($url, $message)
     header('Location: '.$url);
     exit();
 }
+
+function getOrderHistory()
+{
+    global $con;
+    $query = "SELECT * FROM orders WHERE status = '8' OR status = -1 ORDER BY id DESC";
+    return $query_run = mysqli_query($con, $query);
+}

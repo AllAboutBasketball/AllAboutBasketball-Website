@@ -105,7 +105,7 @@ function getCanceledOrders()
     global $con;
     $userId = $_SESSION['auth_user']['user_id'];
     
-    $query = "SELECT * FROM orders WHERE user_id='$userId' AND status='4' ORDER BY id DESC ";
+    $query = "SELECT * FROM orders WHERE user_id='$userId' AND status='-1' ORDER BY id DESC ";
     return $query_run = mysqli_query($con, $query);
 }
 
@@ -237,5 +237,29 @@ function getInTransitOrders(){
     $userId = $_SESSION['auth_user']['user_id'];
     $query = "SELECT * FROM orders WHERE user_id = '$userId' AND status BETWEEN 3 AND 7";
     return $query_run = mysqli_query($con, $query);
+}
+
+
+function addProductToCart($prodId){
+    global $con;
+    $userId = $_SESSION['auth_user']['user_id'];
+    $checkQuery = "SELECT * FROM carts WHERE user_id = $userId AND prod_id = $prodId";
+    $checkResult = mysqli_query($con, $checkQuery);
+
+    if(mysqli_num_rows($checkResult) > 0) {
+        // Update the quantity if the product exists in the cart
+        $updateQuery = "UPDATE carts SET prod_qty = prod_qty + 1 WHERE user_id = $userId AND prod_id = $prodId";
+        mysqli_query($con, $updateQuery);
+    } else {
+        // Insert the product into the cart if it doesn't exist
+        $insertQuery = "INSERT INTO carts (user_id, prod_id, prod_qty) VALUES ($userId, $prodId, 1)";
+        mysqli_query($con, $insertQuery);
+    }   
+}
+
+function cancelOrder($trackingNo){
+    global $con;
+    $query = "UPDATE orders SET status = -1 WHERE tracking_no = '$trackingNo'";
+    mysqli_query($con, $query);
 }
 ?>

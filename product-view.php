@@ -97,7 +97,6 @@ if(isset($_GET['product']))
                                 </div>
                             </div>     
                             <div class="row">
-                  
                                 <div class="col-md-6 mt-4">
                                     <?php 
                                         if($product['qty'] > 0)
@@ -116,7 +115,7 @@ if(isset($_GET['product']))
                                         }   
                                     ?>   
                                         <div class="float-end">
-                                            <a href="cart.php" class="btn btn-info"><i class="fa fa-money"></i> Proceed to Checkout</a>
+                                            <a href="checkout.php?product=<?php echo $product['id']; ?>" class="btn btn-info"><i class="fa fa-money"></i>Proceed to Checkout</a>
                                         </div>    
                                 </div>
                             </div>

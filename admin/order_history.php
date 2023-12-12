@@ -2,7 +2,7 @@
 
 include('../middleware/adminMiddleware.php'); 
 include('includes/header.php');
-
+include('includes/adminFunctions.php');
 
 ?>
 
@@ -29,7 +29,7 @@ include('includes/header.php');
                         </thead>
                         <tbody>
                             <?php
-                                $orders = getOrdersHistory();
+                                $orders = getOrderHistory();
 
                                 if(mysqli_num_rows($orders) > 0)
                                 {
@@ -52,7 +52,7 @@ include('includes/header.php');
                                 {
                                     ?>
                                         <tr>
-                                            <td colspan="5">No Orders Yet</td>
+                                            <td colspan="6">No Orders Yet</td>
                                         </tr>
                                     <?php   
                                 }

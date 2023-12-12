@@ -99,6 +99,7 @@ include('authenticate.php');
                                                 <td><?= $items['created_at']; ?></td>
                                                 <td>
                                                     <a href="view-order.php?t=<?= $items['tracking_no']; ?>" class="btn btn-outline-primary">View Details</a>
+                                                    <a href="cancel-order.php?t=<?= $items['tracking_no']; ?>" class="btn btn-outline-warning">Cancel Order</a>
                                                 </td>
                                             </tr>
                                         <?php
