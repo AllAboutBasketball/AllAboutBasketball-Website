@@ -51,9 +51,8 @@ function getAllActive($table)
 function getAllOrders()
 {
     global $con;
-    $query = "SELECT * FROM orders WHERE status='0' ORDER BY id ASC ";
+    $query = "SELECT * FROM orders WHERE status IN(1, 2, 3, 4, 5, 6, 7) ORDER BY id ASC ";
     return $query_run = mysqli_query($con, $query);
-    
 }
 
 function getAllCollab()
@@ -75,7 +74,7 @@ function checkTrackingNoValid($trackingNo)
 function getOrdersHistory()
 {
     global $con;
-    $query = "SELECT * FROM orders WHERE status IN(2,3) ORDER BY id DESC";
+    $query = "SELECT * FROM orders WHERE status = '8' ORDER BY id DESC";
     return $query_run = mysqli_query($con, $query);
 }
 

@@ -25,33 +25,6 @@ include('authenticate.php');
 <?php 
     $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/") + 1);
 ?>
-<!-- <nav class="navbar navbar-expand-lg navbar-secondary sticky-top bg-info shadow" style="z-index: 100;">
-    <div class="container">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="text-white">   
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link text-dark<?= $page == "my-orders.php"? 'active text-white':''; ?>" href="my-orders.php">Pending</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark " href="confirmed-orders.php">Confirmed</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark " href="forpickup-orders.php">Pick Up by Courier</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="canceled-orders.php">Canceled</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="delivered-orders.php">Delivered</a>
-                </li>
-
-            </ul>
-            </div> 
-        </div>
-    </div>
-</nav> -->
-
 
 <nav class="navbar navbar-expand-lg navbar-secondary sticky-top bg-info shadow" style="z-index: 100;">
     <div class="container">
@@ -59,20 +32,20 @@ include('authenticate.php');
         <div class="text-white">   
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link text-dark<?= $page == "my-orders.php"? 'active text-white':''; ?>" href="my-orders.php">Pending</a>
+                    <a class="nav-link text-dark" href="my-orders.php">Pending</a>
                 </li>
                 <li>
                     <a class="nav-link text-dark" href="transit.php">In Transit</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="delivered-orders.php">Delivered</a>
+                    <a class="nav-link text-dark<?= $page == "my-orders.php"? 'active text-white':''; ?>" href="delivered-orders.php">Delivered</a>
                 </li>
             </ul>
             </div> 
         </div>
     </div>
 </nav>
-            <div class="row">
+<div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -86,7 +59,7 @@ include('authenticate.php');
                         </thead>
                         <tbody>
                             <?php
-                                $orders = getOrders();
+                                $orders = getInTransitOrders();
 
                                 if(mysqli_num_rows($orders) > 0)
                                 {
@@ -108,7 +81,7 @@ include('authenticate.php');
                                 {
                                     ?>
                                         <tr>
-                                            <td colspan="5">No Pending Orders Yet</td>
+                                            <td colspan="6">No Confirmed Orders Yet</td>
                                         </tr>
                                     <?php   
                                 }

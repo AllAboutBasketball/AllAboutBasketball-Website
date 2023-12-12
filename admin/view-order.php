@@ -136,13 +136,21 @@ $data = mysqli_fetch_array($orderData);
                                 <form action="code.php" method="POST">
                                     <input type="hidden" name="tracking_no" value="<?= $data['tracking_no'] ?>">
                                     <input type="hidden" name="order_id" value="<?= $data['id'] ?>">
-                                <select name="order_status" class="form-select">
-                                    <option value="0"<?= $data['status'] == 0?"selected":""?>>Pending</option>
-                                    <option value="1"<?= $data['status'] == 1?"selected":""?>>Confirmed</option>
-                                    <option value="2"<?= $data['status'] == 2?"selected":""?>>PickUp By Courier</option>
-                                    <option value="3"<?= $data['status'] == 3?"selected":""?>>Completed</option>
-                                    <option value="4"<?= $data['status'] == 4?"selected":""?>>Canceled</option>
-                                </select>
+                                    <select name="order_status" class="form-select" onchange="toggleInput(this.value)">
+                                        <option value="1" <?= $data['status'] == 1 ? "selected" : "" ?>>Pending</option>
+                                        <option value="2" <?= $data['status'] == 2 ? "selected" : "" ?>>Order Packaged</option>
+                                        <option value="3" <?= $data['status'] == 3 ? "selected" : "" ?>>Picked up by courier</option>
+                                        <option value="4" <?= $data['status'] == 4 ? "selected" : "" ?>>Arrived at Sorting Station</option>
+                                        <option value="5" <?= $data['status'] == 5 ? "selected" : "" ?>>Departed at Sorting Station</option>
+                                        <option value="6" <?= $data['status'] == 6 ? "selected" : "" ?>>Arrived at Delivery Hub</option>
+                                        <option value="7" <?= $data['status'] == 7 ? "selected" : "" ?>>Out for Delivery</option>
+                                        <option value="8" <?= $data['status'] == 8 ? "selected" : "" ?>>Delivered</option>
+                                    </select>
+
+                                    <div id="locationInput" class="form-control mt-3" style="display: none;">
+                                        <label for="location">Current Location:</label>
+                                        <input type="text" class="form-control" id="location" name="location">
+                                    </div>
                             <!-- <label class="fw-bold mt-2">Status</label>
                             <select name="remarks_status" class="form-select">
                                     <option value="0"<?= $data['status'] == 0?"selected":""?>>Order On Progress</option>

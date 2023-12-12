@@ -254,6 +254,20 @@
           }
         });
     }
+    
+</script>
+
+<script>
+    function toggleInput(value) {
+        const locationInput = document.getElementById("locationInput");
+
+        // Check if the value is between 3 and 6
+        if (value >= 3 && value <= 6) {
+            locationInput.style.display = "block"; // Show the input
+        } else {
+            locationInput.style.display = "none"; // Hide the input
+        }
+    }
 </script>
 </body> 
 </html>

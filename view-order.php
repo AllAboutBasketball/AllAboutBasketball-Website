@@ -166,25 +166,49 @@ $data = mysqli_fetch_array($orderData);
                                    </div>
                                    <label class="fw-bold">Status</label>
                                    <div class="border p-1 mb-3">
+                                   <?php
+                                    $status = $data['status'];
+                                    $statusLabel = '';
+
+                                    switch ($status) {
+                                        case 1:
+                                            $statusLabel = "Pending";
+                                            break;
+                                        case 2:
+                                            $statusLabel = "Order Packaged";
+                                            break;
+                                        case 3:
+                                            $statusLabel = "Picked up by courier";
+                                            break;
+                                        case 4:
+                                            $statusLabel = "Arrived at Sorting Station (ADDRESS)";
+                                            break;
+                                        case 5:
+                                            $statusLabel = "Departed at Sorting Station";
+                                            break;
+                                        case 6:
+                                            $statusLabel = "Arrived at Delivery Hub";
+                                            break;
+                                        case 7:
+                                            $statusLabel = "Out for Delivery";
+                                            break;
+                                        case 8:
+                                            $statusLabel = "Delivered";
+                                            break;
+                                        default:
+                                            $statusLabel = "Unknown";
+                                            break;
+                                    }
+
+                                    echo $statusLabel;
+                                    ?>: 
+                                    <strong>
                                         <?php 
-                                            
-                                            if($data['status'] == 0)
-                                            {
-                                                echo "Pending";
+                                            if($data['current_location']){
+                                                echo $data["current_location"];
                                             }
-                                            else if($data['status'] == 1)
-                                            {
-                                                echo "Confirmed";
-                                            }
-                                            else if($data['status'] == 2)
-                                            {
-                                                echo "Completed";
-                                            }
-                                            else if($data['status'] == 3)
-                                            {
-                                                echo "Canceled";
-                                            }                                       
                                         ?>
+                                    </strong>
                                    </div>
                                    <label class="fw-bold">Remarks</label>
                                    <div class="border p-1 mb-3">

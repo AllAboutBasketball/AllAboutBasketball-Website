@@ -25,7 +25,7 @@ include('authenticate.php');
 <?php 
     $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/") + 1);
 ?>
-<nav class="navbar navbar-expand-lg navbar-secondary sticky-top bg-info shadow">
+<!-- <nav class="navbar navbar-expand-lg navbar-secondary sticky-top bg-info shadow">
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="text-white">   
@@ -45,6 +45,26 @@ include('authenticate.php');
                 <li class="nav-item">
                     <a class="nav-link text-dark <?= $page == "delivered-orders.php"? 'active text-white':''; ?>" href="delivered-orders.php">Delivered</a>
                 </li>    
+            </ul>
+            </div> 
+        </div>
+    </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-lg navbar-secondary sticky-top bg-info shadow" style="z-index: 100;">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="text-white">   
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="my-orders.php">Pending</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" href="transit.php">In Transit</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark<?= $page == "my-orders.php"? 'active text-white':''; ?>" href="delivered-orders.php">Delivered</a>
+                </li>
             </ul>
             </div> 
         </div>

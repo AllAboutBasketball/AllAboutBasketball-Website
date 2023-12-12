@@ -289,7 +289,13 @@ else if(isset($_POST['update_order_btn']))
     $track_no = $_POST['tracking_no'];
     $order_status = $_POST['order_status'];
     $order_id = $_POST['order_id'];
+    $current_location = $_POST['location'];
     // $remarks_status = $_POST['remarks_status'];
+    if ($order_status >= 3 && $order_status <= 6 && $current_location !== '') {
+        $updateCurrentLocation_query = "UPDATE orders SET current_location='$current_location' WHERE tracking_no='$track_no' ";
+        mysqli_query($con, $updateCurrentLocation_query);
+    }
+
     if($_POST['order_status']==2){
         $getOrderId = "SELECT * FROM order_items WHERE order_id ='".$order_id."'";
         $getOrderIdeEsult = mysqli_query($con, $getOrderId);

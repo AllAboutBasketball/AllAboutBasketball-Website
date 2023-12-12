@@ -231,4 +231,11 @@ function getCollabData($id){
     $query = "SELECT * FROM `upload` WHERE id = '$id'";
     return mysqli_query($con, $query);
 }
+
+function getInTransitOrders(){
+    global $con;
+    $userId = $_SESSION['auth_user']['user_id'];
+    $query = "SELECT * FROM orders WHERE user_id = '$userId' AND status BETWEEN 3 AND 7";
+    return $query_run = mysqli_query($con, $query);
+}
 ?>
