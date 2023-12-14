@@ -3,11 +3,15 @@
 include('functions/userfunctions.php');
 include('includes/header.php');
 include('authenticate.php');
-
+include('vendor/autoload.php');
 
 if(isset($_GET['product'])){
     addProductToCart($_GET['product']);
 }
+
+// use Payment\Payment;
+
+// $payment = new Payment();
 
 ?>
 
@@ -202,7 +206,8 @@ if(isset($_GET['product'])){
                             </div>
                             <div class="modal-footer d-flex justify-content-center align-items-center">
                             <button type="submit" name="GcashBtn" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Pay</button>
-                            </div>
+                            <div id="paypal-button-container"></div>    
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -214,3 +219,25 @@ if(isset($_GET['product'])){
 </div>
 
 <?php include('includes/footer.php'); ?>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AVdS_posENfhM0iIDrMn65L8X_YFCqYRumC71tbUVa5xLV8vdmCf63BrszerC7F7Q_YB0pOo0JtofdNE&currency=PHP"></script>
+
+    <script>
+      paypal.Buttons({
+        createOrder: (data, actions) => {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                    value: <?= $totalPrice ?>
+                }
+              }]
+            })
+        },
+
+        onApprove: (data, action) => {
+          return actions.order.capture().then(orderData => {
+            console.log("Payment Approved!")
+          })
+        }
+      }).render('#paypal-button-container')
+    </script>
