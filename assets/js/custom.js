@@ -31,48 +31,6 @@ $(document).ready(function () {
         
     });
 
-    $(document).on('click','.AddTooCart-btn', function (e) {
-        
-        e.preventDefault();
-
-        var qty = $(this).closest('.product_data').find('.input-qty').val();
-        var prod_id = $(this).val();
-
-        $.ajax({
-            method: "POST",
-            url: "functions/handlecart.php",
-            data: {
-                "prod_id" : prod_id,
-                "prod_qty" : qty,
-                "scope" : "add"
-            },
-            success: function (response) {
-                if(response == 201)
-                {
-                    alertify.success("Product Added To Cart");
-
-                }
-                else if(response == "existing")
-                {
-                    alertify.success("Product Already In Cart");
-
-                }
-                else if(response == 401)
-                {
-                    alertify.success("Login To Continue");
-
-                }
-                else if(response == 500)
-                {
-                    alertify.success("Something Went Wrong");
-
-                }
-                
-            }
-        });
-        
-    });
-
     $(document).on('click','.updateQty', function () {
 
         var qty = $(this).closest('.product_data').find('.input-qty').val();

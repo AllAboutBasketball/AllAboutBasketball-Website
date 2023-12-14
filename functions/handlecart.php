@@ -20,7 +20,32 @@
 
                     if(mysqli_num_rows($chk_existing_cart_run) > 0)
                     {
-                        echo "existing";
+                        $prod_id = $_POST['prod_id'];
+                        $prod_qty = $_POST['prod_qty'];
+
+                        $user_id = $_SESSION['auth_user']['user_id'];
+
+                        $chk_existing_cart = "SELECT * FROM carts WHERE prod_id = '$prod_id' AND user_id = '$user_id'";
+                        $chk_existing_cart_run = mysqli_query($con, $chk_existing_cart);
+
+                        if(mysqli_num_rows($chk_existing_cart_run) > 0)
+                        {
+                            $update_query = "UPDATE carts SET prod_qty='$prod_qty' WHERE prod_id='$prod_id' AND user_id='$user_id' ";
+                            $update_query_run = mysqli_query($con, $update_query);
+
+                            if($update_query_run)
+                            {
+                                echo "existing";
+                            }
+                            else
+                            {
+                                echo 500;
+                            }
+                        }
+                        else
+                        {                   
+                            echo "Something Went Wrong";
+                        }
                     }
                     else
                     {                   
@@ -65,7 +90,7 @@
                     {                   
                         echo "Something Went Wrong";
                     }
-                break;
+                    break;
                 case "delete":
                     $cart_id = $_POST['cart_id'];
 

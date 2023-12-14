@@ -67,20 +67,28 @@ if(isset($_GET['product']))
                                 }
                                 
                                 ?>
-                                </div>              
-                                <div class="col-md-2 mt-1 text-end">
-                                <button id="smallBtn" type="button" name="size" value="SMALL" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-right: -10px;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">Small</button> 
+                                </div>           
+
+                                <!-- Size Selection -->
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-md-2 mt-1 text-end">
+                                            <button id="smallBtn" type="button" name="size" value="SMALL" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-right: -10px;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">Small</button> 
+                                        </div>
+                                        <div class="col-md-1 mt-1">
+                                            <button id="mediumBtn" type="button" name="size" value="MEDIUM" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-right: 80%;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">Medium</button> 
+                                        </div>
+                                        <div class="col-md-1 mt-1" style="margin-left: 20px;">
+                                            <button id="largeBtn" type="button" name="size" value="LARGE" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-left: 30%;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">Large</button> 
+                                        </div>
+                                        <div class="col-md-2 mt-1" >
+                                            <button id="xlBtn" type="button" name="size" value="XL" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-left: 20%;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">XL</button> 
+                                        </div>
+                                        <input type="hidden" id="selectedSize" name="selectedSize">
+                                    </div>
                                 </div>
-                                <div class="col-md-1 mt-1 text-end">
-                                <button id="mediumBtn" type="button" name="size" value="MEDIUM" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-right: 80%;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">Medium</button> 
-                                </div>
-                                <div class="col-md-1 mt-1 text-end">
-                                <button id="largeBtn" type="button" name="size" value="LARGE" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-left: 30%;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">Large</button> 
-                                </div>
-                                <div class="col-md-1 mt-1 text-end">
-                                <button id="xlBtn" type="button" name="size" value="XL" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-left: 20%;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">XL</button> 
-                                </div>
-                                <input type="hidden" id="selectedSize" name="selectedSize">
+
+
                             <div class="row">
                             <div class="col-md-3 mt-4">
                                     <div class="input-group mb-3" style = "width:130px">
@@ -103,8 +111,6 @@ if(isset($_GET['product']))
                                         {
                                             ?>
                                                 <button class = "btn btn-success px-4 AddTooCart-btn" value="<?= $product['id']?>"><i class = "fa fa-shopping-cart me-2"></i>Add to Cart</button>
-                                            
-                        
                                             <?php 
 
                                         }
@@ -217,3 +223,47 @@ else
     echo "Something Went Wrong";
 }
  include('includes/footer.php'); ?>
+
+
+<script>
+$(document).on('click','.AddTooCart-btn', function (e) {
+    
+    e.preventDefault();
+
+    var qty = $(this).closest('.product_data').find('.input-qty').val();
+    var prod_id = $(this).val();
+
+    $.ajax({
+        method: "POST",
+        url: "functions/handlecart.php",
+        data: {
+            "prod_id" : prod_id,
+            "prod_qty" : qty,
+            "scope" : "add"
+        },
+        success: function (response) {
+            if(response == 201)
+            {
+                alertify.success("Product Added To Cart");
+
+            }
+            else if(response == "existing")
+            {
+                alertify.success("Cart Item Updated!");
+            }
+            else if(response == 401)
+            {
+                alertify.success("Login To Continue");
+
+            }
+            else if(response == 500)
+            {
+                alertify.success("Something Went Wrong");
+
+            }
+            
+        }
+    });
+    
+});
+</script>
