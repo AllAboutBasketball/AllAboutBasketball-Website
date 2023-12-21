@@ -296,22 +296,28 @@ else if(isset($_POST['update_order_btn']))
         mysqli_query($con, $updateCurrentLocation_query);
     }
 
-    if($_POST['order_status']==2){
-        $getOrderId = "SELECT * FROM order_items WHERE order_id ='".$order_id."'";
+    if($order_status == 2){
+        $getOrderId = "SELECT * FROM order_items WHERE order_id ='$order_id'";
         $getOrderIdeEsult = mysqli_query($con, $getOrderId);
+
         foreach ($getOrderIdeEsult as $getOrderIdeResult) {
-                //get product details
-            $product_id =  $getOrderIdeResult['prod_id'];
-            $getProduct = "SELECT * FROM products WHERE id ='".$product_id."'";
+            $product_id = $getOrderIdeResult['prod_id'];
+
+            $getProduct = "SELECT qty FROM products WHERE id ='$product_id'";
             $getProductResult = mysqli_query($con, $getProduct);
-            foreach ($getProductResult as $getProductResults) {
-                $current_qty=$getProductResults['qty'];
+
+            if ($getProductResult) {
+                $getProductResults = mysqli_fetch_assoc($getProductResult);
+                $current_qty = $getProductResults['qty'];
+
+                $new_qty = $current_qty - $getOrderIdeResult['qty'];
+
+                $updateProductQty_query = "UPDATE products SET qty='$new_qty' WHERE id='$product_id'";
+                $updateInventoryQty_query = "UPDATE inventory SET qty='$new_qty' WHERE id='$product_id'";
+
+                mysqli_query($con, $updateProductQty_query);
+                mysqli_query($con, $updateInventoryQty_query);
             }
-            $new_qty=$current_qty - $getOrderIdeResult['qty'];
-            $updateProductQty_query = "UPDATE products SET qty='$new_qty' WHERE id='$product_id' ";
-            $updateInventoryQty_query = "UPDATE inventory SET qty='$new_qty' WHERE id='$product_id' ";
-            mysqli_query($con, $updateProductQty_query);
-            mysqli_query($con, $updateInventoryQty_query);
         }
     }
     $updateOrder_query = "UPDATE orders SET status='$order_status' WHERE tracking_no='$track_no' ";

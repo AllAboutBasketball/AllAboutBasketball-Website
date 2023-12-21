@@ -30,7 +30,7 @@
 
                         if(mysqli_num_rows($chk_existing_cart_run) > 0)
                         {
-                            $update_query = "UPDATE carts SET prod_qty='$prod_qty' WHERE prod_id='$prod_id' AND user_id='$user_id' ";
+                            $update_query = "UPDATE carts SET prod_qty= prod_qty + '$prod_qty' WHERE prod_id='$prod_id' AND user_id='$user_id' ";
                             $update_query_run = mysqli_query($con, $update_query);
 
                             if($update_query_run)
@@ -77,13 +77,22 @@
                         $update_query = "UPDATE carts SET prod_qty='$prod_qty' WHERE prod_id='$prod_id' AND user_id='$user_id' ";
                         $update_query_run = mysqli_query($con, $update_query);
 
-                        if($update_query_run)
-                        {
-                            echo 200;
-                        }
-                        else
-                        {
-                            echo 500;
+                        if($update_query_run) {
+                            $get_total_price_query = "SELECT SUM(p.selling_price * c.prod_qty) AS total_price 
+                                                        FROM carts c 
+                                                        JOIN products p ON c.prod_id = p.id 
+                                                        WHERE c.user_id='$user_id'";
+                            $get_total_price_result = mysqli_query($con, $get_total_price_query);
+
+                            if ($get_total_price_result && mysqli_num_rows($get_total_price_result) > 0) {
+                                $row = mysqli_fetch_assoc($get_total_price_result);
+                                $totalPrice = $row['total_price'];
+                                echo $totalPrice; 
+                            } else {
+                                echo -1; 
+                            }
+                        } else {
+                            echo 500; 
                         }
                     }
                     else

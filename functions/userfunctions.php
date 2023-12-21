@@ -247,15 +247,48 @@ function addProductToCart($prodId){
     $checkResult = mysqli_query($con, $checkQuery);
 
     if(mysqli_num_rows($checkResult) > 0) {
-        // Update the quantity if the product exists in the cart
         $updateQuery = "UPDATE carts SET prod_qty = prod_qty + 1 WHERE user_id = $userId AND prod_id = $prodId";
         mysqli_query($con, $updateQuery);
     } else {
-        // Insert the product into the cart if it doesn't exist
         $insertQuery = "INSERT INTO carts (user_id, prod_id, prod_qty) VALUES ($userId, $prodId, 1)";
         mysqli_query($con, $insertQuery);
     }   
 }
+
+function instantAddProductToCart($prodId, $qty){
+    global $con;
+    $userId = $_SESSION['auth_user']['user_id'];
+    $checkQuery = "SELECT * FROM carts WHERE user_id = $userId AND prod_id = $prodId";
+    $checkResult = mysqli_query($con, $checkQuery);
+
+    if(mysqli_num_rows($checkResult) > 0) {
+        $updateQuery = "UPDATE carts SET prod_qty = prod_qty + $qty WHERE user_id = $userId AND prod_id = $prodId";
+        mysqli_query($con, $updateQuery);
+
+        return getCartItem($userId, $prodId); 
+    } else {
+        $insertQuery = "INSERT INTO carts (user_id, prod_id, prod_qty) VALUES ($userId, $prodId, $qty)";
+        mysqli_query($con, $insertQuery);
+
+        return getCartItem($userId, $prodId);
+    }
+}
+
+function getCartItem($userId, $prodId){
+    global $con;
+    $query = "SELECT c.id as cid, c.prod_id, c.prod_qty, p.id as pid, p.name, p.size, p.image, p.selling_price, p.qty 
+              FROM carts c, products p 
+              WHERE c.prod_id = p.id AND c.user_id = '$userId' AND c.prod_id = '$prodId'";
+    $result = mysqli_query($con, $query);
+
+    if($result && mysqli_num_rows($result) > 0) {
+        return mysqli_fetch_assoc($result); 
+    }
+
+    return null; 
+}
+
+
 
 function cancelOrder($trackingNo){
     global $con;

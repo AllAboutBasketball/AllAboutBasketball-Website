@@ -31,25 +31,28 @@ $(document).ready(function () {
         
     });
 
-    $(document).on('click','.updateQty', function () {
+    // $(document).on('click','.updateQty', function (e) {
+    //     e.preventDefault();
+    //     var clickedButton = $(this);
+    //     var qty = clickedButton.closest('.product_data').find('.input-qty').val();
+    //     var prod_id = clickedButton.closest('.product_data').find('.prodId').val();
 
-        var qty = $(this).closest('.product_data').find('.input-qty').val();
-        var prod_id = $(this).closest('.product_data').find('.prodId').val();
-
-
-        $.ajax({
-            method: "POST",
-            url: "functions/handlecart.php",
-            data: {
-                "prod_id" : prod_id,
-                "prod_qty" : qty,
-                "scope" : "update"
-            },
-            success: function (response) {
-                //alert(response);
-            }
-        });
-    });
+    //     $.ajax({
+    //         method: "POST",
+    //         url: "functions/handlecart.php",
+    //         data: {
+    //             "prod_id" : prod_id,
+    //             "prod_qty" : qty,
+    //             "scope" : "update"
+    //         },
+    //         success: function (response) {
+    //             window.location.reload();
+    //         },
+    //         error: function () {
+    //             console.log("Error occurred during AJAX request");
+    //         }
+    //     });
+    // });
 
     $(document).on('click','.deleteItem', function () {
 
@@ -79,28 +82,23 @@ $(document).ready(function () {
         });
     });
 
-$("#proceedBtn").click(function() {
-        alert('clicked');
-        // var selectedItems = [];
+    $("#proceedBtn").click(function() {
+            alert('clicked');
+            // var selectedItems = [];
 
-        // $(".checkbox-item:checked").each(function() {
-        //   selectedItems.push($(this).val());
-        // });
+            // $(".checkbox-item:checked").each(function() {
+            //   selectedItems.push($(this).val());
+            // });
 
-        // if (selectedItems.length > 0) {
-        //   // Process the selected items
-        //   console.log("Selected Items: ", selectedItems);
-        //   // You can perform further actions with the selected items here
-        //   localStorage.setItem("carts", selectedItems);
-        // } else {
-        //   console.log("No items selected.");
-        // }
-      });
+            // if (selectedItems.length > 0) {
+            //   // Process the selected items
+            //   console.log("Selected Items: ", selectedItems);
+            //   // You can perform further actions with the selected items here
+            //   localStorage.setItem("carts", selectedItems);
+            // } else {
+            //   console.log("No items selected.");
+            // }
+        }); 
 
-
-
-
-
-    
-});
+    });
 

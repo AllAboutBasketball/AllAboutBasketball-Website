@@ -53,7 +53,7 @@ include('authenticate.php');
                             foreach ($items as $citem) 
                             {
                                 ?>
-                                <div class="card product_data shadow-ms mb-3">
+                                <div class="card product_data product_<?php echo $citem['prod_id']; ?> shadow-ms mb-3">
                                     <div class="row align-items-center">
                                         <div class="col-md-1">
                                             <img src="uploads/<?= $citem['image']?>" alt="Image" width="90px" height="80px">
@@ -62,7 +62,7 @@ include('authenticate.php');
                                             <h5><?= $citem['name']?></h5>
                                         </div>
                                         <div class="col-md-2">
-                                        <h5>₱ <?= $citem['selling_price']?>.00</h5>
+                                        <h5 id="subtotal_<?php echo $citem['prod_id']; ?>">₱ <?= $citem['selling_price'] * $citem['prod_qty']?>.00</h5>
                                         </div>
                                         <div class="col-md-2">
                                             <h5><?= $citem['size']?></h5>
@@ -105,7 +105,6 @@ include('authenticate.php');
                         </div>
                         <div class="float-end">
                             <a id="proceedBtn" class="btn btn-outline-primary" onclick="return validateCheckbox()">Proceed to Checkout</a>
-
                         </div>
                     <?php
                     }
@@ -125,6 +124,31 @@ include('authenticate.php');
     </div>
 </div>
 
-
-
 <?php include('includes/footer.php'); ?>
+
+<script>
+$(document).ready(function () {
+    $(document).on('click','.updateQty', function (e) {
+        e.preventDefault();
+        var clickedButton = $(this);
+        var qty = clickedButton.closest('.product_data').find('.input-qty').val();
+        var prod_id = clickedButton.closest('.product_data').find('.prodId').val();
+
+        $.ajax({
+            method: "POST",
+            url: "functions/handlecart.php",
+            data: {
+                "prod_id" : prod_id,
+                "prod_qty" : qty,
+                "scope" : "update"
+            },
+            success: function (response) {
+                window.location.reload();
+            },
+            error: function () {
+                console.log("Error occurred during AJAX request");
+            }
+        });
+    });
+})
+</script>

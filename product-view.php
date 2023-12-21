@@ -10,7 +10,7 @@ if(isset($_GET['product']))
 
     $product_reviews = getProductReviews($product['id']);
 
-    
+    $qty = 1;
 
 
     if($product)
@@ -121,7 +121,11 @@ if(isset($_GET['product']))
                                         }   
                                     ?>   
                                         <div class="float-end">
-                                            <a href="checkout.php?product=<?php echo $product['id']; ?>" class="btn btn-info"><i class="fa fa-money"></i>Proceed to Checkout</a>
+                                            <button class="btn btn-info checkout">
+                                                <i class="fa fa-money"></i>
+                                                Proceed to Checkout
+                                            </button>
+                                            <!-- <a href="checkout.php?product=<?php echo $product['id']; ?>" class="btn btn-info"><i class="fa fa-money"></i>Proceed to Checkout</a> -->
                                         </div>    
                                 </div>
                             </div>
@@ -226,6 +230,11 @@ else
 
 
 <script>
+$(document).on('click', '.checkout', (e) => {
+    var qty = $('.input-qty').val();
+    window.location.href = `checkout.php?product=<?php echo $product['id']; ?>&qty=${parseInt(qty)}`;
+})
+
 $(document).on('click','.AddTooCart-btn', function (e) {
     
     e.preventDefault();
