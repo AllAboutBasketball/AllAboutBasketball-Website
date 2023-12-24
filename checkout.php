@@ -229,8 +229,6 @@ include('vendor/autoload.php');
     </div>
 </div>
 
-<?php include('includes/footer.php'); ?>
-
 <script src="https://www.paypal.com/sdk/js?client-id=AVdS_posENfhM0iIDrMn65L8X_YFCqYRumC71tbUVa5xLV8vdmCf63BrszerC7F7Q_YB0pOo0JtofdNE&currency=PHP"></script>
 
     <script>
@@ -276,3 +274,5 @@ include('vendor/autoload.php');
         }
       }).render('#paypal-button-container')
     </script>
+<?php include('includes/footer.php'); ?>
+
