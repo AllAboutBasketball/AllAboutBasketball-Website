@@ -39,10 +39,34 @@ function getSlugActive($table, $slug)
     exit();
 }
 
+function getProductSizes($table, $slug){
+    global $con;
+    $query = "SELECT size, selling_price FROM $table WHERE slug = '$slug'";
+    $query_run = mysqli_query($con, $query);
+    
+    if (!$query_run) {
+        echo "Error: " . mysqli_error($con);
+        return array(); 
+    }
+    
+    $products = array();
+    if (mysqli_num_rows($query_run) > 0) {
+        while ($row = mysqli_fetch_assoc($query_run)) {
+            $products[] = array(
+                'size' => $row['size'],
+                'selling_price' => $row['selling_price']
+            );
+        }
+    }
+    
+    return $products;
+}
+
+
 function getProdByCategory($category_id)
 {
     global $con;
-    $query = "SELECT * FROM products WHERE category_id = '$category_id' AND status = '0'";
+    $query = "SELECT * FROM products WHERE category_id = '$category_id' AND status = '0' GROUP BY slug";
     return $query_run = mysqli_query($con, $query);
     exit();
 }

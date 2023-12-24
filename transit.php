@@ -31,14 +31,17 @@ include('authenticate.php');
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="text-white">   
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+            <li class="nav-item">
                     <a class="nav-link text-dark" href="my-orders.php">Pending</a>
                 </li>
                 <li>
                     <a class="nav-link text-dark" href="transit.php">In Transit</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark<?= $page == "my-orders.php"? 'active text-white':''; ?>" href="delivered-orders.php">Delivered</a>
+                    <a class="nav-link text-dark" href="delivered-orders.php">Delivered</a>
+                </li>    
+                <li class="nav-item">
+                    <a class="nav-link text-dark<?= $page == "canceled-orders.php"? 'active text-white':''; ?>" href="canceled-orders.php">Canceled</a>
                 </li>
             </ul>
             </div> 

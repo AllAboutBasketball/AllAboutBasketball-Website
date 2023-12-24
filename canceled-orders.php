@@ -33,18 +33,15 @@ include('authenticate.php');
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="my-orders.php">Pending</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="confirmed-orders.php">Confirmed</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="forpickup-orders.php">Pick Up by Courier</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark<?= $page == "canceled-orders.php"? 'active text-white':''; ?>" href="canceled-orders.php">Canceled</a>
+                <li>
+                    <a class="nav-link text-dark" href="transit.php">In Transit</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="delivered-orders.php">Delivered</a>
                 </li>    
+                <li class="nav-item">
+                    <a class="nav-link text-dark<?= $page == "canceled-orders.php"? 'active text-white':''; ?>" href="canceled-orders.php">Canceled</a>
+                </li>
 
             </ul>
             </div> 

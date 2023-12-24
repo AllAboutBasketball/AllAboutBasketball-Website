@@ -70,9 +70,13 @@ if(isset($_GET['product']))
                                 </div>           
 
                                 <!-- Size Selection -->
+                                <?php
+                                    $slugs = getProductSizes("products", $product['slug']);
+
+                                ?>
                                 <div class="col">
                                     <div class="row">
-                                        <div class="col-md-2 mt-1 text-end">
+                                        <!-- <div class="col-md-2 mt-1 text-end">
                                             <button id="smallBtn" type="button" name="size" value="SMALL" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-right: -10px;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">Small</button> 
                                         </div>
                                         <div class="col-md-1 mt-1">
@@ -83,27 +87,33 @@ if(isset($_GET['product']))
                                         </div>
                                         <div class="col-md-2 mt-1" >
                                             <button id="xlBtn" type="button" name="size" value="XL" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-left: 20%;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">XL</button> 
-                                        </div>
+                                        </div> -->
+
+                                        <?php foreach ($slugs as $prod) { ?>
+                                            <div class="col-md-2 mt-1">
+                                                <button type="button" name="size" value="<?= $prod['size'] ?>" data-selling-price="<?= $prod['selling_price'] ?>" class="btn btn-outline-dark btn-sm custom-hover-color modal-button size-button" style="margin-right: -10px;" data-bs-toggle="modalsize" data-bs-target="#exampleSize"><?= $prod['size'] ?></button> 
+                                            </div>
+                                        <?php } ?>
                                         <input type="hidden" id="selectedSize" name="selectedSize">
                                     </div>
                                 </div>
 
 
                             <div class="row">
-                            <div class="col-md-3 mt-4">
-                                    <div class="input-group mb-3" style = "width:130px">
-                                        <button class="input-group-text decrement-btn">-</button>
-                                        <input type="text" class="form-control input-qty text-center bg-white" value = "1" disabled>
-                                        <button class="input-group-text increment-btn">+</button>
-                                    </div>                                                                                   
-                                </div>
-                                <div class="col-md-3 mt-4 text-end">
-                                    <h4>₱ <span class ="text-success fw-bold"><?= $product['selling_price']?>.00</span></h4>
-                                </div>
-                                <div class="col-md-5 mt-4">
-                                    <h5 style="margin-left: 10%;"> ₱ <s class ="text-danger"><?= $product['original_price']?>.00</s></h5>
-                                </div>
-                            </div>     
+                                <div class="col-md-3 mt-4">
+                                        <div class="input-group mb-3" style = "width:130px">
+                                            <button class="input-group-text decrement-btn">-</button>
+                                            <input type="text" class="form-control input-qty text-center bg-white" value = "1" disabled>
+                                            <button class="input-group-text increment-btn">+</button>
+                                        </div>                                                                                   
+                                    </div>
+                                    <div class="col-md-3 mt-4 text-end">
+                                        <h4>₱ <span class="text-success fw-bold" id="price"><?= $product['selling_price']?>.00</span></h4>
+                                    </div>
+                                    <div class="col-md-5 mt-4">
+                                        <h5 style="margin-left: 10%;"> ₱ <s class ="text-danger"><?= $product['original_price']?>.00</s></h5>
+                                    </div>
+                                </div>     
                             <div class="row">
                                 <div class="col-md-6 mt-4">
                                     <?php 
@@ -248,7 +258,7 @@ $(document).on('click','.AddTooCart-btn', function (e) {
         data: {
             "prod_id" : prod_id,
             "prod_qty" : qty,
-            "scope" : "add"
+            "scope" : "add",
         },
         success: function (response) {
             if(response == 201)
@@ -275,4 +285,9 @@ $(document).on('click','.AddTooCart-btn', function (e) {
     });
     
 });
+
+    $('.size-button').click(function() {
+        var newPrice = $(this).data('selling-price');
+        $('#price').text(newPrice + '.00');
+    });
 </script>
