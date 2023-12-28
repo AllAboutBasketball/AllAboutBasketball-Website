@@ -54,51 +54,50 @@ $(document).ready(function () {
     //     });
     // });
 
-    $(document).on('click','.deleteItem', function () {
+    // $(document).on('click','.deleteItem', function () {
 
-        var cart_id = $(this).val();
-        //alert(cart_id);
+    //     var cart_id = $(this).val();
+    //     //alert(cart_id);
 
-        $.ajax({
-            method: "POST",
-            url: "functions/handlecart.php",
-            data: {
-                "cart_id" : cart_id,
-                "scope" : "delete"
-            },
-            success: function (response) {
-                if(response == 200)
-                {
-                    alertify.success("Item Removed Successfully");
-                    $('#mycart').load(location.href + " #mycart");
+    //     $.ajax({
+    //         method: "POST",
+    //         url: "functions/handlecart.php",
+    //         data: {
+    //             "cart_id" : cart_id,
+    //             "scope" : "delete"
+    //         },
+    //         success: function (response) {
+    //             if(response == 200)
+    //             {
+    //                 alertify.success("Item Removed Successfully");
+    //                 $('#mycart').load(location.href + " #mycart");
 
-                }
-                else
-                {
-                    alertify.success(response);
+    //             }
+    //             else
+    //             {
+    //                 alertify.success(response);
 
-                }
-            }
-        });
-    });
+    //             }
+    //         }
+    //     });
+    // });
 
-    $("#proceedBtn").click(function() {
-            alert('clicked');
-            // var selectedItems = [];
+    // $("#proceedBtn").click(function() {
+    //         // var selectedItems = [];
 
-            // $(".checkbox-item:checked").each(function() {
-            //   selectedItems.push($(this).val());
-            // });
+    //         // $(".checkbox-item:checked").each(function() {
+    //         //   selectedItems.push($(this).val());
+    //         // });
 
-            // if (selectedItems.length > 0) {
-            //   // Process the selected items
-            //   console.log("Selected Items: ", selectedItems);
-            //   // You can perform further actions with the selected items here
-            //   localStorage.setItem("carts", selectedItems);
-            // } else {
-            //   console.log("No items selected.");
-            // }
-        }); 
+    //         // if (selectedItems.length > 0) {
+    //         //   // Process the selected items
+    //         //   console.log("Selected Items: ", selectedItems);
+    //         //   // You can perform further actions with the selected items here
+    //         //   localStorage.setItem("carts", selectedItems);
+    //         // } else {
+    //         //   console.log("No items selected.");
+    //         // }
+    //     }); 
 
     });
 

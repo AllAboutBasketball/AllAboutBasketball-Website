@@ -300,7 +300,7 @@ function instantAddProductToCart($prodId, $qty){
 
 function getCartItem($userId, $prodId){
     global $con;
-    $query = "SELECT c.id as cid, c.prod_id, c.prod_qty, p.id as pid, p.name, p.size, p.image, p.selling_price, p.qty 
+    $query = "SELECT c.id as cid, c.prod_id, c.selected, c.prod_qty, p.id as pid, p.name, p.size, p.image, p.selling_price, p.qty, c.selected 
               FROM carts c, products p 
               WHERE c.prod_id = p.id AND c.user_id = '$userId' AND c.prod_id = '$prodId'";
     $result = mysqli_query($con, $query);
@@ -318,5 +318,28 @@ function cancelOrder($trackingNo){
     global $con;
     $query = "UPDATE orders SET status = -1 WHERE tracking_no = '$trackingNo'";
     mysqli_query($con, $query);
+}
+
+function checkIfItemChecked($prod_id){
+    global $con;
+    
+    $query = "SELECT selected FROM carts WHERE prod_id = '$prod_id'";
+    $result = mysqli_query($con, $query);
+
+    if($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $selected = $row['selected'];
+        return ($selected == 1) ? true : false;
+    } else {
+        return false;
+    }
+}
+
+function getSelectedCartItems(){
+    global $con;
+    $userId = $_SESSION['auth_user']['user_id'];
+    $query = "SELECT c.id as cid, c.prod_id, c.selected, c.prod_qty, p.id as pid, p.name, p.size, p.image, p.selling_price, p.qty 
+                FROM carts c, products p WHERE c.prod_id=p.id AND c.user_id='$userId' AND c.selected = 1 ORDER BY c.id DESC"; 
+    return $query_run = mysqli_query($con, $query);
 }
 ?>

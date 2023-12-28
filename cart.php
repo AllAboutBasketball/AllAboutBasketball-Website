@@ -74,9 +74,9 @@ include('authenticate.php');
                                                     ?>
                                                         <input type="hidden" class="prodId" value="<?= $citem['prod_id']?>">
                                                         <div class="input-group mb-1" style = "width:130px">
-                                                            <button class="input-group-text decrement-btn updateQty">-</button>
+                                                            <button class="input-group-text decrement-btn updateQty decrement_<?php $citem['prod_id'] ?>">-</button>
                                                             <input type="text" class="form-control input-qty text-center bg-white" value = "<?= $citem['prod_qty']?>" disabled>
-                                                            <button class="input-group-text increment-btn updateQty">+</button>
+                                                            <button class="input-group-text increment-btn updateQty increment_<?php $citem['prod_id'] ?>">+</button>
                                                         </div>
                                                     <?php
                                                 }
@@ -90,7 +90,7 @@ include('authenticate.php');
                                             ?>
                                         </div>
                                         <div class="col-md-1">
-                                            <input type="checkbox" name="selected_item" class="checkbox-item"  value="<?= $citem['cid']?>">
+                                            <input type="checkbox" name="selected_item" class="checkbox-item" <?= (checkIfItemChecked($citem['prod_id'])) ? 'checked' : '' ?>  onclick="checkCartItem(<?php echo $citem['prod_id'] ?>)"  value="<?= $citem['cid']?>">
                                         </div>
                                         <div class="col-md-2">
                                             <button class="btn btn-danger btn-sm deleteItem" value="<?= $citem['cid']?>">
@@ -104,7 +104,7 @@ include('authenticate.php');
                             ?>
                         </div>
                         <div class="float-end">
-                            <a id="proceedBtn" class="btn btn-outline-primary" onclick="return validateCheckbox()">Proceed to Checkout</a>
+                            <button id="proceedBtn" class="btn btn-outline-primary">Proceed to Checkout</button>
                         </div>
                     <?php
                     }
@@ -150,5 +150,110 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    $(document).on('click','.deleteItem', function () {
+
+        var cart_id = $(this).val();
+        //alert(cart_id);
+
+        $.ajax({
+            method: "POST",
+            url: "functions/handlecart.php",
+            data: {
+                "cart_id" : cart_id,
+                "scope" : "delete"
+            },
+            success: function (response) {
+                if(response == 200)
+                {
+                    alertify.success("Item Removed Successfully");
+                    $('#mycart').load(location.href + " #mycart");
+
+                }
+                else
+                {
+                    alertify.success(response);
+
+                }
+            }
+        });
+    });
+
+    $("#proceedBtn").click(function() {
+        window.location.href = "checkout.php";
+    }); 
+
+
+    // $(document).on('click', /^.increment_[0-9]+$/, function (e) {
+    //     e.preventDefault();
+    //     let prod_id;
+    //     const classList = e.target.classList;
+    //     const matchingClass = [...classList].find(className => className.match(/^increment_([0-9]+)$/));
+
+    //     if (matchingClass) {
+    //         prod_id = matchingClass.replace('increment_', '');
+    //     }
+
+    //     $.ajax({
+    //         method: "POST",
+    //         url: "functions/handlecart.php",
+    //         data: {
+    //             "prod_id" : prod_id,
+    //             "scope" : "increment"
+    //         },
+    //         success: function (response) {
+    //             window.location.reload();
+    //         },
+    //         error: function () {
+    //             console.log("Error occurred during AJAX request");
+    //         }
+    //     });
+
+    // });
+
+    // $(document).on('click', /^.decrement_[0-9]+$/, function (e) {
+    //     e.preventDefault();
+    //     let prod_id;
+    //     const classList = e.target.classList;
+    //     const matchingClass = [...classList].find(className => className.match(/^decrement_([0-9]+)$/));
+
+    //     if (matchingClass) {
+    //         prod_id = matchingClass.replace('decrement_', '');
+    //     }
+
+    //     $.ajax({
+    //         method: "POST",
+    //         url: "functions/handlecart.php",
+    //         data: {
+    //             "prod_id" : prod_id,
+    //             "scope" : "decrement"
+    //         },
+    //         success: function (response) {
+    //             console.log(response)
+    //             $('#cartContent').html(response);
+    //         },
+    //         error: function () {
+    //             console.log("Error occurred during AJAX request");
+    //         }
+    //     });
+    // });
 })
+
+function checkCartItem(prod_id){
+    $.ajax({
+        method: "POST",
+        url: "functions/handlecart.php",
+        data: {
+            "prod_id" : prod_id,
+            "scope" : "check"
+        },
+        success: function (response) {
+            console.log(`${prod_id} has been checked!`)
+        },
+        error: function () {
+            console.log("Error occurred during AJAX request");
+        }
+    });
+}
 </script>

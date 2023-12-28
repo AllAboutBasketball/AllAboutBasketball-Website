@@ -87,7 +87,7 @@ include('vendor/autoload.php');
                                     $items[] = instantAddProductToCart($_GET['product'], $_GET['qty']);
                                 }
                             }else{
-                                $items = getCartItems();
+                                $items = getSelectedCartItems();
                             }
                             $totalPrice = 0;
                             
