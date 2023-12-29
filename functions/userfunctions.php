@@ -41,7 +41,7 @@ function getSlugActive($table, $slug)
 
 function getProductSizes($table, $slug){
     global $con;
-    $query = "SELECT size, selling_price FROM $table WHERE slug = '$slug'";
+    $query = "SELECT id, size, selling_price FROM $table WHERE slug = '$slug'";
     $query_run = mysqli_query($con, $query);
     
     if (!$query_run) {
@@ -53,6 +53,7 @@ function getProductSizes($table, $slug){
     if (mysqli_num_rows($query_run) > 0) {
         while ($row = mysqli_fetch_assoc($query_run)) {
             $products[] = array(
+                'prod_id' => $row['id'],
                 'size' => $row['size'],
                 'selling_price' => $row['selling_price']
             );

@@ -91,7 +91,7 @@ if(isset($_GET['product']))
 
                                         <?php foreach ($slugs as $prod) { ?>
                                             <div class="col-md-2 mt-1">
-                                                <button type="button" name="size" value="<?= $prod['size'] ?>" data-selling-price="<?= $prod['selling_price'] ?>" class="btn btn-outline-dark btn-sm custom-hover-color modal-button size-button" style="margin-right: -10px;" data-bs-toggle="modalsize" data-bs-target="#exampleSize"><?= $prod['size'] ?></button> 
+                                                <button type="button" name="size" value="<?= $prod['prod_id'] ?>" data-selling-price="<?= $prod['selling_price'] ?>" class="btn btn-outline-dark btn-sm custom-hover-color modal-button size-button" style="margin-right: -10px;" data-bs-toggle="modalsize" data-bs-target="#exampleSize"><?= $prod['size'] ?></button> 
                                             </div>
                                         <?php } ?>
                                         <input type="hidden" id="selectedSize" name="selectedSize">
@@ -240,6 +240,7 @@ else
 
 
 <script>
+var focusedButton = null;
 $(document).on('click', '.checkout', (e) => {
     var qty = $('.input-qty').val();
     window.location.href = `checkout.php?product=<?php echo $product['id']; ?>&qty=${parseInt(qty)}`;
@@ -250,44 +251,60 @@ $(document).on('click','.AddTooCart-btn', function (e) {
     e.preventDefault();
 
     var qty = $(this).closest('.product_data').find('.input-qty').val();
-    var prod_id = $(this).val();
+    var prod_id = getFocusedButtonValue();
 
-    $.ajax({
-        method: "POST",
-        url: "functions/handlecart.php",
-        data: {
-            "prod_id" : prod_id,
-            "prod_qty" : qty,
-            "scope" : "add",
-        },
-        success: function (response) {
-            if(response == 201)
-            {
-                alertify.success("Product Added To Cart");
-
+    // console.log($(this).closest('.col-md-2').find('button[name="size"]:focus').val())
+    if(prod_id != undefined){
+        $.ajax({
+            method: "POST",
+            url: "functions/handlecart.php",
+            data: {
+                "prod_id" : prod_id,
+                "prod_qty" : qty,
+                "scope" : "add",
+            },
+            success: function (response) {
+                if(response == 201)
+                {
+                    alertify.success("Product Added To Cart");
+    
+                }
+                else if(response == "existing")
+                {
+                    alertify.success("Cart Item Updated!");
+                }
+                else if(response == 401)
+                {
+                    alertify.success("Login To Continue");
+    
+                }
+                else if(response == 500)
+                {
+                    alertify.success("Something Went Wrong");
+    
+                }
+                
             }
-            else if(response == "existing")
-            {
-                alertify.success("Cart Item Updated!");
-            }
-            else if(response == 401)
-            {
-                alertify.success("Login To Continue");
-
-            }
-            else if(response == 500)
-            {
-                alertify.success("Something Went Wrong");
-
-            }
-            
-        }
-    });
+        });
+    }else {
+        alertify.error("Select Product Size");
+    }
     
 });
 
-    $('.size-button').click(function() {
-        var newPrice = $(this).data('selling-price');
-        $('#price').text(newPrice + '.00');
-    });
+$('.size-button').click(function() {
+    focusedButton = $(this); // Store the clicked button
+    var newPrice = $(this).data('selling-price');
+    $('#price').text(newPrice + '.00');
+});
+
+function getFocusedButtonValue() {
+    if (focusedButton) {
+        var value = focusedButton.val();
+        return value;
+    } else {
+        console.log('No button is focused.');
+        return undefined;
+    }
+}
 </script>
