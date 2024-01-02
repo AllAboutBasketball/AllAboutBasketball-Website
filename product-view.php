@@ -62,7 +62,6 @@ if(isset($_GET['product']))
                                 {
                                     ?>
                                         <label  class = "btn btn-danger text-white">Out of stock</label><br>
-                                       
                                     <?php 
                                 }
                                 
@@ -120,23 +119,24 @@ if(isset($_GET['product']))
                                         if($product['qty'] > 0)
                                         {
                                             ?>
-                                                <button class = "btn btn-success px-4 AddTooCart-btn" value="<?= $product['id']?>"><i class = "fa fa-shopping-cart me-2"></i>Add to Cart</button>
+                                                <button class = "btn btn-success px-4 AddTooCart-btn" type="button" <?php ($product['qty'] == 0) ? "disabled" : "" ?> value="<?= $product['id']?>"><i class = "fa fa-shopping-cart me-2"></i>Add to Cart</button>
+                                                <div class="float-end">
+                                                    <button class="btn btn-info checkout" type="button">
+                                                        <i class="fa fa-money"></i>
+                                                        Proceed to Checkout
+                                                    </button>
+                                                    <!-- <a href="checkout.php?product=<?php echo $product['id']; ?>" class="btn btn-info"><i class="fa fa-money"></i>Proceed to Checkout</a> -->
+                                                </div>    
                                             <?php 
 
                                         }
                                         else
                                         {
                                             ?>
+                                            
                                             <?php 
                                         }   
                                     ?>   
-                                        <div class="float-end">
-                                            <button class="btn btn-info checkout">
-                                                <i class="fa fa-money"></i>
-                                                Proceed to Checkout
-                                            </button>
-                                            <!-- <a href="checkout.php?product=<?php echo $product['id']; ?>" class="btn btn-info"><i class="fa fa-money"></i>Proceed to Checkout</a> -->
-                                        </div>    
                                 </div>
                             </div>
                         </div>

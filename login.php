@@ -12,8 +12,6 @@ include('includes/header.php');
 
 
 <div class="py-5">
-
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -26,7 +24,6 @@ include('includes/header.php');
                 unset($_SESSION['message']);
                }
             ?>
-                
                 <div class="card">
                     <div class="card-header bg-primary">
                         <h4><strong class="text-light">Login Form</strong></h4>

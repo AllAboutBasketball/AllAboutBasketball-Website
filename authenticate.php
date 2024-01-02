@@ -2,7 +2,7 @@
 
 if(!isset($_SESSION['auth']))
 {
-    redirect("login.php", "Login to Continue");
+    redirect("auth-form.php", "Login to Continue");
 }
 
 
