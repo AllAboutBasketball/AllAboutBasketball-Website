@@ -69,10 +69,10 @@
                 else{
                 ?>
                     <li class="nav-item">
-                    <a class="nav-link <?= $page == "auth-form.php"? 'active text-primary':''; ?>" href="register.php">Register</a>
+                    <a class="nav-link <?= $page == "auth-form.php"? 'active text-primary':''; ?>" href="auth-form.php">Register</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link <?= $page == "auth-form.php"? 'active text-primary':''; ?>" href="login.php">Login</a>
+                    <a class="nav-link <?= $page == "auth-form.php"? 'active text-primary':''; ?>" href="auth-form.php">Login</a>
                     </li>
                <?php
                }
