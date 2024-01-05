@@ -90,7 +90,7 @@ include('authenticate.php');
                                             ?>
                                         </div>
                                         <div class="col-md-1">
-                                            <input type="checkbox" name="selected_item" class="checkbox-item" <?= (checkIfItemChecked($citem['prod_id'])) ? 'checked' : '' ?>  onclick="checkCartItem(<?php echo $citem['prod_id'] ?>, <?php echo $citem['selected'] ?>)"  value="<?= $citem['cid']?>">
+                                            <input type="checkbox" name="selected_item" class="checkbox-item" <?= ($citem['selected'] == 1) ? 'checked' : '' ?>  onclick="checkCartItem(<?php echo $citem['prod_id'] ?>, <?php echo $citem['selected'] ?>)"  value="<?= $citem['cid']?>">
                                         </div>
                                         <div class="col-md-2">
                                             <button class="btn btn-danger btn-sm deleteItem" value="<?= $citem['cid']?>">
@@ -250,7 +250,8 @@ function checkCartItem(prod_id, num){
             "scope" : "check"
         },
         success: function (response) {
-            console.log(`${prod_id} has been checked!`)
+            // refresh the page
+            window.location.reload();
         },
         error: function () {
             console.log("Error occurred during AJAX request");
