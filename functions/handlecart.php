@@ -221,7 +221,7 @@
                     if (mysqli_num_rows($chk_existing_cart_run) > 0) {
                         $cart_item = mysqli_fetch_assoc($chk_existing_cart_run);
                         $selected = $cart_item['selected'];
-                        $selected = ($selected == 0) ? 1 : 0;
+                        $selected = ($selected == false) ? true : false;
                 
                         $update_selected = "UPDATE carts SET selected = '$selected' WHERE prod_id = '$prod_id' AND user_id = '$user_id'";
                         $update_selected_run = mysqli_query($con, $update_selected);
