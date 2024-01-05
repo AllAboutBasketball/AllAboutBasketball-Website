@@ -33,10 +33,6 @@ include('includes/header.php');
                             <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#loginModal">
                                 Login
                             </button>
-
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerModal">
-                                Register
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -65,6 +61,9 @@ include('includes/header.php');
           </div>
           <p><a href="forgot-password.php" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password?</a></p>
           <button type="submit" name="login_btn" class="btn btn-primary"><i class="fa fa-sign-in me-2"></i>Login</button>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerModal">
+              Register
+          </button>
         </form>
       </div>
     </div>

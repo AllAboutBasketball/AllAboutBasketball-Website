@@ -171,6 +171,9 @@ $data = mysqli_fetch_array($orderData);
                                     $statusLabel = '';
 
                                     switch ($status) {
+                                        case 0:
+                                            $statusLabel = "Order Placed";
+                                            break;
                                         case 1:
                                             $statusLabel = "Pending";
                                             break;
@@ -181,7 +184,7 @@ $data = mysqli_fetch_array($orderData);
                                             $statusLabel = "Picked up by courier";
                                             break;
                                         case 4:
-                                            $statusLabel = "Arrived at Sorting Station (ADDRESS)";
+                                            $statusLabel = "Arrived at Sorting Station";
                                             break;
                                         case 5:
                                             $statusLabel = "Departed at Sorting Station";
