@@ -90,7 +90,7 @@ include('authenticate.php');
                                             ?>
                                         </div>
                                         <div class="col-md-1">
-                                            <input type="checkbox" name="selected_item" class="checkbox-item" <?= (checkIfItemChecked($citem['prod_id'])) ? 'checked' : '' ?>  onclick="checkCartItem(<?php echo $citem['prod_id'] ?>)"  value="<?= $citem['cid']?>">
+                                            <input type="checkbox" name="selected_item" class="checkbox-item" <?= (checkIfItemChecked($citem['prod_id'])) ? 'checked' : '' ?>  onclick="checkCartItem(<?php echo $citem['prod_id'] ?>, <?php echo $citem['selected'] ?>)"  value="<?= $citem['cid']?>">
                                         </div>
                                         <div class="col-md-2">
                                             <button class="btn btn-danger btn-sm deleteItem" value="<?= $citem['cid']?>">
@@ -240,7 +240,8 @@ $(document).ready(function () {
     // });
 })
 
-function checkCartItem(prod_id){
+function checkCartItem(prod_id, num){
+    console.log(num);
     $.ajax({
         method: "POST",
         url: "functions/handlecart.php",
