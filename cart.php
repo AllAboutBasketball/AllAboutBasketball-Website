@@ -168,8 +168,7 @@ $(document).ready(function () {
                 if(response == 200)
                 {
                     alertify.success("Item Removed Successfully");
-                    $('#mycart').load(location.href + " #mycart");
-
+                    window.location.reload();
                 }
                 else
                 {
