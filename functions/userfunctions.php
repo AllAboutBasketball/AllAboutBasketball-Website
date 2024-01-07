@@ -41,7 +41,7 @@ function getSlugActive($table, $slug)
 
 function getProductSizes($table, $slug){
     global $con;
-    $query = "SELECT id, size, selling_price FROM $table WHERE slug = '$slug'";
+    $query = "SELECT id, size, selling_price, qty FROM $table WHERE slug = '$slug'";
     $query_run = mysqli_query($con, $query);
     
     if (!$query_run) {
@@ -55,7 +55,8 @@ function getProductSizes($table, $slug){
             $products[] = array(
                 'prod_id' => $row['id'],
                 'size' => $row['size'],
-                'selling_price' => $row['selling_price']
+                'selling_price' => $row['selling_price'],
+                'stock' => $row['qty']
             );
         }
     }
@@ -286,17 +287,30 @@ function instantAddProductToCart($prodId, $qty){
     $checkQuery = "SELECT * FROM carts WHERE user_id = $userId AND prod_id = $prodId";
     $checkResult = mysqli_query($con, $checkQuery);
 
-    if(mysqli_num_rows($checkResult) > 0) {
-        $updateQuery = "UPDATE carts SET prod_qty = prod_qty + $qty WHERE user_id = $userId AND prod_id = $prodId";
-        mysqli_query($con, $updateQuery);
+    $insertQuery = "INSERT INTO carts (user_id, prod_id, prod_qty) VALUES ($userId, $prodId, $qty)";
+    
+    $insertResult = mysqli_query($con, $insertQuery);
+    $insertedId = mysqli_insert_id($con);
 
-        return getCartItem($userId, $prodId); 
-    } else {
-        $insertQuery = "INSERT INTO carts (user_id, prod_id, prod_qty) VALUES ($userId, $prodId, $qty)";
-        mysqli_query($con, $insertQuery);
+    $query = "SELECT c.id as cid, c.prod_id, c.prod_qty, p.id as pid, p.name, p.size, p.image, p.selling_price, p.qty 
+                FROM carts c, products p WHERE c.prod_id=p.id AND c.id='$insertedId' ORDER BY c.id DESC ";
+    $result = mysqli_query($con, $query);
 
-        return getCartItem($userId, $prodId);
+    if($result && mysqli_num_rows($result) > 0) {
+        return mysqli_fetch_assoc($result); 
     }
+
+    // if(mysqli_num_rows($checkResult) > 0) {
+    //     $updateQuery = "UPDATE carts SET prod_qty = prod_qty + $qty WHERE user_id = $userId AND prod_id = $prodId";
+    //     mysqli_query($con, $updateQuery);
+
+    //     return getCartItem($userId, $prodId); 
+    // } else {
+    //     $insertQuery = "INSERT INTO carts (user_id, prod_id, prod_qty) VALUES ($userId, $prodId, $qty)";
+    //     mysqli_query($con, $insertQuery);
+
+    //     return getCartItem($userId, $prodId);
+    // }
 }
 
 function getCartItem($userId, $prodId){
@@ -342,5 +356,17 @@ function getSelectedCartItems(){
     $query = "SELECT c.id as cid, c.prod_id, c.selected, c.prod_qty, p.id as pid, p.name, p.size, p.image, p.selling_price, p.qty 
                 FROM carts c, products p WHERE c.prod_id=p.id AND c.user_id='$userId' AND c.selected = 1 ORDER BY c.id DESC"; 
     return $query_run = mysqli_query($con, $query);
+}
+
+function getProductItem($prod_id, $qty){
+    global $con;
+    $query = "SELECT * FROM products WHERE id = '$prod_id'";
+    $result = mysqli_query($con, $query);
+
+    if($result && mysqli_num_rows($result) > 0) {
+        return mysqli_fetch_assoc($result); 
+    }
+
+    return null; 
 }
 ?>

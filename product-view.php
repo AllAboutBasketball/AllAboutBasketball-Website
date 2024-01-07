@@ -47,21 +47,20 @@ if(isset($_GET['product']))
                         <div class="row">
                             <hr>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3" id="stock-display" style="display: none;">
                                 <?php 
                                 if($product['qty'] > 0)
                                 {
                                     ?>
                                         <label  class = "btn btn-warning text-white">Limited Stock</label><span class="ms-1 fs-5 fw-bold">:</span>
-                                        <span class="ms-1 fw-bold mt-2 fs-4"><?= $product['qty'];?></span>
-                                    
+                                        <span class="ms-1 fw-bold mt-2 fs-4" id="prod_stock"><?= $product['qty'];?></span>
                                     <?php 
 
                                 }
                                 else
                                 {
                                     ?>
-                                        <label  class = "btn btn-danger text-white">Out of stock</label><br>
+                                        <label class="btn btn-danger text-white">Out of stock</label><br>
                                     <?php 
                                 }
                                 
@@ -90,7 +89,7 @@ if(isset($_GET['product']))
 
                                         <?php foreach ($slugs as $prod) { ?>
                                             <div class="col-md-2 mt-1">
-                                                <button type="button" name="size" value="<?= $prod['prod_id'] ?>" data-selling-price="<?= $prod['selling_price'] ?>" class="btn btn-outline-dark btn-sm custom-hover-color modal-button size-button" style="margin-right: -10px;" data-bs-toggle="modalsize" data-bs-target="#exampleSize"><?= $prod['size'] ?></button> 
+                                                <button type="button" name="size" value="<?= $prod['prod_id'] ?>" data-selling-price="<?= $prod['selling_price'] ?>" data-stock="<?= $prod["stock"] ?>" class="btn btn-outline-dark btn-sm custom-hover-color modal-button size-button" style="margin-right: -10px;" data-bs-toggle="modalsize" data-bs-target="#exampleSize"><?= $prod['size'] ?></button> 
                                             </div>
                                         <?php } ?>
                                         <input type="hidden" id="selectedSize" name="selectedSize">
@@ -119,9 +118,9 @@ if(isset($_GET['product']))
                                         if($product['qty'] > 0)
                                         {
                                             ?>
-                                                <button class = "btn btn-success px-4 AddTooCart-btn" type="button" <?php ($product['qty'] == 0) ? "disabled" : "" ?> value="<?= $product['id']?>"><i class = "fa fa-shopping-cart me-2"></i>Add to Cart</button>
+                                                <button class = "btn btn-success px-4 AddTooCart-btn" id="AddTooCart-btn" type="button" <?php ($product['qty'] == 0) ? "disabled" : "" ?> value="<?= $product['id']?>"><i class = "fa fa-shopping-cart me-2"></i>Add to Cart</button>
                                                 <div class="float-end">
-                                                    <button class="btn btn-info checkout" type="button">
+                                                    <button class="btn btn-info checkout" id="checkout" type="button">
                                                         <i class="fa fa-money"></i>
                                                         Proceed to Checkout
                                                     </button>
@@ -243,7 +242,9 @@ else
 var focusedButton = null;
 $(document).on('click', '.checkout', (e) => {
     var qty = $('.input-qty').val();
-    window.location.href = `checkout.php?product=<?php echo $product['id']; ?>&qty=${parseInt(qty)}`;
+    // get the selected size from the button
+    var prod_id = getFocusedButtonValue();
+    window.location.href = `checkout.php?product=${prod_id}&qty=${parseInt(qty)}`;
 })
 
 $(document).on('click','.AddTooCart-btn', function (e) {
@@ -295,6 +296,30 @@ $(document).on('click','.AddTooCart-btn', function (e) {
 $('.size-button').click(function() {
     focusedButton = $(this); // Store the clicked button
     var newPrice = $(this).data('selling-price');
+    var newQty = $(this).data('stock');
+
+    console.log(newQty);
+    if(newQty == 0){
+        $('#stock-display').css('display', 'block');
+        alertify.error("Out of Stock");
+
+        // disable the add to cart button and the checkout button
+        $('#AddTooCart-btn').attr('disabled', true);
+        $('#checkout').attr('disabled', true);
+        let outOfStock = "<label class=\"btn btn-danger text-white\">Out of stock</label><br>";
+        $('#stock-display').html(outOfStock);
+    }else{
+        // check if stock-dsplay is showing out of stock
+        if($('#stock-display').html() == "<label class=\"btn btn-danger text-white\">Out of stock</label><br>"){
+            let stockHTML = `<label  class = "btn btn-warning text-white">Limited Stock</label><span class="ms-1 fs-5 fw-bold">:</span>
+                                        <span class="ms-1 fw-bold mt-2 fs-4" id="prod_stock"><?= $product['qty'];?></span>`;
+            $('#stock-display').html(stockHTML);
+            $('#AddTooCart-btn').attr('disabled', false);
+            $('#checkout').attr('disabled', false);
+        }
+        $('#stock-display').css('display', 'block');
+        $('#prod_stock').text(newQty);
+    }
     $('#price').text(newPrice + '.00');
 });
 

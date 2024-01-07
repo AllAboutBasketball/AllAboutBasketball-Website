@@ -12,6 +12,24 @@ $product_count = getProductsCount();
 $supplier_count = getSupplierCount();
 $collection_count = getCollectionCount();
 
+$low_or_out_of_stock = getLowOrOutOfStockProducts();
+
+$_SESSION['error'] = "another test";
+
+if(mysqli_num_rows($low_or_out_of_stock) > 0){
+    foreach($low_or_out_of_stock as $product){
+        if($product['qty'] == 0){
+            $_SESSION["error"] = "Product ".$product['name']." is out of stock.";
+        }
+        else{
+            $_SESSION["error"] = "Product ".$product['name']." is low on stock.";
+        }
+    }
+}
+else{
+    $low_or_out_of_stock = 0;
+}
+
 ?>
 
 <div class="container">

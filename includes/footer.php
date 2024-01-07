@@ -17,7 +17,13 @@
             alertify.success('<?= $_SESSION['message']?>');
           <?php 
           unset($_SESSION['message']);
-        } 
+        } else if(isset($_SESSION['error']))
+        {
+          ?>
+            alertify.error('<?= $_SESSION['error']?>');
+          <?php 
+          unset($_SESSION['error']);
+        }
         ?>
     </script>
 

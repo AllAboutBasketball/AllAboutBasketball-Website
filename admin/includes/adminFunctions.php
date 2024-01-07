@@ -144,3 +144,10 @@ function getOrderHistory()
     $query = "SELECT * FROM orders WHERE status = '8' OR status = -1 ORDER BY id DESC";
     return $query_run = mysqli_query($con, $query);
 }
+
+function getLowOrOutOfStockProducts()
+{
+    global $con;
+    $query = "SELECT * FROM products WHERE qty <= 15 ORDER BY id DESC";
+    return $query_run = mysqli_query($con, $query);
+}
