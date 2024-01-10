@@ -123,7 +123,6 @@ else if(isset($_POST["verify_email"]))
                 
                     if($role_as == 1)
                     {
-                    
                    
                         
                         $_SESSION['message'] = "Welcome to Dashboard";

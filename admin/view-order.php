@@ -141,13 +141,19 @@ $data = mysqli_fetch_array($orderData);
                                         if($data['status'] == 8){
                                     ?>
                                         <strong class="text-secondary">ITEM DELIVERED!</strong>
-                                    <?php
+                                    
+                            <?php
+                                }else if($data['status'] == -1){
+                            ?>
+                                <strong class="text-primary">CANCELLED</strong>
+                            <?php
                                         }else{
                                     ?>
                                     <form action="code.php" method="POST">
                                         <input type="hidden" name="tracking_no" value="<?= $data['tracking_no'] ?>">
                                         <input type="hidden" name="order_id" value="<?= $data['id'] ?>">
                                         <select name="order_status" class="form-select" onchange="toggleInput(this.value)">
+                                            <option value="0" <?= $data['status'] == 0 ? "selected" : "" ?>>Order On Progress</option>
                                             <option value="1" <?= $data['status'] == 1 ? "selected" : "" ?>>Pending</option>
                                             <option value="2" <?= $data['status'] == 2 ? "selected" : "" ?>>Order Packaged</option>
                                             <option value="3" <?= $data['status'] == 3 ? "selected" : "" ?>>Picked up by courier</option>
@@ -175,14 +181,8 @@ $data = mysqli_fetch_array($orderData);
                                     </form>
                                     <?php
                                         }
+                                    }
                                     ?>
-                            <?php
-                                }else{
-                            ?>
-                                <strong class="text-primary">CANCELLED</strong>
-                            <?php
-                                }
-                            ?>
                             </div>
                         </div>
                     </div>

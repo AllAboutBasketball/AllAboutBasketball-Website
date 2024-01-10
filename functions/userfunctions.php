@@ -369,4 +369,17 @@ function getProductItem($prod_id, $qty){
 
     return null; 
 }
+
+function getUserImage($id){
+    global $con;
+    $query = "SELECT * FROM users WHERE id = '$id'";
+    $result = mysqli_query($con, $query);
+
+    if($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['image']; 
+    }
+
+    return null; 
+}
 ?>

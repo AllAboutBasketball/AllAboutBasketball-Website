@@ -67,6 +67,9 @@ include('authenticate.php');
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="delivered-orders.php">Delivered</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark<?= $page == "canceled-orders.php"? 'active text-white':''; ?>" href="canceled-orders.php">Canceled</a>
+                </li>
             </ul>
             </div> 
         </div>

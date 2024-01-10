@@ -39,9 +39,14 @@
                 <?php 
                     if(isset($_SESSION['auth']))
                     {
+                        $userId = getCurrentUserID();
+                        $img = getUserImage($userId);
                  ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- profile circle image, not that the navbar.php is in a folder named includes and the folder where the image contains is outside the includes folder named userimage -->
+                        <img src="userimage/<?php echo $img; ?>" alt="profile" class="rounded-circle" height="30px" width="30px">
+
                         <?php echo $_SESSION['auth_user']['name']; ?>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -50,7 +55,7 @@
                         <li><a class="dropdown-item" href="my-profile.php">My Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <?php 
-                            $userId = getCurrentUserID();
+                            
                             $collab = getCollabDataByUserID($userId);
 
                             if(mysqli_num_rows($collab) > 0){
