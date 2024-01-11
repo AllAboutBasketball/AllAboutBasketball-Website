@@ -96,7 +96,7 @@ function getOrders()
     global $con;
     $userId = $_SESSION['auth_user']['user_id'];
     
-    $query = "SELECT * FROM orders WHERE user_id='$userId' AND status='0' ORDER BY id DESC ";
+    $query = "SELECT * FROM orders WHERE user_id='$userId' AND status='0' OR STATUS = 1 OR STATUS = 2 ORDER BY id DESC ";
     return $query_run = mysqli_query($con, $query);
 }
 
@@ -105,7 +105,7 @@ function getConfirmedOrders()
     global $con;
     $userId = $_SESSION['auth_user']['user_id'];
     
-    $query = "SELECT * FROM orders WHERE user_id='$userId' AND status='1' ORDER BY id DESC ";
+    $query = "SELECT * FROM orders WHERE user_id='$userId' AND status=1 ORDER BY id DESC ";
     return $query_run = mysqli_query($con, $query);
 }
 
@@ -114,7 +114,7 @@ function getCompletedOrders()
     global $con;
     $userId = $_SESSION['auth_user']['user_id'];
     
-    $query = "SELECT * FROM orders WHERE user_id='$userId' AND status='2' ORDER BY id DESC ";
+    $query = "SELECT * FROM orders WHERE user_id='$userId' AND status=8 ORDER BY id DESC ";
     return $query_run = mysqli_query($con, $query);
 }
 
@@ -123,7 +123,7 @@ function getDeliveredOrders()
     global $con;
     $userId = $_SESSION['auth_user']['user_id'];
     
-    $query = "SELECT * FROM orders WHERE user_id='$userId' AND status='3' ORDER BY id DESC ";
+    $query = "SELECT * FROM orders WHERE user_id='$userId' AND status=8 ORDER BY id DESC ";
     return $query_run = mysqli_query($con, $query);
 }
 function getCanceledOrders()

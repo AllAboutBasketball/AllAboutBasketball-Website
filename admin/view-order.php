@@ -134,7 +134,7 @@ $data = mysqli_fetch_array($orderData);
                             <label class="fw-bold">Status</label>
                             <div class="mb-3">
                                 <?php
-                                if($data['status'] > 0)
+                                if($data['status'] >= 0)
                                 {
                                 ?>
                                     <?php

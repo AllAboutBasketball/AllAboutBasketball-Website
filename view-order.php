@@ -217,22 +217,29 @@ $data = mysqli_fetch_array($orderData);
                                    <div class="border p-1 mb-3">
                                         <?php 
                                             
-                                            if($data['status'] == 0)
+                                            if($data['status'] == 0 || $data['status'] == 1)
                                             {
                                                 echo "On Progress";
                                             }
-                                            else if($data['status'] == 1)
+                                            else if($data['status'] == 2 || $data['status'] == 3 || $data['status'] == 4 || $data['status'] == 5 || $data['status'] == 6 || $data['status'] == 7)
                                             {
                                                 echo "On Shipping";
                                             }
-                                            else if($data['status'] == 2)
+                                            else if($data['status'] == 8)
                                             {
                                                 echo "Thankyou! AAB Likes You!";
                                             }
-                                            else if($data['status'] == 3)
+                                            else if($data['status'] == 10)
                                             {
                                                 echo "Technical Issue";
-                                            }                                       
+                                            }else if($data['status'] == 11)
+                                            {
+                                                echo "Canceled";
+                                            }
+                                            else
+                                            {
+                                                echo "Unknown";
+                                            }
                                         ?>
                                    </div>
                                </div>

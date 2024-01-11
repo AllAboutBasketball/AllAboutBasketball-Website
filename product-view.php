@@ -244,6 +244,7 @@ $(document).on('click', '.checkout', (e) => {
     var qty = $('.input-qty').val();
     // get the selected size from the button
     var prod_id = getFocusedButtonValue();
+    console.log(prod_id);
     window.location.href = `checkout.php?product=${prod_id}&qty=${parseInt(qty)}`;
 })
 
