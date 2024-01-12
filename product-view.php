@@ -244,7 +244,10 @@ $(document).on('click', '.checkout', (e) => {
     var qty = $('.input-qty').val();
     // get the selected size from the button
     var prod_id = getFocusedButtonValue();
-    console.log(prod_id);
+    if(prod_id == undefined){
+        alertify.error("Select Product Size");
+        return;
+    }
     window.location.href = `checkout.php?product=${prod_id}&qty=${parseInt(qty)}`;
 })
 
