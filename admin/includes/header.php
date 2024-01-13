@@ -39,6 +39,10 @@
     margin: 0;
   }  
 
+  tr.border-dang {
+    border-bottom: 2px solid #dc3545; /* Adjust the color as needed */
+  }
+
   </style>
 </head>
 

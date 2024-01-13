@@ -28,41 +28,37 @@ include('includes/header.php');
                            </tr>
                        </thead>
                        <tbody>
-                           <?php
-                                $products = getAll('products');
+                       <?php
+                        $products = getAll('products');
 
-                                if(mysqli_num_rows($products) > 0)
-                                {
-                                    foreach($products as $item)
-                                    {
-                                        ?>
-                                        <tr>
-                                            <td class="text-center"><?= $item['id']; ?></td>
-                                            <td class="text-center"><?= $item['name']; ?></td>
-                                            <td class="text-center">
-                                                <img src="../uploads/<?= $item['image']; ?>" width = "50px" height = "50px" alt="<?= $item['name']; ?>">
-                                            </td>
-                                            <td class="text-center"><?= $item['status'] == '0' ? "Visible":"Hidden" ?></td>
-                                            <td class="text-center"><?= $item['qty']; ?></td>
-                                            <td class="text-center">
-                                                <a href="edit-products.php?id=<?= $item['id']; ?>" class="btn btn-success"><i class="fa fa-edit me-1"></i>Edit</a>
-                                            </td>
-                                            <td class="text-center">   
-                                                <button type="button" class = "btn btn-danger delete_prod_btn" value = "<?= $item['id']; ?>"><i class="fa fa-trash me-1"></i>Delete</button>   
-                                            </td>
-                                            
-                                        </tr>
+                        if (mysqli_num_rows($products) > 0) {
+                            foreach ($products as $item) {
+                                $qty = $item['qty'];
+                                $highlightClass = ($qty <= 0 || $qty < 15) ? 'bg-danger text-light' : '';
 
-                                        <?php  
+                                ?>
+                                <tr>
+                                    <td class="text-center"><?= $item['id']; ?></td>
+                                    <td class="text-center <?= $highlightClass ?>"><?= $item['name']; ?></td>
+                                    <td class="text-center">
+                                        <img src="../uploads/<?= $item['image']; ?>" width="50px" height="50px" alt="<?= $item['name']; ?>">
+                                    </td>
+                                    <td class="text-center"><?= $item['status'] == '0' ? "Visible" : "Hidden" ?></td>
+                                    <td class="text-center <?= $highlightClass ?>"><?= $qty; ?></td>
+                                    <td class="text-center">
+                                        <a href="edit-products.php?id=<?= $item['id']; ?>" class="btn btn-success"><i class="fa fa-edit me-1"></i>Edit</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-danger delete_prod_btn" value="<?= $item['id']; ?>"><i class="fa fa-trash me-1"></i>Delete</button>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
+                            echo "No Records Found";
+                        }
+                        ?>
 
-                                    }
-
-                                }
-                                else
-                                {
-                                    echo "No Records Found";
-                                }
-                           ?>
                            
                        </tbody>
 

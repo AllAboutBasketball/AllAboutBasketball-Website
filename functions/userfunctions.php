@@ -382,4 +382,14 @@ function getUserImage($id){
 
     return null; 
 }
+
+function findSizeInfo($slugs, $size)
+{
+    foreach ($slugs as $prod) {
+        if ($prod['size'] === $size) {
+            return $prod;
+        }
+    }
+    return null; // Return null if size information is not found
+}
 ?>

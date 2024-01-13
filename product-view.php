@@ -69,32 +69,33 @@ if(isset($_GET['product']))
 
                                 <!-- Size Selection -->
                                 <?php
-                                    $slugs = getProductSizes("products", $product['slug']);
-
+                                $allSizes = ["SMALL", "MEDIUM", "LARGE", "XL"]; // Define all possible sizes
+                                $slugs = getProductSizes("products", $product['slug']);
                                 ?>
                                 <div class="col">
                                     <div class="row">
-                                        <!-- <div class="col-md-2 mt-1 text-end">
-                                            <button id="smallBtn" type="button" name="size" value="SMALL" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-right: -10px;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">Small</button> 
-                                        </div>
-                                        <div class="col-md-1 mt-1">
-                                            <button id="mediumBtn" type="button" name="size" value="MEDIUM" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-right: 80%;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">Medium</button> 
-                                        </div>
-                                        <div class="col-md-1 mt-1" style="margin-left: 20px;">
-                                            <button id="largeBtn" type="button" name="size" value="LARGE" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-left: 30%;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">Large</button> 
-                                        </div>
-                                        <div class="col-md-2 mt-1" >
-                                            <button id="xlBtn" type="button" name="size" value="XL" class="btn btn-outline-dark btn-sm custom-hover-color modal-button" style="margin-left: 20%;" data-bs-toggle="modalsize" data-bs-target="#exampleSize">XL</button> 
-                                        </div> -->
-
-                                        <?php foreach ($slugs as $prod) { ?>
+                                        <?php foreach ($allSizes as $size) { ?>
+                                            <?php
+                                            $sizeInfo = findSizeInfo($slugs, $size); // Custom function to find size information in $slugs array
+                                            $disabled = $sizeInfo ? '' : 'disabled'; // Check if size is available in the database
+                                            ?>
                                             <div class="col-md-2 mt-1">
-                                                <button type="button" name="size" value="<?= $prod['prod_id'] ?>" data-selling-price="<?= $prod['selling_price'] ?>" data-stock="<?= $prod["stock"] ?>" class="btn btn-outline-dark btn-sm custom-hover-color modal-button size-button" style="margin-right: -10px;" data-bs-toggle="modalsize" data-bs-target="#exampleSize"><?= $prod['size'] ?></button> 
+                                                <button type="button" name="size" value="<?= $sizeInfo ? $sizeInfo['prod_id'] : '' ?>" 
+                                                        data-selling-price="<?= $sizeInfo ? $sizeInfo['selling_price'] : '' ?>" 
+                                                        data-stock="<?= $sizeInfo ? $sizeInfo['stock'] : '' ?>" 
+                                                        class="btn btn-outline-dark btn-sm custom-hover-color modal-button size-button" 
+                                                        style="margin-right: -10px;" 
+                                                        data-bs-toggle="modalsize" 
+                                                        data-bs-target="#exampleSize" 
+                                                        <?= $disabled ?>>
+                                                    <?= $size ?>
+                                                </button>
                                             </div>
                                         <?php } ?>
                                         <input type="hidden" id="selectedSize" name="selectedSize">
                                     </div>
                                 </div>
+
 
 
                             <div class="row">
@@ -257,8 +258,6 @@ $(document).on('click','.AddTooCart-btn', function (e) {
 
     var qty = $(this).closest('.product_data').find('.input-qty').val();
     var prod_id = getFocusedButtonValue();
-
-    // console.log($(this).closest('.col-md-2').find('button[name="size"]:focus').val())
     if(prod_id != undefined){
         $.ajax({
             method: "POST",
