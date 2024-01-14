@@ -213,6 +213,18 @@ $data = mysqli_fetch_array($orderData);
                                         ?>
                                     </strong>
                                    </div>
+                                   <!-- Check if $data['courier_info'] if it's true then render the image with proper sizing with the label of Courier Infor -->
+                                      <?php
+                                        if($data['courier_info'] != "")
+                                        {
+                                         ?>
+                                              <label class="fw-bold">Courier Information</label>
+                                              <div class="border p-1 mb-3">
+                                                    <img src="uploads/<?= $data['courier_info']; ?>" width="100%" height="100%" alt="<?= $data['courier_info']; ?>">
+                                              </div>
+                                         <?php
+                                        }
+                                        ?>
                                    <label class="fw-bold">Remarks</label>
                                    <div class="border p-1 mb-3">
                                         <?php 

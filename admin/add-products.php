@@ -57,10 +57,13 @@ include('includes/header.php');
                             <label class="mb-0 text-dark fw-bold" for="">Name</label>
                             <input type="text" required name="name" id="name" readonly placeholder="Enter name" class="form-control mb-2" autocomplete="off" pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only (whitespace allowed)" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '').toUpperCase();">
                         </div>
-                       <div class="col-md-6">
-                            <label class ="mb-0 text-dark fw-bold" for="">Tag No.</label>
-                            <input type="text" required name = "slug" placeholder = "Enter Tag #" class="form-control mb-2" autocomplete="off" oninput="disableSpecialCharacters(this)">
-                       </div>
+                        <div class="col-md-6">
+                            <label class="mb-0 text-dark fw-bold" for="">Tag No.</label>
+                            <div class="input-group d-flex flex-row align-items-center justify-content-center">
+                                <input type="text" required name="slug" id="tagInput" placeholder="Enter Tag #" class="form-control mb-2" autocomplete="off" oninput="disableSpecialCharacters(this)">
+                                <button type="button" class="btn btn-primary" onclick="generateTag()">Generate</button>
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <label class="mb-0 text-dark fw-bold" >Choose Size</label>
                                 <input type="text" required name="size" id="size" readonly placeholder="Enter name" class="form-control mb-2" autocomplete="off" pattern="[A-Za-z\s]+" title="Please enter alphabetic characters only (whitespace allowed)" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '').toUpperCase();">
@@ -114,3 +117,10 @@ include('includes/header.php');
 
     <?php include('includes/footer.php'); ?>
     
+    <script>
+        function generateTag() {
+            var randomTag = 'aab' + Math.floor(Math.random() * 1000000000000000);
+            document.getElementById('tagInput').value = randomTag;
+        }
+
+    </script>

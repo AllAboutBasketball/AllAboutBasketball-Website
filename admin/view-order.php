@@ -168,6 +168,14 @@ $data = mysqli_fetch_array($orderData);
                                             <label for="location">Current Location:</label>
                                             <input type="text" class="form-control" id="location" name="location">
                                         </div>
+
+                                        <div class="form-group mt-3" id="courierInput" style="display: none;">
+                                            <label for="imageUpload" class="mb-2">Upload Courier Info</label>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control-file" id="imageUpload" name="courier_info">
+                                            </div>
+                                        </div>
+
                                     <!-- <label class="fw-bold mt-2">Status</label>
                                     <select name="remarks_status" class="form-select">
                                             <option value="0"<?= $data['status'] == 0?"selected":""?>>Order On Progress</option>
@@ -193,3 +201,22 @@ $data = mysqli_fetch_array($orderData);
 </div>
 
 <?php include('includes/footer.php'); ?>
+
+<script>
+    function toggleInput(value) {
+        const locationInput = document.getElementById("locationInput");
+        const courierInput = document.getElementById("courierInput");
+
+        // Check if the value is between 3 and 6
+        if (value >= 3 && value <= 6) {
+            locationInput.style.display = "block";
+        } else if(value == 7){
+            courierInput.style.display = "block";
+        } else {
+            locationInput.style.display = "none";
+            courierInput.style.display = "none";
+        }
+    }
+
+
+</script>

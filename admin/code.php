@@ -290,10 +290,27 @@ else if(isset($_POST['update_order_btn']))
     $order_status = $_POST['order_status'];
     $order_id = $_POST['order_id'];
     $current_location = $_POST['location'];
+    $courier_info = $_POST['courier_info'];
+
+    $imagExt = pathinfo($courier_info, PATHINFO_EXTENSION);
+    $filename = time().'.'.$imagExt;
+    $path = '../uploads';
+
     // $remarks_status = $_POST['remarks_status'];
     if ($order_status >= 3 && $order_status <= 6 && $current_location !== '') {
         $updateCurrentLocation_query = "UPDATE orders SET current_location='$current_location' WHERE tracking_no='$track_no' ";
         mysqli_query($con, $updateCurrentLocation_query);
+    }
+
+    if ($order_status == 7){
+        if($_FILES['courier_info']['tmp_name'] != ""){
+            $update_filename = $filename;
+            $updateCourierInfo_query = "UPDATE orders SET courier_info='$update_filename' WHERE tracking_no='$track_no' ";
+            mysqli_query($con, $updateCourierInfo_query);
+            move_uploaded_file($_FILES['courier_info']['tmp_name'], $path.'/'.$update_filename);
+        }else{
+            $_SESSION['message'] = "Please upload the courier info";
+        }
     }
 
     if($order_status == 2){
@@ -301,23 +318,33 @@ else if(isset($_POST['update_order_btn']))
         $getOrderIdeEsult = mysqli_query($con, $getOrderId);
 
         foreach ($getOrderIdeEsult as $getOrderIdeResult) {
+            // updating the qty in products and inventory
             $product_id = $getOrderIdeResult['prod_id'];
+            $qty = $getOrderIdeResult['qty'];
 
-            $getProduct = "SELECT qty FROM products WHERE id ='$product_id'";
-            $getProductResult = mysqli_query($con, $getProduct);
+            $getProductQuery = "SELECT * FROM products WHERE id='$product_id'";
+            $getProductQueryResult = mysqli_query($con, $getProductQuery);
 
-            if ($getProductResult) {
-                $getProductResults = mysqli_fetch_assoc($getProductResult);
-                $current_qty = $getProductResults['qty'];
+            $getProductQueryResult = mysqli_fetch_assoc($getProductQueryResult);
+            $product_qty = $getProductQueryResult['qty'];
 
-                $new_qty = $current_qty - $getOrderIdeResult['qty'];
+            $new_qty = $product_qty - $qty;
 
-                $updateProductQty_query = "UPDATE products SET qty='$new_qty' WHERE id='$product_id'";
-                $updateInventoryQty_query = "UPDATE inventory SET qty='$new_qty' WHERE id='$product_id'";
+            $updateProductQuery = "UPDATE products SET qty='$new_qty' WHERE id='$product_id'";
+            mysqli_query($con, $updateProductQuery);
 
-                mysqli_query($con, $updateProductQty_query);
-                mysqli_query($con, $updateInventoryQty_query);
-            }
+
+            // TO BE COMMENTED IN THE MEANTIME!!!!!!!!!
+            // $getInventoryQuery = "SELECT * FROM inventory WHERE product_id='$product_id'";
+            // $getInventoryQueryResult = mysqli_query($con, $getInventoryQuery);
+
+            // $getInventoryQueryResult = mysqli_fetch_assoc($getInventoryQueryResult);
+            // $inventory_qty = $getInventoryQueryResult['qty'];
+
+            // $new_inventory_qty = $inventory_qty - $qty;
+
+            // $updateInventoryQuery = "UPDATE inventory SET qty='$new_inventory_qty' WHERE product_id='$product_id'";
+            // mysqli_query($con, $updateInventoryQuery);
         }
     }
     $updateOrder_query = "UPDATE orders SET status='$order_status' WHERE tracking_no='$track_no' ";
