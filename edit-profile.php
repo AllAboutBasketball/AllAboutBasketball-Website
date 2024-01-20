@@ -60,6 +60,10 @@ include('authenticate.php');
                                                             <label class="fw-bold">Phone</label>
                                                             <input type="number" name = "phone" value = "<?= $data['phone']?>" placeholder = "Enter phone" class="form-control">
                                                         </div>
+                                                        <div class="col-md-12 mb-2">
+                                                            <label class="fw-bold">Address</label>
+                                                            <input type="text" name = "address" value = "<?= $data['address']?>" placeholder = "Enter address" class="form-control">
+                                                        </div>
                                                         
                                     </div>
                                 </div>

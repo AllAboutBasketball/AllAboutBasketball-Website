@@ -196,6 +196,8 @@ if(isset($_GET['product']))
                                 <input class="form-control" id="comment" name="comment" placeholder="Write your comment here" style="outline: none;border-bottom: 1px solid #ced4da;" />
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            <!-- hidden button containing the product slug variable -->
+                            <input type="hidden" name="product_slug" value="<?php echo $product_slug; ?>">
                         </form>
                         <div class="mt-5">
                             <hr>

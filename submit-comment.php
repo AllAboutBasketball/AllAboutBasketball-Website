@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $comment = $_POST['comment'];
         $feedback_id = $_POST['feedback_id'];
         $user_id = $_POST['user_id'];
+        $slug = $_POST['product_slug'];
 
         $comment = mysqli_real_escape_string($con, $comment);
 
@@ -13,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = mysqli_query($con, $query);
 
         if ($result) {
-            redirect('product-view.php', "Comment Submitted!");
+            redirect('product-view.php?product='.$slug, "Comment Submitted!");
         } else {
             echo "Error: " . mysqli_error($con);
         }

@@ -1,5 +1,11 @@
 <?php 
     $page = substr($_SERVER['SCRIPT_NAME'], strrpos($_SERVER['SCRIPT_NAME'],"/") + 1);
+
+    if(isset($_GET['search']))
+    {
+        $keyword = $_GET['search'];
+        redirect('search-result.php?search='.$keyword, "Search Results for ".$keyword."");
+    }
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark shadow">
     <div class="container">

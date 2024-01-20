@@ -392,4 +392,11 @@ function findSizeInfo($slugs, $size)
     }
     return null; // Return null if size information is not found
 }
+
+function searchProducts($keyword){
+    // Search by name
+    global $con;
+    $query = "SELECT * FROM products WHERE name LIKE '%$keyword%'";
+    return $query_run = mysqli_query($con, $query);
+}
 ?>

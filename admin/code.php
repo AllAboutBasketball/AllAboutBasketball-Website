@@ -398,6 +398,7 @@ else if(isset($_POST['update_profile_btn']))
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
+    $address = $_POST['address'];
 
     $new_image = $_FILES['image']['name'];
     $old_image = $_POST['old_image'];
@@ -424,7 +425,7 @@ else if(isset($_POST['update_profile_btn']))
     }
     $path = 'userimage';
 
-    $update_query = "UPDATE users SET name='$name', email='$email', phone='$phone', image='$update_filename' WHERE id='$userId'";
+    $update_query = "UPDATE users SET name='$name', email='$email', phone='$phone', address='$address', image='$update_filename' WHERE id='$userId'";
 
     $update_query_run = mysqli_query($con, $update_query);
 
