@@ -62,6 +62,12 @@ include('authenticate.php');
                                                                 <?= $data['phone']; ?>
                                                             </div>
                                                         </div>
+                                                        <div class="col-md-12 mb-2">
+                                                            <label class="fw-bold text-success">Address</label>
+                                                            <div class="form-control">
+                                                                <?= $data['address']; ?>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-md-6 mb-2">
                                                         <a href="edit-profile.php" class="btn btn-success"><i class="fa fa-edit me-1"></i>Edit</a>
                                                         </div>

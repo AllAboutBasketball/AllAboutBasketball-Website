@@ -10,6 +10,8 @@ if (isset($_GET['id'])) {
 
     if ($result) {
         $data = mysqli_fetch_assoc($result);
+        $user = getUserData($data['user_id']);
+        $userData = mysqli_fetch_assoc($user);
     } else {
         die("Error fetching data.");
     }
@@ -44,6 +46,15 @@ if (isset($_GET['id'])) {
                                     <p class="card-text">
                                         <strong>Cloth Size:</strong> <?php echo $data['cloth_size']; ?><br>
                                         <strong>Color:</strong> <?php echo $data['color']; ?>
+                                    </p>
+
+                                    <hr class="mt-5 mb-5">
+
+                                    <h5 class="card-title">User Information</h5>
+                                    <p class="card-text">
+                                        <strong>Name:</strong> <?php echo $userData['name']; ?><br>
+                                        <strong>Email:</strong> <?php echo $userData['email']; ?><br>
+                                        <strong>Phone:</strong> <?php echo $userData['address']; ?><br>
                                     </p>
                                 </div>
                             </div>

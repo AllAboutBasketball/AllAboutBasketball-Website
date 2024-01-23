@@ -8,11 +8,7 @@ if(isset($_GET['search']))
     $keyword = $_GET['search'];
     $products = searchProducts($keyword);
     $count = mysqli_num_rows($products);
-}
-else
-{
-    redirect('index.php');
-}
+
 
 if($count > 0){
 ?>
@@ -71,5 +67,10 @@ if($count > 0){
 else
 {
     echo "<h1>No Products Found</h1>";
+}
+}
+else
+{
+    redirect('index.php');
 }
 ?>

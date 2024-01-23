@@ -4,11 +4,11 @@ include('../middleware/adminMiddleware.php');
 include('includes/header.php');
 include('includes/adminFunctions.php');
 
-$new_count = getNewOrdersCount();
+$new_count = getRecentOrdersCount();
 $completed_count = getCompletedOrdersCount();
-$user_count = getUserCount();
+$user_count = getTodaysUsersCount();
 $employee_count = getEmployeeCount();
-$product_count = getProductsCount();
+$product_count = getAllProductsCount();
 $supplier_count = getSupplierCount();
 $collection_count = getCollectionCount();
 ?>
@@ -31,7 +31,7 @@ $collection_count = getCollectionCount();
 
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
+                            <!-- <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p> -->
                         </div>
                     </div>
                     
@@ -48,7 +48,7 @@ $collection_count = getCollectionCount();
 
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month</p>
+                            <!-- <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month</p> -->
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@ $collection_count = getCollectionCount();
 
                         <hr class="horizontal my-0 dark">
                         <div class="card-footer p-3">
-                            <p class="mb-0 "><span class="text-success text-sm font-weight-bolder">+1% </span>than yesterday</p>
+                            <!-- <p class="mb-0 "><span class="text-success text-sm font-weight-bolder">+1% </span>than yesterday</p> -->
                         </div>
                     </div>
 
@@ -79,13 +79,13 @@ $collection_count = getCollectionCount();
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize ">Followers</p>
-                                <h4 class="mb-0 ">+<?php echo $user_count; ?></h4>
+                                <h4 class="mb-0 "><?php echo $user_count; ?></h4>
                             </div>
                         </div>
 
                         <hr class="horizontal my-0 dark">
                         <div class="card-footer p-3">
-                            <p class="mb-0 ">Just updated</p>
+                            <!-- <p class="mb-0 ">Just updated</p> -->
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@ $collection_count = getCollectionCount();
 
                         <hr class="horizontal my-0 dark">
                         <div class="card-footer p-3">
-                            <p class="mb-0 "><span class="text-success text-sm font-weight-bolder">+1% </span>than yesterday</p>
+                            <!-- <p class="mb-0 "><span class="text-success text-sm font-weight-bolder">+1% </span>than yesterday</p> -->
                         </div>
                     </div>
 
@@ -115,13 +115,13 @@ $collection_count = getCollectionCount();
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize ">Supplier</p>
-                                <h4 class="mb-0 ">+<?php echo $supplier_count; ?></h4>
+                                <h4 class="mb-0 "><?php echo $supplier_count; ?></h4>
                             </div>
                         </div>
 
                         <hr class="horizontal my-0 dark">
                         <div class="card-footer p-3">
-                            <p class="mb-0 ">Just updated</p>
+                            <!-- <p class="mb-0 ">Just updated</p> -->
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@ $collection_count = getCollectionCount();
 
                         <hr class="horizontal my-0 dark">
                         <div class="card-footer p-3">
-                            <p class="mb-0 "><span class="text-success text-sm font-weight-bolder">+1% </span>than yesterday</p>
+                            <!-- <p class="mb-0 "><span class="text-success text-sm font-weight-bolder">+1% </span>than yesterday</p> -->
                         </div>
                     </div>
 
@@ -151,13 +151,13 @@ $collection_count = getCollectionCount();
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize ">Collections</p>
-                                <h4 class="mb-0 ">+<?php echo $collection_count; ?></h4>
+                                <h4 class="mb-0 "><?php echo $collection_count; ?></h4>
                             </div>
                         </div>
 
                         <hr class="horizontal my-0 dark">
                         <div class="card-footer p-3">
-                            <p class="mb-0 ">Just updated</p>
+                            <!-- <p class="mb-0 ">Just updated</p> -->
                         </div>
                     </div>
                 </div>

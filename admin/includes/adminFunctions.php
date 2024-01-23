@@ -18,7 +18,7 @@ function getNewOrdersCount(){
 
 function getCompletedOrdersCount(){
     global $con;
-    $query = "SELECT COUNT(*) AS new_completed_count FROM orders WHERE status = '2'";
+    $query = "SELECT COUNT(*) AS new_completed_count FROM orders WHERE status = '8'";
     $result = mysqli_query($con, $query);
 
     if ($result) {
@@ -150,4 +150,56 @@ function getLowOrOutOfStockProducts()
     global $con;
     $query = "SELECT * FROM products WHERE qty <= 15 ORDER BY id DESC";
     return $query_run = mysqli_query($con, $query);
+}
+
+function getUserData($user_id){
+    global $con;
+    $query = "SELECT * FROM users WHERE id = '$user_id'";
+    return mysqli_query($con, $query);
+}
+
+function getRecentOrdersCount(){
+    global $con;
+    $query = "SELECT COUNT(*) AS recent_orders_count FROM orders WHERE status = '0' OR status = '1'";
+    $result = mysqli_query($con, $query);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $recentOrdersCount = $row['recent_orders_count'];
+        mysqli_free_result($result);
+        return $recentOrdersCount;
+    } else {
+        return -1; 
+    }
+}
+
+function getTodaysUsersCount()
+{
+    global $con;
+    $query = "SELECT COUNT(*) AS todays_users_count FROM users WHERE DATE(created_at) = CURDATE()";
+    $result = mysqli_query($con, $query);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $todaysUsersCount = $row['todays_users_count'];
+        mysqli_free_result($result);
+        return $todaysUsersCount;
+    } else {
+        return -1; 
+    }
+}
+
+function getAllProductsCount(){
+    global $con;
+    $query = "SELECT COUNT(*) AS all_products_count FROM products";
+    $result = mysqli_query($con, $query);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $allProductsCount = $row['all_products_count'];
+        mysqli_free_result($result);
+        return $allProductsCount;
+    } else {
+        return -1; 
+    }
 }

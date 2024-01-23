@@ -22,7 +22,7 @@
           </li>
           <hr class="horizontal light mt-0 mb-2">
           <!--------------------------------------------------------------------------------->
-          <a class="nav-link text-white dropdown-toggle <?= $page == ""? 'active bg-gradient-info':''; ?>" href="#" data-bs-toggle="dropdown">
+          <a class="nav-link text-white dropdown-toggle <?= $page == ""? 'active bg-gradient-info':''; ?>" data-bs-toggle="dropdown">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">assignment</i>
             </div>
@@ -169,7 +169,7 @@
             </a>
           </li>
             <li class="nav-item">
-            <a class="nav-link text-white <?= $page == "confirmed-orders.php"? 'active bg-gradient-info':''; ?> " href="../admin/confirmed-orders.php">
+            <a class="nav-link text-white <?= $page == "confirmed-orders.php"? 'active bg-gradient-info':'' ?> " href="../admin/confirmed-orders.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">done_all</i>
               </div>
@@ -178,7 +178,7 @@
           </li>
           <hr class="horizontal light mt-0 mb-2">
           <li class="nav-item">
-            <a class="nav-link text-white <?= $page == "supplier.php"? 'active bg-gradient-info':''; ?> " href="../admin/supplier.php">
+            <a class="nav-link text-white <?= $page == "supplier.php"? 'active bg-gradient-info':'' ?> " href="../admin/supplier.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">view_list</i>
               </div>
@@ -187,7 +187,7 @@
           </li>
           <!-- <hr class="horizontal light mt-0 mb-2">
           <li class="nav-item">
-            <a class="nav-link text-white <?= $page == "supplier-order.php"? 'active bg-gradient-info':''; ?>" href="../admin/supplier-order.php">
+            <a class="nav-link text-white <?= $page == "supplier-order.php"? 'active bg-gradient-info':'' ?>" href="../admin/supplier-order.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">storage</i>
               </div>
@@ -195,7 +195,7 @@
             </a>
           </li> -->
           <!-- <li class="nav-item">
-            <a class="nav-link text-white <?= $page == "purchase-order.php"? 'active bg-gradient-info':''; ?>" href="../admin/purchase-order.php">
+            <a class="nav-link text-white <?= $page == "purchase-order.php"? 'active bg-gradient-info':'' ?>" href="../admin/purchase-order.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">storage</i>
               </div>
@@ -204,7 +204,7 @@
           </li> -->
           <hr class="horizontal light mt-0 mb-2">
           <li class="nav-item">
-            <a class="nav-link text-white <?= $page == "delivery.php"? 'active bg-gradient-info':''; ?> " href="../admin/delivery.php">
+            <a class="nav-link text-white <?= $page == "delivery.php"? 'active bg-gradient-info':'' ?> " href="../admin/delivery.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10"> moped</i>
               </div>
@@ -212,7 +212,7 @@
             </a>
           </li>
             <!-- <li class="nav-item">
-            <a class="nav-link text-white <?= $page == "delivery.php"? 'active bg-gradient-info':''; ?> " href="../admin/delivery.php">
+            <a class="nav-link text-white <?= $page == "delivery.php"? 'active bg-gradient-info':'' ?> " href="../admin/delivery.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">pending</i>
               </div>
@@ -223,7 +223,7 @@
           </ul>
       <!--------------------------------------------------------------------------------------------------------->
       <!------------------------------------------------------------------------------------->
-      <a class="nav-link text-white dropdown-toggle <?= $page == ""? 'active bg-gradient-info':''; ?>" href="#" data-bs-toggle="dropdown">
+          <a class="nav-link text-white dropdown-toggle <?= $page == "" ? 'active bg-gradient-info': '' ?>" data-bs-toggle="dropdown">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">business</i>
             </div>

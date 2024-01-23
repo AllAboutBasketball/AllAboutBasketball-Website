@@ -2,7 +2,7 @@
 
 include('../middleware/adminMiddleware.php'); 
 include('includes/header.php');
-include("includes/adminFunctions.php");
+include('./includes/adminFunctions.php');
 
 
 ?>
@@ -30,14 +30,14 @@ include("includes/adminFunctions.php");
                                     if($items['status'] != 0){
                         ?>
                                     <tr>
-                                        <td><?= $items['id']; ?></td>
-                                        <td><?= $items['cloth_size']; ?></td>
+                                        <td><?= $items['id'] ?></td>
+                                        <td><?= $items['cloth_size'] ?></td>
                                         <td class="text-center">
-                                            <img src="../userdesign/<?= $items['image']; ?>" width = "50px" height = "50px" alt="<?= $items['name']; ?>">
+                                            <img src="../userdesign/<?= $items['image']; ?>" width = "50px" height = "50px" alt="<?= $items['name'] ?>">
                                         </td>
-                                        <td><?= $items['color']; ?></td>
+                                        <td><?= $items['color'] ?></td>
                                         <td>
-                                            <a href="view-collab.php?id=<?= $items['id']; ?>" class="btn btn-outline-success">View Details</a>
+                                            <a href="view-collab.php?id=<?= $items['id'] ?>" class="btn btn-outline-success">View Details</a>
                                         </td>
                                     </tr>
                         <?php
@@ -52,3 +52,5 @@ include("includes/adminFunctions.php");
         </div>
     </div>
 </div>
+
+<?php include('includes/footer.php'); ?>
