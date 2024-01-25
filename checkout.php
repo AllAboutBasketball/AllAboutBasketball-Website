@@ -229,50 +229,68 @@ include('vendor/autoload.php');
     </div>
 </div>
 
+
+<?php include('includes/footer.php'); ?>
 <script src="https://www.paypal.com/sdk/js?client-id=AVdS_posENfhM0iIDrMn65L8X_YFCqYRumC71tbUVa5xLV8vdmCf63BrszerC7F7Q_YB0pOo0JtofdNE&currency=PHP"></script>
 
-    <script>
-      paypal.Buttons({
-        createOrder: (data, actions) => {
+<script>
+    paypal.Buttons({
+        createOrder: function (data, actions) {
             return actions.order.create({
-              purchase_units: [{
-                amount: {
-                    value: <?= $totalPrice ?>
-                }
-              }]
-            })
+                purchase_units: [{
+                    amount: {
+                        value: <?= $totalPrice ?>
+                    }
+                }]
+            });
         },
 
-        onApprove: (data, action) => {
-          return actions.order.capture().then(orderData => {
-            console.log("Payment Approved!")
-            var name = $('input[name="name"]').val();
-            var email = $('input[name="email"]').val();
-            var phone = $('input[name="phone"]').val();
-            var zipCode = $('input[name="zip_code"]').val();
-            var address = $('textarea[name="address"]').val();
-            $.ajax({
-                method: "POST",
-                url: "functions/placeorder.php",
-                data: {
-                    "Paypal": true,
-                    "name": name,
-                    "email": email,
-                    "phone": phone,
-                    "zip_code": zipCode,
-                    "address": address,
-                    "payment_modes": "paypal" 
-                },
-                success: function(response) {
-                    console.log("POST request successful:", response);
-                },
-                error: function(err) {
-                    console.error("Error sending POST request:", err);
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (orderData) {
+                console.log("Payment Approved!");
+                var name = $('input[name="name"]').val();
+                var email = $('input[name="email"]').val();
+                var phone = $('input[name="phone"]').val();
+                var zipCode = $('input[name="zip_code"]').val();
+                var address = $('textarea[name="address"]').val();
+                $.ajax({
+                    method: "POST",
+                    url: "functions/placeorder.php",
+                    data: {
+                        "Paypal": true,
+                        "name": name,
+                        "email": email,
+                        "phone": phone,
+                        "zip_code": zipCode,
+                        "address": address,
+                        "payment_modes": "paypal"
+                    },
+                    success: function (response) {
+                        window.location.reload(); 
+                        window.location.href = "my-orders.php";
+
+                    },
+                    error: function (err) {
+                        console.error("Error sending POST request:", err);
+                    }
+                });
+            });
+        },
+
+        payment: function (data, actions) {
+            return actions.payment.create({
+                payment: {
+                    transactions: [
+                        {
+                            amount: {
+                                total: <?= $totalPrice ?>,
+                                currency: 'PHP'
+                            }
+                        }
+                    ]
                 }
             });
-          })
-        }
-      }).render('#paypal-button-container')
-    </script>
-<?php include('includes/footer.php'); ?>
+        },
+    }).render('#paypal-button-container');
+</script>
 
