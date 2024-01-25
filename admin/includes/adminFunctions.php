@@ -1,5 +1,5 @@
 <?php
-include('./../config/dbcon.php');
+include('dbconnection.php');
 
 function getNewOrdersCount(){
     global $con;
@@ -18,7 +18,7 @@ function getNewOrdersCount(){
 
 function getCompletedOrdersCount(){
     global $con;
-    $query = "SELECT COUNT(*) AS new_completed_count FROM orders WHERE status = '8'";
+    $query = "SELECT COUNT(*) AS new_completed_count FROM orders WHERE status = '2'";
     $result = mysqli_query($con, $query);
 
     if ($result) {

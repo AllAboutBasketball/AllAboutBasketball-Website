@@ -1,70 +1,88 @@
 <?php
-
-include('../middleware/adminMiddleware.php'); 
-include('includes/header.php');
-
-
+include 'template/header.php';
+?> 
+<main id="js-page-content" role="main" class="page-content">
+	<ol class="breadcrumb page-breadcrumb">
+		<li class="breadcrumb-item"><a href="javascript:void(0);"><?php echo $title; ?></a></li>
+		<li class="breadcrumb-item active">Orders</li>
+		<li class="position-absolute pos-top pos-right d-none d-sm-block">
+			<span class="js-get-date"></span></li>
+	</ol>
+	<div class="row">
+		<div class="col-xl-12">
+			<div id="panel-1" class="panel">
+				<div class="panel-container show">
+					<div class="panel-content">
+						<!-- datatable start -->
+						<table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+							<thead class="bg-primary-600">
+								<tr>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div> 
+		</div>
+	</div>
+</main>
+<?php
+include 'template/footer.php';
 ?>
 
-<div class="container">
-    <div class="row">
-        <div class="colmd-12">
-           <div class="card">
-               <div class="card-header bg-info">
-                   <h4 class="text-white">Orders
-                        <a href="order_history.php" class="btn btn-danger float-end"><i class="fa fa-history me-1"></i>Order History</a>
-                   </h4>
-               </div>
-               <div class="card-body" id="">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th class="text-success fw-bold text-center">ID</th>
-                                <th class="text-success fw-bold text-center">Users</th>
-                                <th class="text-success fw-bold text-center">Tracking No.</th>
-                                <th class="text-success fw-bold text-center">Price</th>
-                                <th class="text-success fw-bold text-center">Date Ordered</th>
-                                <th class="text-success fw-bold text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                $orders = getAllOrders();
+<div id="updatediv"><div>
 
-                                if(mysqli_num_rows($orders) > 0)
-                                {
-                                    foreach ($orders as $items) {
-                                        ?>
-                                            <tr>
-                                                <td class="text-center"><?= $items['id']; ?></td>
-                                                <td class="text-center"><?= $items['name']; ?></td>
-                                                <td class="text-center"><?= $items['tracking_no']; ?></td>
-                                                <td class="text-center">₱ <?= $items['total_price']; ?>.00</td>
-                                                <td class="text-center"><?= $items['created_at']; ?></td>
-                                                <td class="text-center">
-                                                    <a href="view-order.php?t=<?= $items['tracking_no']; ?>" class="btn btn-success">View Details</a>
-                                                </td>
-                                            </tr>
-                                        <?php
-                                    }
-                                }
-                                else
-                                {
-                                    ?>
-                                        <tr>
-                                            <td colspan="5">No Orders Yet</td>
-                                        </tr>
-                                    <?php   
-                                }
-                            ?>
-                           
-                        </tbody>
-                    </table>
-                   
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+	$(document).ready(function() {
+		// initialize datatable
+		$('#dt-basic-example').dataTable(
+		{
+			responsive: true,
+			lengthChange: false,
+			serverSide: true,
+			order: [[ 0, "asc" ]],
+			ajax: "ordersres.php",
+			columns: [
+				{ title: 'No.', data:0 },
+				{ title: 'DATE ORDERED', data:4 },
+				{ title: 'TRACKING NO.', data:2 },
+				{ title: 'CUSTOMER NAME', data:1 },
+				{ title: 'TOTAL ORDER', data:3 },
+				{ title: 'ACTION', data:5 },
+			],
+			dom:
 
-<?php include('includes/footer.php'); ?>
+			"<'row mb-3'<'col-sm-12 col-md-6 d-flex align-items-center justify-content-start'f><'col-sm-12 col-md-6 d-flex align-items-center justify-content-end'lB>>" +
+			"<'row'<'col-sm-12'tr>>" +
+			"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+			buttons: [
+				{
+					extend: 'pdfHtml5',
+					text: 'PDF',
+					titleAttr: 'Generate PDF',
+					className: 'btn-outline-danger btn-sm mr-1'
+				},
+				{
+					extend: 'print',
+					text: 'Print',
+					titleAttr: 'Print Table',
+					className: 'btn-outline-primary btn-sm'
+				}
+			]
+		});
+	}); 
+	
+						    
+	function update(id){
+		$.ajax({
+			url:'ordersupdate.php?id='+id,
+			type:'post',
+			success  : function(data) {
+				$("#updatediv").html(data);
+				$('#update_modal').modal('show');
+			}
+		});
+	}    
+</script>
