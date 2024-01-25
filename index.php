@@ -4,26 +4,26 @@ include('./includes/header.php');
 ?>
 
 <!------------- MARQUEE ------------->
-<div class="py-3">
-    <div class="container">
-            <div class="row mt-4">
-                <div style="position: absolute; left: 0; font-size: 40px; font-weight:500px; margin-left: 100px; width:25%;">
-                    <marquee behavior="scroll" direction="right" scrollamount="10" scrolldelay="100">Month's New Arrival</marquee>
-                </div>
-                <div style=" margin-top: 70px; padding-left: 15px;justify-content: space-between;letter-spacing: 0.2em; font-size:14px;">
-                <p>CHECK OUT THIS MONTH'S NEW ARRIVAL</p>
-                </div>
-             </div>
+<div class="container">
+    <div class="py-3">
+        <div class="row mt-4">
+            <div style="position: absolute; left: 0; font-size: 40px; font-weight:500px; margin-left: 100px; width:25%;">
+                <marquee behavior="scroll" direction="right" scrollamount="10" scrolldelay="100">Month's New Arrival</marquee>
+            </div>
+            <div style=" margin-top: 70px; padding-left: 15px;justify-content: space-between;letter-spacing: 0.2em; font-size:14px;">
+            <p>CHECK OUT THIS MONTH'S NEW ARRIVAL</p>
+            </div>
+            </div>
     </div>
 </div>
   
 <!------------------------- PRODUCT SLIDER -------------------->
-<div class="slide">
-<div class="py-2">
-	<div class="container">
-		<div class="row">
+<div class="container">
+    <div class="slide">
+        <div class="py-2">
+            <div class="row">
                 <section id="new-arrival-container">
-                    <div class="nav-body">
+                    <div class="nav-body ">
                         <div class="nav-wrapper">
                             <div class="wrapper-holder">
                                 <div id="slider-img-1"></div>
@@ -41,9 +41,9 @@ include('./includes/header.php');
                         </div>
                     </div>
                 </section>	
-		</div>
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!------------------ COLLECTION DISPLAY ------------------------>

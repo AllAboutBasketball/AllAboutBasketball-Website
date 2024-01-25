@@ -206,6 +206,8 @@ else if(isset($_POST['update_prod_btn']))
     $status = isset($_POST['status']) ? '1':'0';
     $trending = isset($_POST['trending']) ? '1':'0';
     $meta_keywords = $_POST['meta_keywords'];
+    $connectToInventory = $_POST["first_time"];
+    $inventoryId = $_POST["inventory_id"];
     
 
     $image = $_FILES['image']['name'];
@@ -226,28 +228,69 @@ else if(isset($_POST['update_prod_btn']))
         $update_filename = $old_image;
     }
 
-    $update_product_query = "UPDATE products SET category_id='$category_id', name='$name', slug='$slug', size='$size', description='$description',
-    original_price='$original_price', selling_price='$selling_price', qty='$qty', status='$status',
-    trending='$trending', meta_keywords='$meta_keywords', image='$update_filename' WHERE id='$product_id'";
-
-    $update_product_query_run = mysqli_query($con, $update_product_query);
-
-
-
-    if($update_product_query_run)
-    {
-        if($_FILES['image']['name'] != "")
-        {
-            move_uploaded_file($_FILES['image']['tmp_name'], $path.'/'.$update_filename);
-            if(file_exists("../uploads/".$old_image))
-            {
-                unlink("../uploads/".$old_image);
-            }
-        }
-        redirect("edit-products.php?id=$product_id", "Update Successful");
+    if($connectToInventory == "1"){
+        $inventory_query = "INSERT INTO inventory_connections (inventoryId, productId) VALUES ('$inventoryId', '$product_id')";
+        $inventory_query_run = mysqli_query($con, $inventory_query);
+    }else{
+        $inventory_query = "UPDATE inventory_connections SET inventoryId='$inventoryId' WHERE productId='$product_id'";
+        $inventory_query_run = mysqli_query($con, $inventory_query);
     }
-    else    
-    {
+
+    // Get the old qty of the product and if its increased then it will be deducted to the related inventory
+    $getOldQtyQuery = "SELECT * FROM products WHERE id='$product_id'";
+    $getOldQtyQueryResult = mysqli_query($con, $getOldQtyQuery);
+    $getOldQtyQueryResult = mysqli_fetch_assoc($getOldQtyQueryResult);
+    $oldQty = $getOldQtyQueryResult['qty'];
+
+    if ($oldQty < $qty) {
+        $newQty = $qty - $oldQty;
+        $getInventoryQuery = "SELECT * FROM inventory WHERE id='$inventoryId'";
+        $getInventoryQueryResult = mysqli_query($con, $getInventoryQuery);
+        $getInventoryQueryResult = mysqli_fetch_assoc($getInventoryQueryResult);
+        $inventoryQty = $getInventoryQueryResult['qty'];
+
+        $newInventoryQty = $inventoryQty - $newQty;
+
+        $updateInventoryQuery = "UPDATE inventory SET qty='$newInventoryQty' WHERE id='$inventoryId'";
+        mysqli_query($con, $updateInventoryQuery);
+    } else if ($oldQty > $qty) {
+        $newQty = $oldQty - $qty;
+        $getInventoryQuery = "SELECT * FROM inventory WHERE id='$inventoryId'";
+        $getInventoryQueryResult = mysqli_query($con, $getInventoryQuery);
+        $getInventoryQueryResult = mysqli_fetch_assoc($getInventoryQueryResult);
+        $inventoryQty = $getInventoryQueryResult['qty'];
+
+        $newInventoryQty = $inventoryQty + $newQty;
+
+        $updateInventoryQuery = "UPDATE inventory SET qty='$newInventoryQty' WHERE id='$inventoryId'";
+        mysqli_query($con, $updateInventoryQuery);
+    }
+
+    // Wrap it all in a condition to make sure that relation exists within the related inventory_connections table before updating the product
+    if ($inventory_query_run) {
+        $update_product_query = "UPDATE products SET category_id='$category_id', name='$name', slug='$slug', size='$size', description='$description',
+        original_price='$original_price', selling_price='$selling_price', qty='$qty', status='$status',
+        trending='$trending', meta_keywords='$meta_keywords', image='$update_filename' WHERE id='$product_id'";
+    
+        $update_product_query_run = mysqli_query($con, $update_product_query);
+    
+        if($update_product_query_run)
+        {
+            if($_FILES['image']['name'] != "")
+            {
+                move_uploaded_file($_FILES['image']['tmp_name'], $path.'/'.$update_filename);
+                if(file_exists("../uploads/".$old_image))
+                {
+                    unlink("../uploads/".$old_image);
+                }
+            }
+            redirect("edit-products.php?id=$product_id", "Update Successful");
+        }
+        else    
+        {
+            redirect("edit-products.php?id=$product_id", "Something Went Wrong");
+        }
+    } else {
         redirect("edit-products.php?id=$product_id", "Something Went Wrong");
     }
 }

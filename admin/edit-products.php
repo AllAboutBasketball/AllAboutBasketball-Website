@@ -1,8 +1,8 @@
 <?php
 
 include('../middleware/adminMiddleware.php'); 
-
 include('includes/header.php');
+include('includes/adminFunctions.php');
 
 
 ?>
@@ -16,6 +16,7 @@ include('includes/header.php');
                 $id = $_GET['id'];
 
                 $product = getByID("products", $id);
+                $inventoryConnection = getProductInventoryConnection($id); 
 
                 if(mysqli_num_rows($product) > 0)
                 {
@@ -30,8 +31,54 @@ include('includes/header.php');
                             <div class="card-body">
                                 <form action="code.php" method="POST" enctype="multipart/form-data">
                                 <div class="row">
+                                    <!-- For Inventory Connection -->
+                                    <?php if(mysqli_num_rows($inventoryConnection) == 0) { ?>
                                         <div class="col-md-12">
-                                            <label class ="mb-0 text-dark fw-bold" for="">Select Colllection</label>
+                                            <label class ="mb-0 text-dark fw-bold" for="">Connect to Inventory</label>
+                                            <input type="hidden" name="first_time" value="1">
+                                            <select name = "inventory_id" class="form-select mb-2">
+                                            <option readonly selected hidden>Choose</option>                                                     
+                                            <?php
+                                                $inventories = getAll("inventory");
+
+                                                if(mysqli_num_rows($inventories) > 0) {
+                                                    foreach ($inventories as $item) {
+                                                            $slug = str_replace('+', ' ', $item['name']);
+                                                        ?>
+                                                        <option value="<?= $item['id']; ?>"><?= $item['name']; ?></option>
+                                                        <?php
+                                                    }
+                                                } else {
+                                                    echo "No inventory available";
+                                                }
+                                            ?>
+                                            </select>
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="col-md-12">
+                                            <label class ="mb-0 text-dark fw-bold" for="">Update Inventory Source</label>
+                                            <input type="hidden" name="first_time" value="0">
+                                            <select name = "inventory_id" class="form-select mb-2">
+                                            <option readonly selected hidden>Choose</option>                                                     
+                                            <?php
+                                                $inventories = getAll("inventory");
+                                                $inventoryId = getInventoryId($id);
+                                                if(mysqli_num_rows($inventories) > 0) {
+                                                    foreach ($inventories as $item) {
+                                                        $slug = str_replace('+', ' ', $item['name']);
+                                                        ?>
+                                                        <option value="<?= $item['id']; ?>" <?= $inventoryId == $item['id']?'selected':'' ?>><?= $item['name']; ?></option>
+                                                        <?php
+                                                    }
+                                                } else {
+                                                    echo "No inventory available";
+                                                }
+                                            ?>
+                                            </select>
+                                        <?php } ?>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class ="mb-0 text-dark fw-bold" for="">Select Collection</label>
                                             <select name = "category_id" class="form-select mb-2">
                                             <option readonly selected hidden>Choose</option>                                                     
                                             <?php

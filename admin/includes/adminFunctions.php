@@ -203,3 +203,30 @@ function getAllProductsCount(){
         return -1; 
     }
 }
+
+function getProductInventoryConnection($product_id){
+    global $con;
+    $query = "SELECT * FROM inventory_connections WHERE productId = '$product_id'";
+    return mysqli_query($con, $query);
+}
+
+// function getAll($table){
+//     global $con;
+//     $query = "SELECT * FROM $table";
+//     return mysqli_query($con, $query);
+// }
+
+function getInventoryId($product_id){
+    global $con;
+    $query = "SELECT * FROM inventory_connections WHERE productId = '$product_id'";
+    $result = mysqli_query($con, $query);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $inventoryId = $row['inventoryId'];
+        mysqli_free_result($result);
+        return $inventoryId;
+    } else {
+        return -1; 
+    }
+}
